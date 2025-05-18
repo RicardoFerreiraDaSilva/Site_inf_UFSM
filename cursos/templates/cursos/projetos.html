@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Projetos dos Alunos - INF UFSM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #005599;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 30px;
+        }
+        h2 {
+            text-align: center;
+            color: #003366;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .project-card h3 {
+            color: #005599;
+        }
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Projetos dos Alunos</h1>
+        <p>Conheça iniciativas criativas e inovadoras desenvolvidas por estudantes do INF</p>
+    </header>
+
+    <nav>
+        <a href="/">Início</a>
+        <a href="/projetos/">Projetos</a>
+        <a href="/atividades/">Atividades</a>
+        <a href="/institucional/">Institucional</a>
+        <a href="/pesquisa/">Pesquisa</a>
+        <a href="/publicacoes/">Publicações</a>
+        <a href="/estrutura/">Estrutura</a>
+        <a href="/pessoas/">Pessoas</a>
+    </nav>
+
+    <section>
+        <h2>Projetos em Destaque</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Portal Acadêmico Inteligente</h3>
+                <p>Um sistema com IA para recomendar disciplinas e otimizar o plano de estudos dos alunos.</p>
+            </div>
+            <div class="project-card">
+    <h3>Aplicativo de Monitoria</h3>
+    <p>Aplicativo móvel para conectar alunos e monitores de forma prática e intuitiva.</p>
+    <img src="{% static 'cursos/computador.jpg' %}" alt="computador" style="width:100%; border-radius:8px; margin-top:10px;">
+            </div>
+
+            <div class="project-card">
+                <h3>Plataforma de Eventos INF</h3>
+                <p>Ferramenta web para divulgação e gerenciamento de eventos acadêmicos e técnicos do instituto.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Instituto de Informática - UFSM</p>
+    </footer>
+</body>
+</html>

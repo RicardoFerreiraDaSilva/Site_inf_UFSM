@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Instituto de Informática - UFSM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #005599;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 30px;
+        }
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .carousel-slide {
+            display: none;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .carousel-slide.active {
+            display: block;
+        }
+        .carousel-controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .carousel-controls button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #005599;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .inf-description {
+            padding: 20px;
+            background-color: #e6f0ff;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        {% load static %}
+<img src="{% static 'cursos/novo_logo.png' %}" alt="Logo Novo" width="150">
+
+        <div>
+            <h1>Instituto de Informática da UFSM</h1>
+            <p>Explore os cursos de Sistemas de Informação e Ciência da Computação</p>
+        </div>
+    </header>
+    <nav>
+    
+    <a href="/">Início</a>
+    <a href="/projetos/">Projetos</a>
+    <a href="/atividades/">Atividades</a>
+    <a href="/institucional/">Institucional</a>
+    <a href="/pesquisa/">Pesquisa</a>
+    <a href="/publicacoes/">Publicações</a>
+    <a href="/estrutura/">Estrutura</a>
+    <a href="/pessoas/">Pessoas</a>
+
+    </nav>
+
+    <section class="inf-description">
+        <h2>Sobre o Instituto de Informática</h2>
+        <p>O Instituto de Informática da UFSM é responsável pela formação de profissionais altamente capacitados nas áreas de Sistemas de Informação, Ciência da Computação e áreas correlatas. Com um ambiente acadêmico inovador, o INF oferece cursos de graduação e pós-graduação, além de desenvolver projetos e pesquisas que contribuem para o avanço da tecnologia e da sociedade.</p>
+    </section>
+
+    <section>
+        <h2>Destaques</h2>
+        <p>Conheça os projetos, eventos e inovações dos alunos do Instituto.</p>
+
+        <div class="carousel" id="carousel1">
+            <div class="carousel-slide active">
+                <h3>Sistemas de Informação</h3>
+                <p>Curso voltado ao desenvolvimento de soluções de software, com foco em negócios, inovação e tecnologia.</p>
+            </div>
+            <div class="carousel-slide">
+                <h3>Ciência da Computação</h3>
+                <p>Curso com foco teórico e prático em algoritmos, estruturas de dados, computação gráfica, IA e mais.</p>
+            </div>
+            <div class="carousel-slide">
+                <h3>Mestrado em Ciência da Computação</h3>
+                <p>Programa de pós-graduação voltado à pesquisa científica e desenvolvimento tecnológico em informática.</p>
+            </div>
+        </div>
+
+        <div class="carousel-controls">
+            <button onclick="showSlide('carousel1', 0)">1</button>
+            <button onclick="showSlide('carousel1', 1)">2</button>
+            <button onclick="showSlide('carousel1', 2)">3</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>Atividades e Eventos</h2>
+        <p>Fique por dentro das atividades, palestras e oportunidades oferecidas pelo INF.</p>
+
+        <div class="carousel" id="carousel2">
+            <div class="carousel-slide active">
+                <h3>Atividade PET CC</h3>
+                <p>Grupo PET da Ciência da Computação promovendo oficinas e atividades extracurriculares.</p>
+            </div>
+            <div class="carousel-slide">
+                <h3>Atividade PET SI</h3>
+                <p>Iniciativas do PET de Sistemas de Informação voltadas à formação complementar dos alunos.</p>
+            </div>
+            <div class="carousel-slide">
+                <h3>Palestra de Tecnologia</h3>
+                <p>Evento com especialistas do setor de tecnologia discutindo tendências e inovações.</p>
+            </div>
+            <div class="carousel-slide">
+                <h3>Evento de Tecnologia</h3>
+                <p>Feiras e mostras tecnológicas com participação de alunos e empresas parceiras.</p>
+            </div>
+            <div class="carousel-slide">
+                <h3>Edital do Mestrado</h3>
+                <p>Fique atento às datas e critérios do processo seletivo para o Mestrado em Ciência da Computação.</p>
+            </div>
+        </div>
+
+        <div class="carousel-controls">
+            <button onclick="showSlide('carousel2', 0)">1</button>
+            <button onclick="showSlide('carousel2', 1)">2</button>
+            <button onclick="showSlide('carousel2', 2)">3</button>
+            <button onclick="showSlide('carousel2', 3)">4</button>
+            <button onclick="showSlide('carousel2', 4)">5</button>
+        </div>
+    </section>
+    <section>
+    <section>
+    <h2>Alunos Destaques</h2>
+    <p>Conheça alguns de nossos alunos que se destacaram em grandes empresas ou projetos inovadores.</p>
+
+    <div class="carousel" id="carousel3">
+        <div class="carousel-slide active">
+            <h3>João Silva</h3>
+            <p>Trabalhou na Google como desenvolvedor de software após concluir o curso de Ciência da Computação.</p>
+        </div>
+        <div class="carousel-slide">
+            <h3>Maria Oliveira</h3>
+            <p>Desenvolvedora de uma plataforma educacional premiada, após concluir o curso de Sistemas de Informação.</p>
+        </div>
+        <div class="carousel-slide">
+            <h3>Felipe Santos</h3>
+            <p>Foi estagiário na Microsoft e agora lidera uma equipe de inovação na área de IA.</p>
+        </div>
+        <div class="carousel-slide">
+            <h3>Ana Costa</h3>
+            <p>Participou de um projeto de IoT que recebeu reconhecimento internacional e prêmio em evento global.</p>
+        </div>
+        <div class="carousel-slide">
+            <h3>Lucas Almeida</h3>
+            <p>Foi selecionado para um programa de mentoria na Apple e agora trabalha como engenheiro de software.</p>
+        </div>
+    </div>
+
+    <!-- Controles de navegação -->
+    <div class="carousel-controls">
+        <button onclick="showSlide('carousel3', 0)">1</button>
+        <button onclick="showSlide('carousel3', 1)">2</button>
+        <button onclick="showSlide('carousel3', 2)">3</button>
+        <button onclick="showSlide('carousel3', 3)">4</button>
+        <button onclick="showSlide('carousel3', 4)">5</button>
+    </div>
+</section>
+
+<!-- Estilo CSS -->
+<style>
+    .carousel {
+        position: relative;
+        overflow: hidden;
+    }
+    .carousel-slide {
+        display: none;
+        padding: 20px;
+        background: #f0f0f0;
+        margin: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .carousel-slide.active {
+        display: block;
+    }
+    .carousel-controls {
+        text-align: center;
+        margin-top: 10px;
+    }
+    .carousel-controls button {
+        padding: 5px 15px;
+        margin: 0 5px;
+        background-color: #005599;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .carousel-controls button:hover {
+        background-color: #003366;
+    }
+</style>
+
+<!-- Script JavaScript -->
+<script>
+    let currentSlide = 0;
+    const totalSlides = document.querySelectorAll('#carousel3 .carousel-slide').length;
+
+    // Função para mostrar o slide específico
+    function showSlide(carouselId, index) {
+        const carousel = document.getElementById(carouselId);
+        const slides = carousel.getElementsByClassName('carousel-slide');
+        // Remove a classe 'active' de todos os slides
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove('active');
+        }
+        // Adiciona a classe 'active' no slide selecionado
+        slides[index].classList.add('active');
+    }
+
+    // Define o primeiro slide como ativo ao carregar a página
+    document.addEventListener('DOMContentLoaded', function () {
+        showSlide('carousel3', currentSlide);
+        // Rotação automática a cada 5 segundos
+        setInterval(function() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide('carousel3', currentSlide);
+        }, 5000); // 5000 milissegundos = 5 segundos
+    });
+</script>
+
+<!-- Bloco de Redes Sociais -->
+<section style="background-color: #f5f5f5; padding: 30px; text-align: center; margin-top: 40px;">
+    <h2>Redes Sociais do INF</h2>
+    <div style="display: flex; justify-content: center; gap: 30px; margin-top: 20px;">
+        <a href="https://www.instagram.com/inf.ufsm" target="_blank" style="text-decoration: none; color: #E1306C;">
+            <i class="fab fa-instagram fa-2x"></i><br>Instagram
+        </a>
+        <a href="https://www.facebook.com/inf.ufsm" target="_blank" style="text-decoration: none; color: #4267B2;">
+            <i class="fab fa-facebook fa-2x"></i><br>Facebook
+        </a>
+        <a href="https://twitter.com/inf_ufsm" target="_blank" style="text-decoration: none; color: #1DA1F2;">
+            <i class="fab fa-twitter fa-2x"></i><br>Twitter
+        </a>
+        <a href="https://www.linkedin.com/school/ufsm" target="_blank" style="text-decoration: none; color: #0A66C2;">
+            <i class="fab fa-linkedin fa-2x"></i><br>LinkedIn
+        </a>
+    </div>
+</section>
+
+    <footer>
+        <p>© 2025 Instituto de Informática - UFSM</p>
+    </footer>
+
+    <script>
+        function showSlide(carouselId, index) {
+            const carousel = document.getElementById(carouselId);
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) slide.classList.add('active');
+            });
+        }
+
+        function startAutoCarousel(carouselId, totalSlides) {
+            let currentIndex = 0;
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                showSlide(carouselId, currentIndex);
+            }, 5000);
+        }
+
+        // Inicia os dois carrosséis com rotação automática
+        window.onload = function () {
+            startAutoCarousel('carousel1', 3);
+            startAutoCarousel('carousel2', 5);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividades - Instituto de Informática UFSM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #005599;
+            text-align: center;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 30px;
+        }
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 30px;
+        }
+        .pet-box {
+            flex: 1 1 400px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .social-links a i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Atividades no Instituto de Informática</h1>
+        <p>Palestras, eventos, workshops e ações dos grupos PET.</p>
+    </header>
+
+    <nav>
+        <a href="/">Início</a>
+        <a href="/projetos/">Projetos</a>
+        <a href="/atividades/">Atividades</a>
+        <a href="/institucional/">Institucional</a>
+        <a href="/pesquisa/">Pesquisa</a>
+        <a href="/publicacoes/">Publicações</a>
+        <a href="/estrutura/">Estrutura</a>
+        <a href="/pessoas/">Pessoas</a>
+    </nav>
+
+    <section>
+        <h2>Eventos e Ações Acadêmicas</h2>
+        <p>Confira as palestras, workshops, feiras e outras iniciativas promovidas no Instituto de Informática da UFSM.</p>
+    </section>
+
+    <section class="flex-container">
+        <div class="pet-box">
+            <h3>Atividades PET Sistemas de Informação</h3>
+            <p>Projetos, oficinas e mentorias promovidas pelo PET SI com foco no desenvolvimento profissional dos alunos.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/petsi_ufsm/" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://discord.com/invite/petsiu" target="_blank">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+            </div>
+        </div>
+
+        <div class="pet-box">
+            <h3>Atividades PET Ciência da Computação</h3>
+            <p>Ações voltadas ao aprimoramento acadêmico e à inovação tecnológica desenvolvidas pelo PET CC.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/petcc_ufsm/" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://discord.com/invite/petcc" target="_blank">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Instituto de Informática - UFSM</p>
+    </footer>
+</body>
+</html>

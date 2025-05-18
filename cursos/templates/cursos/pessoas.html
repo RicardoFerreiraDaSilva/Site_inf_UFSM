@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pessoas - Instituto de Informática UFSM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #005599;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 30px;
+        }
+
+        .course {
+            background-color: #f0f0f0;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .course h3 {
+            margin-top: 0;
+            color: #003366;
+        }
+
+        .course a {
+            color: #005599;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pessoas do INF</h1>
+        <p>Conheça os docentes e colaboradores do Instituto de Informática da UFSM</p>
+    </header>
+
+    <nav>
+        <a href="/">Início</a>
+        <a href="/projetos/">Projetos</a>
+        <a href="/atividades/">Atividades</a>
+        <a href="/institucional/">Institucional</a>
+        <a href="/pesquisa/">Pesquisa</a>
+        <a href="/publicacoes/">Publicações</a>
+        <a href="/estrutura/">Estrutura</a>
+        <a href="/pessoas/">Pessoas</a>
+    </nav>
+
+    <section>
+        <div class="course">
+            <h3>Bacharelado em Sistemas de Informação</h3>
+            <p>Veja a lista de docentes do curso:</p>
+            <a href="https://www.ufsm.br/cursos/graduacao/santa-maria/sistemas-de-informacao/docentes" target="_blank">Acessar página de docentes</a>
+        </div>
+
+        <div class="course">
+            <h3>Curso Técnico em Informática</h3>
+            <p>Veja a lista de docentes do curso:</p>
+            <a href="https://www.ufsm.br/cursos/tecnico/santa-maria/informatica/docentes" target="_blank">Acessar página de docentes</a>
+        </div>
+
+        <div class="course">
+            <h3>Mestrado em Ciência da Computação</h3>
+            <p>Veja a equipe de professores e pesquisadores envolvidos:</p>
+            <a href="https://www.ufsm.br/cursos/pos-graduacao/santa-maria/ppgcc/" target="_blank">Acessar PPGCC</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Instituto de Informática - UFSM</p>
+    </footer>
+</body>
+</html>

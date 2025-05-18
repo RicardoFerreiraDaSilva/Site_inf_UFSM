@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa - Instituto de Informática - UFSM</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link para o arquivo de estilos -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #005599;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 40px 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #003366;
+        }
+
+        .group-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .group-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .group-card:hover {
+            transform: scale(1.05);
+        }
+
+        .group-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .group-card .content {
+            padding: 20px;
+        }
+
+        .group-card h3 {
+            color: #005599;
+            margin-bottom: 10px;
+        }
+
+        .group-card p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Pesquisa no Instituto de Informática - UFSM</h1>
+        <p>Explore os grupos de pesquisa e inovações desenvolvidas no INF</p>
+    </header>
+
+    <nav>
+        <a href="/">Início</a>
+        <a href="/projetos/">Projetos</a>
+        <a href="/atividades/">Atividades</a>
+        <a href="/institucional/">Institucional</a>
+        <a href="/pesquisa/">Pesquisa</a>
+        <a href="/publicacoes/">Publicações</a>
+        <a href="/estrutura/">Estrutura</a>
+        <a href="/pessoas/">Pessoas</a>
+    </nav>
+
+    <section>
+        <h2>Grupos de Pesquisa</h2>
+
+        <div class="group-list">
+            <!-- Grupo de Inteligência Artificial e Aprendizado de Máquina -->
+            <div class="group-card">
+                <img src="https://via.placeholder.com/250x150" alt="Imagem IA">
+                <div class="content">
+                    <h3>Inteligência Artificial e Aprendizado de Máquina</h3>
+                    <p>Pesquisas focadas em algoritmos inteligentes, redes neurais e aplicações em sistemas autônomos e PNL.</p>
+                </div>
+            </div>
+
+            <!-- Grupo de Engenharia de Software -->
+            <div class="group-card">
+                <img src="https://via.placeholder.com/250x150" alt="Imagem Engenharia de Software">
+                <div class="content">
+                    <h3>Engenharia de Software</h3>
+                    <p>Estudo de práticas para o desenvolvimento de software de qualidade, incluindo métodos ágeis e arquitetura de sistemas.</p>
+                </div>
+            </div>
+
+            <!-- Grupo de Redes e Sistemas Distribuídos -->
+            <div class="group-card">
+                <img src="https://via.placeholder.com/250x150" alt="Imagem Redes e Sistemas Distribuídos">
+                <div class="content">
+                    <h3>Redes e Sistemas Distribuídos</h3>
+                    <p>Pesquisas sobre redes de computadores, protocolos de comunicação e computação em nuvem para melhorar a conectividade.</p>
+                </div>
+            </div>
+
+            <!-- Grupo de Segurança da Informação -->
+            <div class="group-card">
+                <img src="https://via.placeholder.com/250x150" alt="Imagem Segurança da Informação">
+                <div class="content">
+                    <h3>Segurança da Informação</h3>
+                    <p>Pesquisas focadas em criptografia, proteção de dados e defesa contra ataques cibernéticos.</p>
+                </div>
+            </div>
+
+            <!-- Grupo de Computação Aplicada -->
+            <div class="group-card">
+                <img src="https://via.placeholder.com/250x150" alt="Imagem Computação Aplicada">
+                <div class="content">
+                    <h3>Computação Aplicada</h3>
+                    <p>Aplicações inovadoras da computação em biologia, saúde digital e outras áreas multidisciplinares.</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2025 Instituto de Informática - UFSM</p>
+    </footer>
+
+</body>
+</html>
