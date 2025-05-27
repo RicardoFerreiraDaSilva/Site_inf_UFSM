@@ -62,6 +62,7 @@
 <body>
     <header>
         <h1>Projetos dos Alunos</h1>
+        <p><a href="{% url 'cadastrar_projeto' %}">Cadastrar novo projeto</a></p>
         <p>Conheça iniciativas criativas e inovadoras desenvolvidas por estudantes do INF</p>
     </header>
 
@@ -79,21 +80,18 @@
     <section>
         <h2>Projetos em Destaque</h2>
         <div class="project-grid">
-            <div class="project-card">
-                <h3>Portal Acadêmico Inteligente</h3>
-                <p>Um sistema com IA para recomendar disciplinas e otimizar o plano de estudos dos alunos.</p>
-            </div>
-            <div class="project-card">
-    <h3>Aplicativo de Monitoria</h3>
-    <p>Aplicativo móvel para conectar alunos e monitores de forma prática e intuitiva.</p>
-    <img src="{% static 'cursos/computador.jpg' %}" alt="computador" style="width:100%; border-radius:8px; margin-top:10px;">
-            </div>
+    {% if projetos %}
+{% for projeto in projetos %}
+<div class="project-card">
+    <h3><a href="{% url 'projeto_detalhe' projeto.id %}">{{ projeto.titulo }}</a></h3>
+    <p>{{ projeto.descricao|truncatewords:20 }}</p>
+</div>
+{% endfor %}
 
-            <div class="project-card">
-                <h3>Plataforma de Eventos INF</h3>
-                <p>Ferramenta web para divulgação e gerenciamento de eventos acadêmicos e técnicos do instituto.</p>
-            </div>
-        </div>
+    {% else %}
+        <p>Nenhum projeto cadastrado.</p>
+    {% endif %}
+</div>
     </section>
 
     <footer>
