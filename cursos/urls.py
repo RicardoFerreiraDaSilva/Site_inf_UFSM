@@ -17,5 +17,6 @@ urlpatterns = [
     path('estrutura/', views.estrutura, name='estrutura'),
     path('pessoas/', views.pessoas, name='pessoas'),
     path('registro/', views.registrar_usuario, name='registro'),
+    path('base-demo/', views.base_demo, name='base_demo'),
 
 ]
