@@ -1,26 +1,41 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProjetoForm
-from django.shortcuts import render, get_object_or_404
 from .models import Projeto
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 
-def projeto_detalhe(request, projeto_id):
-    projeto = get_object_or_404(Projeto, id=projeto_id)
-    return render(request, 'cursos/projeto_detalhe.html', {'projeto': projeto})
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'cursos/login.html', {'form': form})
+
+@login_required
 def cadastrar_projeto(request):
     if request.method == 'POST':
         form = ProjetoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('projetos')  # redireciona para a lista de projetos
+            return redirect('projetos')
     else:
         form = ProjetoForm()
     return render(request, 'cursos/cadastrar_projeto.html', {'form': form})
+
+def projeto_detalhe(request, projeto_id):
+    projeto = get_object_or_404(Projeto, id=projeto_id)
+    return render(request, 'cursos/projeto_detalhe.html', {'projeto': projeto})
 
 def index(request):
     return render(request, 'cursos/index.html')
 
 def projetos(request):
-    projetos = Projeto.objects.all()  # busca todos os projetos no banco
+    projetos = Projeto.objects.all()
     return render(request, 'cursos/projetos.html', {'projetos': projetos})
 
 def atividades(request):
@@ -40,4 +55,16 @@ def estrutura(request):
 
 def pessoas(request):
     return render(request, 'cursos/pessoas.html')
-    
+
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+
+def registrar_usuario(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # redireciona para login após cadastro
+    else:
+        form = UserCreationForm()
+    return render(request, 'cursos/registrar.html', {'form': form})
