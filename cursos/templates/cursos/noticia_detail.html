@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ noticia.titulo }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'cursos/estilo.css' %}">
+</head>
+<body>
+
+<!-- Cabeçalho -->
+<header>
+    <img src="{% static 'cursos/novo_logo.png' %}" alt="Logo Novo" width="150">
+    <div>
+        <h1>Instituto de Informática da UFSM</h1>
+        <p>Explore os cursos de Sistemas de Informação e Ciência da Computação</p>
+    </div>
+</header>
+
+<nav>
+    <a href="/">Início</a>
+    <a href="/projetos/">Projetos</a>
+    <a href="/atividades/">Atividades</a>
+    <a href="/institucional/">Institucional</a>
+    <a href="/pesquisa/">Pesquisa</a>
+    <a href="/publicacoes/">Publicações</a>
+    <a href="/estrutura/">Estrutura</a>
+    <a href="/pessoas/">Pessoas</a>
+</nav>
+
+<!-- Conteúdo da Notícia -->
+<section style="padding: 30px;">
+    <h2>{{ noticia.titulo }}</h2>
+    <p style="color: gray; font-size: 0.9em;">Publicado em {{ noticia.data_publicacao|date:"d/m/Y H:i" }}</p>
+
+    {% if noticia.imagem %}
+        <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+    {% endif %}
+
+    <div style="margin-top: 20px; line-height: 1.6;">
+        {{ noticia.conteudo|linebreaks }}
+    </div>
+</section>
+
+<!-- Rodapé -->
+<footer>
+    <p>© 2025 Instituto de Informática - UFSM</p>
+</footer>
+
+</body>
+</html>

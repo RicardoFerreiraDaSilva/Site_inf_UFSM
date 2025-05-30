@@ -72,6 +72,15 @@
             text-align: center;
             margin-top: 30px;
         }
+        .full-width-footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+         }
+
     </style>
 </head>
 <body>
@@ -121,12 +130,40 @@
             </div>
         </div>
 
-        <div class="carousel-controls">
-            <button onclick="showSlide('carousel1', 0)">1</button>
-            <button onclick="showSlide('carousel1', 1)">2</button>
-            <button onclick="showSlide('carousel1', 2)">3</button>
-        </div>
-    </section>
+<section>
+<section>
+<h2>Notícias</h2>
+
+{% if noticias %}
+    <div class="carousel" id="carouselNoticias">
+        {% for noticia in noticias %}
+        <a href="{% url 'noticia_detail' noticia.pk %}" style="text-decoration: none; color: inherit;">
+            <div class="carousel-slide {% if forloop.first %}active{% endif %}">
+                {% if noticia.imagem %}
+                    <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" style="width: 100%; height: auto;">
+                {% endif %}
+                <h3>{{ noticia.titulo }}</h3>
+                <p>{{ noticia.data_publicacao|date:"d/m/Y H:i" }}</p>
+                <p>{{ noticia.conteudo|truncatewords:30 }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+    <div class="carousel-controls">
+        {% for noticia in noticias %}
+        <button onclick="showSlide('carouselNoticias', {{ forloop.counter0 }})">{{ forloop.counter }}</button>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>Nenhuma notícia cadastrada.</p>
+{% endif %}
+
+<div class="carousel-controls">
+    {% for noticia in noticias %}
+    <button onclick="showSlide('carouselNoticias', {{ forloop.counter0 }})">{{ forloop.counter }}</button>
+    {% endfor %}
+</div>
 
     <section>
         <h2>Atividades e Eventos</h2>
@@ -200,6 +237,20 @@
         <button onclick="showSlide('carousel3', 4)">5</button>
     </div>
 </section>
+
+<section style="padding: 30px; max-width: 600px; margin: 40px auto; background-color: #f0f0f0; border-radius: 8px;">
+  <h2>Localização do Instituto de Informática</h2>
+  <p>Campus Camobi - Centro Tecnológico (CT) da UFSM<br>
+     Av. Roraima, 1000 - Camobi, Santa Maria - RS, 97105-900</p>
+
+  <div style="width: 100%; height: 300px; margin-top: 20px;">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.982658903636!2d-53.80692928485651!3d-29.68480068201167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951b9b7a0a618e09%3A0xd5d6a9270d55a748!2sCentro%20Tecnol%C3%B3gico%20-%20UFSM!5e0!3m2!1spt-BR!2sbr!4v1695834796316!5m2!1spt-BR!2sbr" 
+      width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
 
 <!-- Estilo CSS -->
 <style>
@@ -283,33 +334,42 @@
     </div>
 </section>
 
-    <footer>
-        <p>© 2025 Instituto de Informática - UFSM</p>
-    </footer>
+<footer class="full-width-footer">
+    <p>© 2025 Instituto de Informática - UFSM</p>
+</footer>
 
     <script>
-        function showSlide(carouselId, index) {
-            const carousel = document.getElementById(carouselId);
-            const slides = carousel.querySelectorAll('.carousel-slide');
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-                if (i === index) slide.classList.add('active');
-            });
-        }
+    function showSlide(carouselId, index) {
+        const carousel = document.getElementById(carouselId);
+        const slides = carousel.querySelectorAll('.carousel-slide');
 
-        function startAutoCarousel(carouselId, totalSlides) {
-            let currentIndex = 0;
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                showSlide(carouselId, currentIndex);
-            }, 5000);
-        }
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+    }
 
-        // Inicia os dois carrosséis com rotação automática
-        window.onload = function () {
-            startAutoCarousel('carousel1', 3);
-            startAutoCarousel('carousel2', 5);
-        };
-    </script>
+    function startAutoCarousel(carouselId) {
+        const carousel = document.getElementById(carouselId);
+        if (!carousel) return;
+
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        if (totalSlides === 0) return;
+
+        let currentIndex = 0;
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(carouselId, currentIndex);
+        }, 5000);
+    }
+
+    window.onload = function () {
+        startAutoCarousel('carousel1');
+        startAutoCarousel('carousel2');
+        startAutoCarousel('carousel3');
+        startAutoCarousel('carouselNoticias');
+    };
+</script>
+
 </body>
 </html>

@@ -4,6 +4,18 @@ from .models import Projeto
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render
+from .models import Noticia
+from django.shortcuts import render, get_object_or_404
+from .models import Noticia
+
+def noticia_detail(request, pk):
+    noticia = get_object_or_404(Noticia, pk=pk)
+    return render(request, 'cursos/noticia_detail.html', {'noticia': noticia})
+
+def pagina_inicial(request):
+    noticias = Noticia.objects.all().order_by('-data_publicacao')[:5] 
+    return render(request, 'nome_da_template.html', {'noticias': noticias})
 
 def login_view(request):
     if request.method == 'POST':
