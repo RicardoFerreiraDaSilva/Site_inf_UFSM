@@ -15,3 +15,15 @@ class Noticia(models.Model):
 
     def __str__(self):
         return self.titulo
+class Livro(models.Model):
+    titulo = models.CharField(max_length=200)
+    autor = models.CharField(max_length=100)
+    editora = models.CharField(max_length=100, blank=True)
+    ano_publicacao = models.PositiveIntegerField()
+    isbn = models.CharField(max_length=13, blank=True)
+    descricao = models.TextField(blank=True)
+    arquivo_pdf = models.FileField(upload_to='livros/', blank=True, null=True)
+    capa = models.ImageField(upload_to='capas_livros/', blank=True, null=True)
+
+    def __str__(self):
+        return self.titulo

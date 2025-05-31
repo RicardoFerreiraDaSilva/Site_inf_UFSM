@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ProjetoForm
-from .models import Projeto
+from .models import Projeto, Noticia, Livro
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render
-from .models import Noticia
-from django.shortcuts import render, get_object_or_404
-from .models import Noticia
+from django.contrib.auth.forms import UserCreationForm
+
+def lista_livros(request):
+    livros = Livro.objects.all()
+    return render(request, 'cursos/publicacoes.html', {'livros': livros})
 
 def noticia_detail(request, pk):
     noticia = get_object_or_404(Noticia, pk=pk)
@@ -59,9 +60,6 @@ def institucional(request):
 def pesquisa(request):
     return render(request, 'cursos/pesquisa.html')
 
-def publicacoes(request):
-    return render(request, 'cursos/publicacoes.html')
-
 def estrutura(request):
     return render(request, 'cursos/estrutura.html')
 
@@ -71,15 +69,12 @@ def pessoas(request):
 def base_demo(request):
     return render(request, 'cursos/base_demo.html')
 
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
-
 def registrar_usuario(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  # redireciona para login após cadastro
+            return redirect('login')
     else:
         form = UserCreationForm()
     return render(request, 'cursos/registrar.html', {'form': form})

@@ -1,25 +1,153 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Instituto de Informática - UFSM{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #005599;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 30px;
+        }
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .carousel-slide {
+            display: none;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .carousel-slide.active {
+            display: block;
+        }
+        .carousel-controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .carousel-controls button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #005599;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .carousel-controls button:hover {
+            background-color: #003366;
+        }
+        .inf-description {
+            padding: 20px;
+            background-color: #e6f0ff;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .full-width-footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+        }
+    </style>
 </head>
 <body>
-    <header class="bg-primary text-white p-3 mb-4">
-        <div class="container">
-            <h1>Instituto de Informática - UFSM</h1>
+    <header>
+        <img src="{% static 'cursos/novo_logo.png' %}" alt="Logo Novo" width="150">
+        <div>
+            <h1>Instituto de Informática da UFSM</h1>
+            <p>Explore os cursos de Sistemas de Informação e Ciência da Computação</p>
         </div>
     </header>
 
-    <main class="container">
+    <nav>
+        <a href="/">Início</a>
+        <a href="/projetos/">Projetos</a>
+        <a href="/atividades/">Atividades</a>
+        <a href="/institucional/">Institucional</a>
+        <a href="/pesquisa/">Pesquisa</a>
+        <a href="/publicacoes/">Publicações</a>
+        <a href="/estrutura/">Estrutura</a>
+        <a href="/pessoas/">Pessoas</a>
+    </nav>
+
+    <section class="inf-description">
         {% block content %}
         <p>Conteúdo padrão do site.</p>
         {% endblock %}
-    </main>
+    </section>
 
-    <footer class="bg-light text-center py-3 mt-4">
-        <p>&copy; 2025 Instituto de Informática - UFSM</p>
+    <footer class="full-width-footer">
+        <p>© 2025 Instituto de Informática - UFSM</p>
     </footer>
+
+    <script>
+        function showSlide(carouselId, index) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+
+        function startAutoCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const totalSlides = slides.length;
+            if (totalSlides === 0) return;
+
+            let currentIndex = 0;
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                showSlide(carouselId, currentIndex);
+            }, 5000);
+        }
+
+        window.onload = function () {
+            startAutoCarousel('carousel1');
+            startAutoCarousel('carousel2');
+            startAutoCarousel('carousel3');
+            startAutoCarousel('carouselNoticias');
+        };
+    </script>
 </body>
 </html>

@@ -1,179 +1,33 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicações - Instituto de Informática - UFSM</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link para o arquivo de estilos -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
+{% extends 'cursos/base.html' %}
 
-        header {
-            background-color: #003366;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+{% block content %}
+  <div class="container">
+    <h1 class="text-center text-primary mb-4">Publicações - Livros</h1>
 
-        nav {
-            background-color: #005599;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        section {
-            padding: 40px 20px;
-        }
-
-        h2 {
-            text-align: center;
-            color: #003366;
-        }
-
-        .publication-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .publication-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .publication-card:hover {
-            transform: scale(1.05);
-        }
-
-        .publication-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .publication-card .content {
-            padding: 20px;
-        }
-
-        .publication-card h3 {
-            color: #005599;
-            margin-bottom: 10px;
-        }
-
-        .publication-card p {
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .publication-card a {
-            color: #005599;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        footer {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>Publicações - Instituto de Informática - UFSM</h1>
-        <p>Confira os livros didáticos e materiais produzidos pelo INF.</p>
-    </header>
-
-    <nav>
-        <a href="/">Início</a>
-        <a href="/projetos/">Projetos</a>
-        <a href="/atividades/">Atividades</a>
-        <a href="/institucional/">Institucional</a>
-        <a href="/pesquisa/">Pesquisa</a>
-        <a href="/publicacoes/">Publicações</a>
-        <a href="/estrutura/">Estrutura</a>
-        <a href="/pessoas/">Pessoas</a>
-    </nav>
-
-    <section>
-        <h2>Livros Didáticos Publicados</h2>
-
-        <div class="publication-list">
-            <!-- Livro 1 -->
-            <div class="publication-card">
-                <img src="https://via.placeholder.com/250x300" alt="Capa do livro 1">
-                <div class="content">
-                    <h3>Livro de Introdução à Programação</h3>
-                    <p>Este livro aborda os conceitos fundamentais de programação, usando exemplos práticos e abordagens pedagógicas inovadoras.</p>
-                    <a href="#" target="_blank">Saiba mais</a>
-                </div>
+    {% if livros %}
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for livro in livros %}
+          <div class="col">
+            <div class="card h-100">
+              {% if livro.capa %}
+                <img src="{{ livro.capa.url }}" class="card-img-top" alt="Capa de {{ livro.titulo }}">
+              {% endif %}
+              <div class="card-body">
+                <h5 class="card-title">{{ livro.titulo }}</h5>
+                <p class="card-text"><strong>Autor:</strong> {{ livro.autor }}</p>
+                <p class="card-text"><strong>Editora:</strong> {{ livro.editora }}</p>
+                <p class="card-text"><strong>Ano:</strong> {{ livro.ano_publicacao }}</p>
+                {% if livro.isbn %}
+                  <p class="card-text"><strong>ISBN:</strong> {{ livro.isbn }}</p>
+                {% endif %}
+                <p class="card-text">{{ livro.resumo }}</p>
+              </div>
             </div>
-
-            <!-- Livro 2 -->
-            <div class="publication-card">
-                <img src="https://via.placeholder.com/250x300" alt="Capa do livro 2">
-                <div class="content">
-                    <h3>Algoritmos e Estruturas de Dados</h3>
-                    <p>Aborda as principais estruturas de dados e algoritmos, essenciais para o entendimento da ciência da computação.</p>
-                    <a href="#" target="_blank">Saiba mais</a>
-                </div>
-            </div>
-
-            <!-- Livro 3 -->
-            <div class="publication-card">
-                <img src="https://via.placeholder.com/250x300" alt="Capa do livro 3">
-                <div class="content">
-                    <h3>Engenharia de Software para Iniciantes</h3>
-                    <p>Este livro introduz as boas práticas de engenharia de software e fornece uma abordagem prática para estudantes.</p>
-                    <a href="#" target="_blank">Saiba mais</a>
-                </div>
-            </div>
-
-            <!-- Livro 4 -->
-            <div class="publication-card">
-                <img src="https://via.placeholder.com/250x300" alt="Capa do livro 4">
-                <div class="content">
-                    <h3>Redes de Computadores</h3>
-                    <p>Explore os conceitos essenciais das redes de computadores e sua aplicação no mundo real, com ênfase em segurança e protocolos.</p>
-                    <a href="#" target="_blank">Saiba mais</a>
-                </div>
-            </div>
-
-            <!-- Livro 5 -->
-            <div class="publication-card">
-                <img src="https://via.placeholder.com/250x300" alt="Capa do livro 5">
-                <div class="content">
-                    <h3>Desenvolvimento de Sistemas Web</h3>
-                    <p>Aprenda a construir sistemas web dinâmicos e responsivos, com exemplos de desenvolvimento usando as melhores práticas da indústria.</p>
-                    <a href="#" target="_blank">Saiba mais</a>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <footer>
-        <p>© 2025 Instituto de Informática - UFSM</p>
-    </footer>
-
-</body>
-</html>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-muted">Nenhum livro cadastrado.</p>
+    {% endif %}
+  </div>
+{% endblock %}
