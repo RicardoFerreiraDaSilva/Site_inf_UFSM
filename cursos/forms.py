@@ -8,3 +8,21 @@ class ProjetoForm(forms.ModelForm):
         widgets = {
             'data_publicacao': forms.DateInput(attrs={'type': 'date'})
         }
+
+from .models import Atividade
+
+class AtividadeForm(forms.ModelForm):
+    class Meta:
+        model = Atividade
+        fields = ['titulo', 'descricao', 'tipo', 'data', 'local', 'imagem']
+
+from django import forms
+from .models import Atividade
+
+class AtividadeForm(forms.ModelForm):
+    class Meta:
+        model = Atividade
+        fields = ['titulo', 'descricao', 'tipo', 'data', 'local', 'imagem']
+        widgets = {
+            'data': forms.DateInput(attrs={'type': 'date'}),
+        }

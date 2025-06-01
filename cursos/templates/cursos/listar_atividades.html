@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Atividades - Instituto de Informática</title>
+    <style>
+        body { font-family: Arial; background: #f9f9f9; margin: 0; padding: 0; }
+        header, footer { background-color: #003366; color: white; text-align: center; padding: 20px; }
+        nav { background-color: #005599; text-align: center; padding: 10px; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+
+        .container { max-width: 900px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 12px rgba(0,0,0,0.1); }
+        h2 { color: #003366; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #eee; }
+        a.btn { color: #005599; margin-right: 10px; text-decoration: none; }
+        a.btn:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Instituto de Informática - UFSM</h1>
+        <p>Lista de Atividades Cadastradas</p>
+    </header>
+
+    <nav>
+        <a href="/">Início</a>
+        <a href="/projetos/">Projetos</a>
+        <a href="/atividades/">Atividades</a>
+        <a href="/institucional/">Institucional</a>
+        <a href="/pesquisa/">Pesquisa</a>
+        <a href="/publicacoes/">Publicações</a>
+        <a href="/estrutura/">Estrutura</a>
+        <a href="/pessoas/">Pessoas</a>
+    </nav>
+
+    <div class="container">
+        <h2>Atividades Cadastradas</h2>
+        <a href="{% url 'cadastrar_atividade' %}">+ Nova Atividade</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for atividade in atividades %}
+                <tr>
+                    <td>{{ atividade.titulo }}</td>
+                    <td>{{ atividade.tipo }}</td>
+                    <td>{{ atividade.data }}</td>
+                    <td>
+                        <a class="btn" href="{% url 'editar_atividade' atividade.id %}">Editar</a>
+                        <a class="btn" href="{% url 'excluir_atividade' atividade.id %}">Excluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="4">Nenhuma atividade cadastrada.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{% url 'atividades' %}">← Voltar à página pública de atividades</a>
+
+    <footer>
+        <p>© 2025 Instituto de Informática - UFSM</p>
+    </footer>
+</body>
+</html>

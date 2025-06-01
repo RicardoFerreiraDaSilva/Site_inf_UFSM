@@ -27,3 +27,20 @@ class Livro(models.Model):
 
     def __str__(self):
         return self.titulo
+class Atividade(models.Model):
+    TIPO_CHOICES = [
+        ('Palestra', 'Palestra'),
+        ('Workshop', 'Workshop'),
+        ('Feira', 'Feira'),
+        ('Outra', 'Outra'),
+    ]
+
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField()
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
+    data = models.DateField()
+    local = models.CharField(max_length=200, blank=True)
+    imagem = models.ImageField(upload_to='atividades/', blank=True, null=True)
+
+    def __str__(self):
+        return self.titulo

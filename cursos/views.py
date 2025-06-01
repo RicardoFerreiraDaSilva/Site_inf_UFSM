@@ -78,3 +78,64 @@ def registrar_usuario(request):
     else:
         form = UserCreationForm()
     return render(request, 'cursos/registrar.html', {'form': form})
+from .models import Atividade
+from .forms import AtividadeForm
+from django.contrib.auth.decorators import login_required
+
+def atividades(request):
+    atividades = Atividade.objects.all().order_by('-data')
+    return render(request, 'cursos/atividades.html', {'atividades': atividades})
+
+@login_required
+def cadastrar_atividade(request):
+    if request.method == 'POST':
+        form = AtividadeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('atividades')
+    else:
+        form = AtividadeForm()
+    return render(request, 'cursos/cadastrar_atividade.html', {'form': form})
+
+from django.shortcuts import render, redirect
+from .forms import AtividadeForm
+
+def cadastrar_atividade(request):
+    if request.method == 'POST':
+        form = AtividadeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('atividades')  # redireciona para a lista de atividades
+    else:
+        form = AtividadeForm()
+    
+    return render(request, 'cursos/cadastrar_atividade.html', {'form': form})
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Atividade
+from .forms import AtividadeForm
+
+def listar_atividades(request):
+    atividades = Atividade.objects.all().order_by('-data')
+    return render(request, 'cursos/listar_atividades.html', {'atividades': atividades})
+
+def editar_atividade(request, id):
+    atividade = get_object_or_404(Atividade, id=id)
+    if request.method == 'POST':
+        form = AtividadeForm(request.POST, request.FILES, instance=atividade)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_atividades')
+    else:
+        form = AtividadeForm(instance=atividade)
+    return render(request, 'cursos/cadastrar_atividade.html', {'form': form})
+
+def excluir_atividade(request, id):
+    atividade = get_object_or_404(Atividade, id=id)
+    atividade.delete()
+    return redirect('listar_atividades')
+
+def atividades_publicas(request):
+    atividades = Atividade.objects.all().order_by('-data')
+    return render(request, 'cursos/atividades.html', {'atividades': atividades})
+
