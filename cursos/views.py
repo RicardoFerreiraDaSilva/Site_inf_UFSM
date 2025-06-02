@@ -5,6 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render
+from .models import Noticia
+
+def noticias(request):
+    noticias = Noticia.objects.all().order_by('-data_publicacao')
+    return render(request, 'noticias.html', {'noticias': noticias})
 
 def lista_livros(request):
     livros = Livro.objects.all()
