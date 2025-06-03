@@ -33,4 +33,9 @@ urlpatterns = [
     path('atividades/gerenciar/', views.listar_atividades, name='listar_atividades'),
     path('atividades/editar/<int:id>/', views.editar_atividade, name='editar_atividade'),
     path('atividades/excluir/<int:id>/', views.excluir_atividade, name='excluir_atividade'),
+
+    #Grupos de pesquisa
+    path('grupos/', views.grupos_pesquisa, name='grupos'),
+    path('grupos/<slug:slug>/', views.grupo_detalhe, name='grupo_detalhe'),
+
 ]

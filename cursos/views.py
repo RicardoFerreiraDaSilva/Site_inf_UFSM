@@ -149,3 +149,24 @@ def publicacoes(request):
     publicacoes = Livro.objects.all() 
     return render(request, 'cursos/publicacoes.html', {'publicacoes': publicacoes})
 
+def grupos_pesquisa(request):
+    return render(request, 'cursos/pesquisa.html')
+
+from .models import GrupoPesquisa
+
+def grupos_pesquisa(request):
+    grupos = GrupoPesquisa.objects.all()
+    return render(request, 'cursos/grupos.html', {'grupos': grupos})
+
+def grupo_detalhe(request, slug):
+    grupo = GrupoPesquisa.objects.get(slug=slug)
+    return render(request, 'cursos/grupo_detalhe.html', {'grupo': grupo})
+
+from django.shortcuts import render
+from .models import GrupoPesquisa  # nome do seu modelo de grupo
+
+def pesquisa_view(request):
+    grupos = GrupoPesquisa.objects.all()  # pega todos os grupos
+    return render(request, 'cursos/pesquisa.html', {'grupos': grupos})
+
+

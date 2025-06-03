@@ -1,100 +1,113 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisa - Instituto de Informática - UFSM</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link para o arquivo de estilos -->
+    <meta charset="UTF-8" />
+    <title>Grupos de Pesquisa - Instituto de Informática UFSM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <style>
+        :root {
+            --azul-escuro: #003366;
+            --azul-medio: #005599;
+            --cinza-claro: #f2f2f2;
+            --texto: #333;
+        }
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #fafafa;
+            color: var(--texto);
         }
-
-        header {
-            background-color: #003366;
+        header, footer {
+            background-color: var(--azul-escuro);
             color: white;
             padding: 20px;
             text-align: center;
         }
-
         nav {
-            background-color: #005599;
-            padding: 10px;
+            background-color: var(--azul-medio);
             text-align: center;
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
         }
-
         nav a {
             color: white;
-            margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
+            padding: 6px 12px;
+            transition: background-color 0.3s;
         }
-
+        nav a:hover {
+            background-color: var(--azul-escuro);
+            border-radius: 5px;
+        }
         section {
-            padding: 40px 20px;
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
         h2 {
             text-align: center;
-            color: #003366;
+            margin-bottom: 20px;
+            color: var(--azul-escuro);
         }
-
-        .group-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
         }
-
-        .group-card {
+        .atividade-card {
             background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .group-card:hover {
-            transform: scale(1.05);
-        }
-
-        .group-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .group-card .content {
+            border-left: 6px solid var(--azul-medio);
+            border-radius: 10px;
             padding: 20px;
+            max-width: 380px;
+            flex: 1 1 280px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+            transition: transform 0.3s ease;
+            cursor: pointer;
         }
-
-        .group-card h3 {
-            color: #005599;
+        .atividade-card:hover {
+            transform: translateY(-5px);
+        }
+        .atividade-card h3 {
+            font-size: 20px;
             margin-bottom: 10px;
+            color: var(--azul-escuro);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-
-        .group-card p {
-            color: #555;
-            margin-bottom: 15px;
+        .atividade-card p {
+            margin: 8px 0;
+            line-height: 1.5;
         }
-
-        footer {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-            padding: 15px;
+        @media (max-width: 600px) {
+            .atividade-card {
+                max-width: 100%;
+            }
+            nav {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>Pesquisa no Instituto de Informática - UFSM</h1>
-        <p>Explore os grupos de pesquisa e inovações desenvolvidas no INF</p>
+        <h1>Grupos de Pesquisa</h1>
+        <p>Conheça os grupos de pesquisa do Instituto de Informática da UFSM</p>
     </header>
 
     <nav>
@@ -106,63 +119,27 @@
         <a href="/publicacoes/">Publicações</a>
         <a href="/estrutura/">Estrutura</a>
         <a href="/pessoas/">Pessoas</a>
+        <a href="/grupos/">Grupos de Pesquisa</a>
     </nav>
 
     <section>
-        <h2>Grupos de Pesquisa</h2>
+        <h2>Grupos em Destaque</h2>
+        <div class="cards-container">
+{% for grupo in grupos %}
+  <div>
+    <h3>{{ grupo.nome }}</h3>
+    <p><strong>Líder:</strong> {{ grupo.lider }}</p>
+    <p>{{ grupo.descricao }}</p>
+  </div>
+{% empty %}
+  <p>Nenhum grupo de pesquisa cadastrado.</p>
+{% endfor %}
 
-        <div class="group-list">
-            <!-- Grupo de Inteligência Artificial e Aprendizado de Máquina -->
-            <div class="group-card">
-                <img src="https://via.placeholder.com/250x150" alt="Imagem IA">
-                <div class="content">
-                    <h3>Inteligência Artificial e Aprendizado de Máquina</h3>
-                    <p>Pesquisas focadas em algoritmos inteligentes, redes neurais e aplicações em sistemas autônomos e PNL.</p>
-                </div>
-            </div>
-
-            <!-- Grupo de Engenharia de Software -->
-            <div class="group-card">
-                <img src="https://via.placeholder.com/250x150" alt="Imagem Engenharia de Software">
-                <div class="content">
-                    <h3>Engenharia de Software</h3>
-                    <p>Estudo de práticas para o desenvolvimento de software de qualidade, incluindo métodos ágeis e arquitetura de sistemas.</p>
-                </div>
-            </div>
-
-            <!-- Grupo de Redes e Sistemas Distribuídos -->
-            <div class="group-card">
-                <img src="https://via.placeholder.com/250x150" alt="Imagem Redes e Sistemas Distribuídos">
-                <div class="content">
-                    <h3>Redes e Sistemas Distribuídos</h3>
-                    <p>Pesquisas sobre redes de computadores, protocolos de comunicação e computação em nuvem para melhorar a conectividade.</p>
-                </div>
-            </div>
-
-            <!-- Grupo de Segurança da Informação -->
-            <div class="group-card">
-                <img src="https://via.placeholder.com/250x150" alt="Imagem Segurança da Informação">
-                <div class="content">
-                    <h3>Segurança da Informação</h3>
-                    <p>Pesquisas focadas em criptografia, proteção de dados e defesa contra ataques cibernéticos.</p>
-                </div>
-            </div>
-
-            <!-- Grupo de Computação Aplicada -->
-            <div class="group-card">
-                <img src="https://via.placeholder.com/250x150" alt="Imagem Computação Aplicada">
-                <div class="content">
-                    <h3>Computação Aplicada</h3>
-                    <p>Aplicações inovadoras da computação em biologia, saúde digital e outras áreas multidisciplinares.</p>
-                </div>
-            </div>
         </div>
-
     </section>
 
     <footer>
         <p>© 2025 Instituto de Informática - UFSM</p>
     </footer>
-
 </body>
 </html>

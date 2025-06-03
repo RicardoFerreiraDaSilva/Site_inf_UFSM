@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ grupo.nome }} - Grupo de Pesquisa</title>
+</head>
+<body>
+    <h1>{{ grupo.nome }}</h1>
+    <p><strong>Líder:</strong> {{ grupo.lider }}</p>
+    {% if grupo.area %}
+        <p><strong>Área:</strong> {{ grupo.area }}</p>
+    {% endif %}
+    <p>{{ grupo.descricao|linebreaks }}</p>
+    {% if grupo.site %}
+        <p><a href="{{ grupo.site }}" target="_blank">Visite o site do grupo</a></p>
+    {% endif %}
+    <a href="{% url 'grupos' %}">← Voltar</a>
+</body>
+</html>
