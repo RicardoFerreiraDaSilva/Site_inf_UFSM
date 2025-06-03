@@ -21,7 +21,7 @@ urlpatterns = [
     path('registrar/', views.registrar_usuario, name='registrar'),
 
     # Publicações
-    path('publicacoes/', views.lista_livros, name='publicacoes'),
+    path('publicacoes/', views.publicacoes, name='publicacoes'),
 
     # Notícias
     path('noticias/', views.noticias, name='noticias'),

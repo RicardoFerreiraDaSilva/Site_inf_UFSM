@@ -1,33 +1,178 @@
-{% extends 'cursos/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Publicações - Instituto de Informática UFSM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+        :root {
+            --azul-escuro: #003366;
+            --azul-medio: #005599;
+            --cinza-claro: #f2f2f2;
+            --cinza: #ddd;
+            --texto: #333;
+        }
 
-{% block content %}
-  <div class="container">
-    <h1 class="text-center text-primary mb-4">Publicações - Livros</h1>
+        * {
+            box-sizing: border-box;
+        }
 
-    {% if livros %}
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for livro in livros %}
-          <div class="col">
-            <div class="card h-100">
-              {% if livro.capa %}
-                <img src="{{ livro.capa.url }}" class="card-img-top" alt="Capa de {{ livro.titulo }}">
-              {% endif %}
-              <div class="card-body">
-                <h5 class="card-title">{{ livro.titulo }}</h5>
-                <p class="card-text"><strong>Autor:</strong> {{ livro.autor }}</p>
-                <p class="card-text"><strong>Editora:</strong> {{ livro.editora }}</p>
-                <p class="card-text"><strong>Ano:</strong> {{ livro.ano_publicacao }}</p>
-                {% if livro.isbn %}
-                  <p class="card-text"><strong>ISBN:</strong> {{ livro.isbn }}</p>
-                {% endif %}
-                <p class="card-text">{{ livro.resumo }}</p>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p class="text-muted">Nenhum livro cadastrado.</p>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            color: var(--texto);
+        }
+
+        header,
+        footer {
+            background-color: var(--azul-escuro);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: var(--azul-medio);
+            text-align: center;
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 6px 12px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--azul-escuro);
+            border-radius: 5px;
+        }
+
+        section {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--azul-escuro);
+        }
+
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .livro-card {
+            background-color: white;
+            border-left: 6px solid var(--azul-medio);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 380px;
+            flex: 1 1 280px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s ease;
+        }
+
+        .livro-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .livro-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--azul-escuro);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .livro-card p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .livro-card a {
+            color: var(--azul-medio);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .livro-card a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .livro-card {
+                max-width: 100%;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Publicações do Instituto de Informática</h1>
+        <p>Livros publicados por professores, alunos e grupos do Instituto.</p>
+    </header>
+
+    <nav>
+        <a href="/">Início</a>
+        <a href="/projetos/">Projetos</a>
+        <a href="/atividades/">Atividades</a>
+        <a href="/institucional/">Institucional</a>
+        <a href="/pesquisa/">Pesquisa</a>
+        <a href="/publicacoes/">Publicações</a>
+        <a href="/estrutura/">Estrutura</a>
+        <a href="/pessoas/">Pessoas</a>
+    </nav>
+
+    <section>
+        <h2>Livros Publicados</h2>
+        {% if publicacoes %}
+            <div class="cards-container">
+                {% for livro in publicacoes %}
+                    <div class="livro-card">
+                       {% if livro.capa %}
+        <img src="{{ livro.capa.url }}" alt="{{ livro.titulo }}" style="width: 100%; border-radius: 8px; margin-bottom: 10px;" />
     {% endif %}
-  </div>
-{% endblock %}
+                        <h3><i class="fas fa-book"></i> {{ livro.titulo }}</h3>
+                        <p><strong>Autor:</strong> {{ livro.autor }}</p>
+                        <p><strong>Ano:</strong> {{ livro.ano }}</p>
+                        <p>{{ livro.descricao|linebreaks }}</p>
+                        {% if livro.link %}
+                            <p><a href="{{ livro.link }}" target="_blank">🔗 Mais informações</a></p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p style="text-align: center;">Nenhum livro cadastrado até o momento.</p>
+        {% endif %}
+    </section>
+
+    <footer>
+        <p>© 2025 Instituto de Informática - UFSM</p>
+    </footer>
+</body>
+</html>

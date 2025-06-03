@@ -145,3 +145,7 @@ def atividades_publicas(request):
     atividades = Atividade.objects.all().order_by('-data')
     return render(request, 'cursos/atividades.html', {'atividades': atividades})
 
+def publicacoes(request):
+    publicacoes = Livro.objects.all() 
+    return render(request, 'cursos/publicacoes.html', {'publicacoes': publicacoes})
+
