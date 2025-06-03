@@ -2,23 +2,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Instituto de Informática - UFSM{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <title>Institucional - Instituto de Informática - UFSM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
+        :root {
+            --azul-escuro: #003366;
+            --azul-medio: #005599;
+            --cinza-claro: #f4f4f4;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 0 0 80px;
+            background-color: white;
         }
-        header {
-            background-color: #003366;
+        header, footer {
+            background-color: var(--azul-escuro);
             color: white;
             padding: 20px;
             text-align: center;
         }
         nav {
-            background-color: #005599;
+            background-color: var(--azul-medio);
             padding: 10px;
             text-align: center;
         }
@@ -28,126 +34,125 @@
             text-decoration: none;
             font-weight: bold;
         }
+        nav a:hover {
+            text-decoration: underline;
+        }
         section {
-            padding: 30px;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
         }
-        footer {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-            padding: 15px;
+        h2, h3 {
+            color: var(--azul-escuro);
         }
-        .carousel {
+        .timeline {
             position: relative;
-            max-width: 600px;
-            margin: 20px auto;
-            overflow: hidden;
-            border: 1px solid #ccc;
+            margin: 40px 0;
+            padding-left: 30px;
+            border-left: 4px solid var(--azul-medio);
+        }
+        .event {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            background-color: var(--cinza-claro);
             border-radius: 8px;
-        }
-        .carousel-slide {
-            display: none;
             padding: 20px;
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        .carousel-slide.active {
-            display: block;
+        .event::before {
+            content: "\f111"; /* Font Awesome circle */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: -30px;
+            top: 20px;
+            font-size: 12px;
+            color: var(--azul-medio);
         }
-        .carousel-controls {
-            text-align: center;
-            margin-top: 10px;
+        .event h4 {
+            margin: 0 0 10px;
+            color: var(--azul-escuro);
+            font-size: 1.2em;
         }
-        .carousel-controls button {
-            margin: 0 5px;
-            padding: 5px 10px;
-            background-color: #005599;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        .event p {
+            margin: 0;
+            line-height: 1.5;
         }
-        .carousel-controls button:hover {
-            background-color: #003366;
-        }
-        .inf-description {
-            padding: 20px;
-            background-color: #e6f0ff;
-            text-align: center;
-            margin-top: 30px;
-        }
-        .full-width-footer {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
+        @media (max-width: 600px) {
+            nav a {
+                display: block;
+                margin: 10px 0;
+            }
+            .timeline {
+                padding-left: 20px;
+            }
+            .event {
+                padding: 15px;
+            }
+            .event::before {
+                left: -20px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <img src="{% static 'cursos/novo_logo.png' %}" alt="Logo Novo" width="150">
-        <div>
-            <h1>Instituto de Informática da UFSM</h1>
-            <p>Explore os cursos de Sistemas de Informação e Ciência da Computação</p>
+
+<header>
+    <h1>Instituto de Informática - UFSM</h1>
+</header>
+
+<nav>
+    <a href="/">Início</a>
+    <a href="/projetos/">Projetos</a>
+    <a href="/atividades/">Atividades</a>
+    <a href="/institucional/" style="text-decoration: underline; font-weight: bold;">Institucional</a>
+    <a href="/pesquisa/">Pesquisa</a>
+    <a href="/publicacoes/">Publicações</a>
+    <a href="/estrutura/">Estrutura</a>
+    <a href="/pessoas/">Pessoas</a>
+</nav>
+
+<section>
+    <h2>Institucional</h2>
+    <p>Bem-vindo à página institucional do Instituto de Informática da UFSM. Conheça nossa história e evolução.</p>
+
+    <h3><i class="fas fa-clock"></i> Linha do Tempo - Curiosidades sobre o INF</h3>
+    <div class="timeline">
+        <div class="event">
+            <h4>1994</h4>
+            <p>Criação do Curso de Ciência da Computação na UFSM, dando origem ao embrião do atual INF.</p>
         </div>
-    </header>
+        <div class="event">
+            <h4>2009</h4>
+            <p>Fundação do Instituto de Informática como unidade acadêmica independente da UFSM.</p>
+        </div>
+        <div class="event">
+            <h4>2010</h4>
+            <p>Lançamento do curso de Sistemas de Informação, ampliando a atuação do INF.</p>
+        </div>
+        <div class="event">
+            <h4>2013</h4>
+            <p>Início do Programa de Pós-Graduação em Ciência da Computação (mestrado).</p>
+        </div>
+        <div class="event">
+            <h4>2018</h4>
+            <p>INF passa a contar com múltiplos grupos de pesquisa reconhecidos pelo CNPq.</p>
+        </div>
+        <div class="event">
+            <h4>2020</h4>
+            <p>Adaptação completa para atividades remotas durante a pandemia, sem perder vínculo com os alunos.</p>
+        </div>
+        <div class="event">
+            <h4>2023</h4>
+            <p>INF participa de feiras nacionais e conquista prêmios por inovação em tecnologia educacional.</p>
+        </div>
+    </div>
+</section>
 
-    <nav>
-        <a href="/">Início</a>
-        <a href="/projetos/">Projetos</a>
-        <a href="/atividades/">Atividades</a>
-        <a href="/institucional/">Institucional</a>
-        <a href="/pesquisa/">Pesquisa</a>
-        <a href="/publicacoes/">Publicações</a>
-        <a href="/estrutura/">Estrutura</a>
-        <a href="/pessoas/">Pessoas</a>
-    </nav>
+<footer>
+    <p>© 2025 Instituto de Informática - UFSM</p>
+</footer>
 
-    <section class="inf-description">
-        {% block content %}
-        <p>Conteúdo padrão do site.</p>
-        {% endblock %}
-    </section>
-
-    <footer class="full-width-footer">
-        <p>© 2025 Instituto de Informática - UFSM</p>
-    </footer>
-
-    <script>
-        function showSlide(carouselId, index) {
-            const carousel = document.getElementById(carouselId);
-            if (!carousel) return;
-            const slides = carousel.querySelectorAll('.carousel-slide');
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-        }
-
-        function startAutoCarousel(carouselId) {
-            const carousel = document.getElementById(carouselId);
-            if (!carousel) return;
-
-            const slides = carousel.querySelectorAll('.carousel-slide');
-            const totalSlides = slides.length;
-            if (totalSlides === 0) return;
-
-            let currentIndex = 0;
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                showSlide(carouselId, currentIndex);
-            }, 5000);
-        }
-
-        window.onload = function () {
-            startAutoCarousel('carousel1');
-            startAutoCarousel('carousel2');
-            startAutoCarousel('carousel3');
-            startAutoCarousel('carouselNoticias');
-        };
-    </script>
 </body>
 </html>

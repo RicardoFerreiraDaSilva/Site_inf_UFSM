@@ -3,21 +3,28 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Institucional - Instituto de Informática - UFSM</title>
+    <title>Institucional - Instituto de Informática UFSM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
             --azul-escuro: #003366;
             --azul-medio: #005599;
-            --cinza-claro: #f4f4f4;
+            --cinza-claro: #f2f2f2;
+            --cinza: #ddd;
+            --texto: #333;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: white;
-            padding-bottom: 80px;
+            background-color: #fafafa;
+            color: var(--texto);
         }
 
         header, footer {
@@ -29,34 +36,42 @@
 
         nav {
             background-color: var(--azul-medio);
-            padding: 10px;
             text-align: center;
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
         }
 
         nav a {
             color: white;
-            margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
+            padding: 6px 12px;
+            transition: background-color 0.3s;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            background-color: var(--azul-escuro);
+            border-radius: 5px;
         }
 
         section {
-            padding: 40px 20px;
+            padding: 30px 20px;
             max-width: 1000px;
-            margin: auto;
+            margin: 0 auto;
         }
 
         h2, h3 {
+            text-align: center;
+            margin-bottom: 20px;
             color: var(--azul-escuro);
         }
 
         .timeline {
             position: relative;
-            margin: 40px 0;
+            margin-top: 40px;
             padding-left: 30px;
             border-left: 4px solid var(--azul-medio);
         }
@@ -64,11 +79,12 @@
         .event {
             position: relative;
             margin-bottom: 30px;
-            padding-left: 20px;
-            background-color: var(--cinza-claro);
-            border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding-left: 20px;
+            background-color: white;
+            border-left: 6px solid var(--azul-medio);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .event::before {
@@ -94,9 +110,8 @@
         }
 
         @media (max-width: 600px) {
-            nav a {
-                display: block;
-                margin: 10px 0;
+            nav {
+                flex-direction: column;
             }
 
             .timeline {
@@ -117,22 +132,23 @@
 
 <header>
     <h1>Instituto de Informática - UFSM</h1>
+    <p>Conheça a história e evolução do INF</p>
 </header>
 
-<nav class="bg-blue-600 text-white py-3 flex flex-wrap justify-center gap-4">
-    <a href="/" class="hover:underline">Início</a>
-    <a href="/projetos/" class="hover:underline">Projetos</a>
-    <a href="/atividades/" class="hover:underline">Atividades</a>
-    <a href="/institucional/" class="hover:underline font-bold underline">Institucional</a>
-    <a href="/pesquisa/" class="hover:underline">Pesquisa</a>
-    <a href="/publicacoes/" class="hover:underline">Publicações</a>
-    <a href="/estrutura/" class="hover:underline">Estrutura</a>
-    <a href="/pessoas/" class="hover:underline">Pessoas</a>
+<nav>
+    <a href="/">Início</a>
+    <a href="/projetos/">Projetos</a>
+    <a href="/atividades/">Atividades</a>
+    <a href="/institucional/" style="text-decoration: underline;">Institucional</a>
+    <a href="/pesquisa/">Pesquisa</a>
+    <a href="/publicacoes/">Publicações</a>
+    <a href="/estrutura/">Estrutura</a>
+    <a href="/pessoas/">Pessoas</a>
 </nav>
 
 <section>
     <h2>Institucional</h2>
-    <p>Bem-vindo à página institucional do Instituto de Informática da UFSM. Conheça nossa história e evolução.</p>
+    <p style="text-align: center;">Bem-vindo à página institucional do Instituto de Informática da UFSM.</p>
 </section>
 
 <section>
