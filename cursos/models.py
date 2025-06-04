@@ -63,7 +63,7 @@ class GrupoPesquisa(models.Model):
     nome = models.CharField(max_length=200)
     lider = models.CharField(max_length=200)
     descricao = models.TextField(blank=True, null=True)
-    slug = models.SlugField(unique=True, blank=True)  # para URLs amigáveis
+    slug = models.SlugField(unique=True, blank=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -72,4 +72,4 @@ class GrupoPesquisa(models.Model):
 
     def __str__(self):
         return self.nome
-   
+

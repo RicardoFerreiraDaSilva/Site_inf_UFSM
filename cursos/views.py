@@ -131,9 +131,10 @@ def excluir_atividade(request, id):
     return redirect('listar_atividades')
 
 # Publicações (Livros)
+
 def publicacoes(request):
-    livros = Livro.objects.all()
-    return render(request, 'cursos/publicacoes.html', {'livros': livros})
+    publicacoes = Livro.objects.all()
+    return render(request, 'cursos/publicacoes.html', {'publicacoes': publicacoes})
 
 # Grupos de Pesquisa
 

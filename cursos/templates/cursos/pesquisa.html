@@ -122,21 +122,30 @@
         <a href="/grupos/">Grupos de Pesquisa</a>
     </nav>
 
-    <section>
-        <h2>Grupos em Destaque</h2>
-        <div class="cards-container">
-            {% if grupos %}
-                {% for grupo in grupos %}
-                    <div class="atividade-card">
-                        <h3>{{ grupo.nome }}</h3>
-                        <p>{{ grupo.descricao }}</p>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>Nenhum grupo de pesquisa cadastrado.</p>
-            {% endif %}
-        </div>
-    </section>
+<section>
+    <h2>Grupos em Destaque</h2>
+    <div class="cards-container">
+        {% for grupo in grupos %}
+            <div class="atividade-card">
+                {% if grupo.imagem %}
+                    <img src="{{ grupo.imagem.url }}" alt="{{ grupo.nome }}" class="grupo-logo" />
+                {% endif %}
+                <h3>{{ grupo.nome }}</h3>
+                <p><strong>Líder:</strong> {{ grupo.lider }}</p>
+                {% if grupo.area %}
+                    <p><strong>Área:</strong> {{ grupo.area }}</p>
+                {% endif %}
+                <p>{{ grupo.descricao|truncatechars:150 }}</p>
+                {% if grupo.site %}
+                    <p><a href="{{ grupo.site }}" target="_blank">Visitar site</a></p>
+                {% endif %}
+                {% if grupo.slug %}
+                    <a href="{% url 'grupo_detalhe' grupo.slug %}">Saiba mais</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</section>
 
     <footer>
         <p>© 2025 Instituto de Informática - UFSM</p>
