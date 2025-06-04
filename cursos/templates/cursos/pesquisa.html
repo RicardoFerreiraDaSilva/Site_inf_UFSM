@@ -125,16 +125,16 @@
     <section>
         <h2>Grupos em Destaque</h2>
         <div class="cards-container">
-{% for grupo in grupos %}
-  <div>
-    <h3>{{ grupo.nome }}</h3>
-    <p><strong>Líder:</strong> {{ grupo.lider }}</p>
-    <p>{{ grupo.descricao }}</p>
-  </div>
-{% empty %}
-  <p>Nenhum grupo de pesquisa cadastrado.</p>
-{% endfor %}
-
+            {% if grupos %}
+                {% for grupo in grupos %}
+                    <div class="atividade-card">
+                        <h3>{{ grupo.nome }}</h3>
+                        <p>{{ grupo.descricao }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhum grupo de pesquisa cadastrado.</p>
+            {% endif %}
         </div>
     </section>
 

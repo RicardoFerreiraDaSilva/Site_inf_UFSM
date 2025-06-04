@@ -7,7 +7,7 @@ urlpatterns = [
     
     # Páginas principais
     path('institucional/', views.institucional, name='institucional'),
-    path('pesquisa/', views.pesquisa, name='pesquisa'),
+    path('pesquisa/', views.pesquisa, name='pesquisa'),  # mantenha só um
     path('estrutura/', views.estrutura, name='estrutura'),
     path('pessoas/', views.pessoas, name='pessoas'),
     
@@ -28,14 +28,12 @@ urlpatterns = [
     path('noticia/<int:pk>/', views.noticia_detail, name='noticia_detail'),
 
     # Atividades
-    path('atividades/', views.atividades_publicas, name='atividades'),
+    path('atividades/', views.atividades, name='atividades'),  # corrigido aqui
     path('atividades/cadastrar/', views.cadastrar_atividade, name='cadastrar_atividade'),
     path('atividades/gerenciar/', views.listar_atividades, name='listar_atividades'),
     path('atividades/editar/<int:id>/', views.editar_atividade, name='editar_atividade'),
     path('atividades/excluir/<int:id>/', views.excluir_atividade, name='excluir_atividade'),
 
-    #Grupos de pesquisa
-    path('grupos/', views.grupos_pesquisa, name='grupos'),
+    # Grupos de pesquisa
     path('grupos/<slug:slug>/', views.grupo_detalhe, name='grupo_detalhe'),
-
 ]
