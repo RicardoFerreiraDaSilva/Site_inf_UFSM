@@ -5,103 +5,166 @@
     <meta charset="UTF-8">
     <title>Estrutura - Instituto de Informática UFSM</title>
     <style>
+        :root {
+            --azul-escuro: #003366;
+            --azul-medio: #005599;
+            --cinza-claro: #f2f2f2;
+            --texto: #333;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: var(--cinza-claro);
+            color: var(--texto);
         }
+
         header {
-            background-color: #003366;
+            background-color: var(--azul-escuro);
             color: white;
             padding: 20px;
             text-align: center;
         }
+
         nav {
-            background-color: #005599;
-            padding: 10px;
-            text-align: center;
+            background-color: var(--azul-medio);
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
         }
+
         nav a {
             color: white;
-            margin: 0 10px;
             text-decoration: none;
             font-weight: bold;
+            padding: 6px 12px;
+            transition: background-color 0.3s;
         }
-        section {
-            padding: 30px;
-        }
-        .estrutura-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .estrutura-card {
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .estrutura-card img {
-            max-width: 100%;
-            height: auto;
+
+        nav a:hover {
+            background-color: var(--azul-escuro);
             border-radius: 5px;
         }
+
+        section {
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--azul-escuro);
+            margin-bottom: 30px;
+        }
+
+        .estrutura-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .estrutura-card {
+            background-color: white;
+            border-left: 6px solid var(--azul-medio);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .estrutura-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .estrutura-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .estrutura-card h3 {
+            color: var(--azul-escuro);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .estrutura-card p {
+            line-height: 1.5;
+            margin: 0;
+        }
+
         footer {
-            background-color: #003366;
+            background-color: var(--azul-escuro);
             color: white;
             text-align: center;
             padding: 15px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Estrutura do Instituto de Informática</h1>
-    <p>Conheça as instalações e recursos disponíveis para alunos e professores</p>
-</header>
+    <header>
+        <h1>Estrutura do Instituto de Informática</h1>
+        <p>Conheça as instalações e recursos disponíveis para alunos e professores</p>
+    </header>
 
-<nav>
-    <a href="/">Início</a>
-    <a href="/projetos/">Projetos</a>
-    <a href="/atividades/">Atividades</a>
-    <a href="/institucional/">Institucional</a>
-    <a href="/pesquisa/">Pesquisa</a>
-    <a href="/publicacoes/">Publicações</a>
-    <a href="/estrutura/">Estrutura</a>
-    <a href="/pessoas/">Pessoas</a>
-</nav>
+    <nav>
+        <a href="/">Início</a>
+        <a href="/projetos/">Projetos</a>
+        <a href="/atividades/">Atividades</a>
+        <a href="/institucional/">Institucional</a>
+        <a href="/pesquisa/">Pesquisa</a>
+        <a href="/publicacoes/">Publicações</a>
+        <a href="/estrutura/">Estrutura</a>
+        <a href="/pessoas/">Pessoas</a>
+    </nav>
 
-<section>
-    <div class="estrutura-grid">
-        <div class="estrutura-card">
-            <img src="{% static 'cursos/laboratorio_informatica.jpg' %}" alt="Laboratórios de Informática">
-            <h3>Laboratórios de Informática</h3>
-            <p>Espaços equipados com computadores modernos para aulas práticas e desenvolvimento de projetos.</p>
+    <section>
+        <h2>Ambientes e Instalações</h2>
+        <div class="estrutura-grid">
+            <div class="estrutura-card">
+                <img src="{% static 'cursos/laboratorio_informatica.jpg' %}" alt="Laboratórios de Informática">
+                <h3>Laboratórios de Informática</h3>
+                <p>Espaços equipados com computadores modernos para aulas práticas e desenvolvimento de projetos.</p>
+            </div>
+            <div class="estrutura-card">
+                <img src="{% static 'cursos/auditorio.jpg' %}" alt="Auditório">
+                <h3>Auditório</h3>
+                <p>Espaço para palestras, workshops, seminários e eventos acadêmicos com capacidade para mais de 100 pessoas.</p>
+            </div>
+            <div class="estrutura-card">
+                <img src="{% static 'cursos/biblioteca.jpg' %}" alt="Biblioteca Setorial">
+                <h3>Biblioteca Setorial</h3>
+                <p>Acervo atualizado com livros e materiais de apoio nas áreas de computação e tecnologia.</p>
+            </div>
+            <div class="estrutura-card">
+                <img src="{% static 'cursos/salas_estudo.jpg' %}" alt="Salas de Estudo">
+                <h3>Salas de Estudo</h3>
+                <p>Ambientes silenciosos e colaborativos para estudo individual ou em grupo.</p>
+            </div>
         </div>
-        <div class="estrutura-card">
-            <img src="{% static 'cursos/auditorio.jpg' %}" alt="Auditório">
-            <h3>Auditório</h3>
-            <p>Espaço para palestras, workshops, seminários e eventos acadêmicos com capacidade para mais de 100 pessoas.</p>
-        </div>
-        <div class="estrutura-card">
-            <img src="{% static 'cursos/biblioteca.jpg' %}" alt="Biblioteca Setorial">
-            <h3>Biblioteca Setorial</h3>
-            <p>Acervo atualizado com livros e materiais de apoio nas áreas de computação e tecnologia.</p>
-        </div>
-        <div class="estrutura-card">
-            <img src="{% static 'cursos/salas_estudo.jpg' %}" alt="Salas de Estudo">
-            <h3>Salas de Estudo</h3>
-            <p>Ambientes silenciosos e colaborativos para estudo individual ou em grupo.</p>
-        </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <p>© 2025 Instituto de Informática - UFSM</p>
-</footer>
+    <footer>
+        <p>© 2025 Instituto de Informática - UFSM</p>
+    </footer>
 
 </body>
 </html>
