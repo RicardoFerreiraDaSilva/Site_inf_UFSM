@@ -1,43 +1,148 @@
-from django.urls import path
-from . import views
-from django.contrib.auth import views as auth_views
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-urlpatterns = [
-    # Página inicial
-    path('', views.home, name='home'),
+from .models import (
+    Projeto, Noticia, Livro, Atividade,
+    GrupoPesquisa, Destaque, ProjetoPET
+)
+from .forms import (
+    ProjetoForm, AtividadeForm, ProjetoPETForm
+)
 
-    # Páginas principais
-    path('institucional/', views.institucional, name='institucional'),
-    path('pesquisa/', views.pesquisa, name='pesquisa'),
-    path('estrutura/', views.estrutura, name='estrutura'),
-    path('pessoas/', views.pessoas, name='pessoas'),
+# Página inicial com destaques e projetos PET
+def home(request):
+    destaques = Destaque.objects.all()
+    petsi_destaques = ProjetoPET.objects.filter(grupo='SI')
+    petcc_destaques = ProjetoPET.objects.filter(grupo='CC')
+    return render(request, 'cursos/index.html', {
+        'destaques': destaques,
+        'petsi_destaques': petsi_destaques,
+        'petcc_destaques': petcc_destaques,
+    })
 
-    # Projetos
-    path('projetos/', views.projetos, name='projetos'),
-    path('projetos/<int:projeto_id>/', views.projeto_detalhe, name='projeto_detalhe'),
-    path('cadastrar_projeto/', views.cadastrar_projeto, name='cadastrar_projeto'),
+# Página de notícias
+def noticias(request):
+    noticias = Noticia.objects.all().order_by('-data_publicacao')
+    return render(request, 'noticias.html', {'noticias': noticias})
 
-    # Autenticação
-    path('login/', views.login_view, name='login'),
-    path('registrar/', views.registrar_usuario, name='registrar'),
+def noticia_detail(request, pk):
+    noticia = get_object_or_404(Noticia, pk=pk)
+    return render(request, 'cursos/noticia_detail.html', {'noticia': noticia})
 
-    # Publicações
-    path('publicacoes/', views.publicacoes, name='publicacoes'),
+# Página de projetos
+def projetos(request):
+    projetos = Projeto.objects.all()
+    return render(request, 'cursos/projetos.html', {'projetos': projetos})
 
-    # Notícias
-    path('noticias/', views.noticias, name='noticias'),
-    path('noticia/<int:pk>/', views.noticia_detail, name='noticia_detail'),
+@login_required
+def cadastrar_projeto(request):
+    if request.method == 'POST':
+        form = ProjetoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('projetos')
+    else:
+        form = ProjetoForm()
+    return render(request, 'cursos/cadastrar_projeto.html', {'form': form})
 
-    # Atividades
-    path('atividades/', views.atividades, name='atividades'),
-    path('atividades/cadastrar/', views.cadastrar_atividade, name='cadastrar_atividade'),
-    path('atividades/gerenciar/', views.listar_atividades, name='listar_atividades'),
-    path('atividades/editar/<int:id>/', views.editar_atividade, name='editar_atividade'),
-    path('atividades/excluir/<int:id>/', views.excluir_atividade, name='excluir_atividade'),
+def projeto_detalhe(request, projeto_id):
+    projeto = get_object_or_404(Projeto, id=projeto_id)
+    return render(request, 'cursos/projeto_detalhe.html', {'projeto': projeto})
 
-    # Projetos PET
-    path('cadastrar-projeto-pet/', views.cadastrar_projeto_pet, name='cadastrar_projeto_pet'),
+# Página de atividades
+def atividades(request):
+    atividades = Atividade.objects.all().order_by('-data')
+    return render(request, 'cursos/atividades.html', {'atividades': atividades})
 
-    # Grupos de pesquisa
-    path('grupos/<slug:slug>/', views.grupo_detalhe, name='grupo_detalhe'),
-]
+@login_required
+def cadastrar_atividade(request):
+    if request.method == 'POST':
+        form = AtividadeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('atividades')
+    else:
+        form = AtividadeForm()
+    return render(request, 'cursos/cadastrar_atividade.html', {'form': form})
+
+@login_required
+def editar_atividade(request, id):
+    atividade = get_object_or_404(Atividade, id=id)
+    if request.method == 'POST':
+        form = AtividadeForm(request.POST, request.FILES, instance=atividade)
+        if form.is_valid():
+            form.save()
+            return redirect('atividades')
+    else:
+        form = AtividadeForm(instance=atividade)
+    return render(request, 'cursos/cadastrar_atividade.html', {'form': form})
+
+@login_required
+def excluir_atividade(request, id):
+    atividade = get_object_or_404(Atividade, id=id)
+    atividade.delete()
+    return redirect('atividades')
+
+# Página de publicações
+def publicacoes(request):
+    publicacoes = Livro.objects.all()
+    return render(request, 'cursos/publicacoes.html', {'publicacoes': publicacoes})
+
+# Página de grupos de pesquisa
+def pesquisa(request):
+    grupos = GrupoPesquisa.objects.all()
+    return render(request, 'cursos/pesquisa.html', {'grupos': grupos})
+
+def grupo_detalhe(request, slug):
+    grupo = get_object_or_404(GrupoPesquisa, slug=slug)
+    return render(request, 'cursos/grupo_detalhe.html', {'grupo': grupo})
+
+# Página de cadastro de projeto PET
+@login_required
+def cadastrar_projeto_pet(request):
+    if request.method == 'POST':
+        form = ProjetoPETForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ProjetoPETForm()
+    return render(request, 'cursos/cadastrar_projeto_pet.html', {'form': form})
+
+# Login
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'cursos/login.html', {'form': form})
+
+# Registro de usuário
+def registrar_usuario(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'cursos/registrar.html', {'form': form})
+
+# Páginas estáticas
+def institucional(request):
+    return render(request, 'cursos/institucional.html')
+
+def estrutura(request):
+    return render(request, 'cursos/estrutura.html')
+
+def pessoas(request):
+    return render(request, 'cursos/pessoas.html')
+
+def base_demo(request):
+    return render(request, 'cursos/base_demo.html')

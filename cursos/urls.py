@@ -3,8 +3,9 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', views.home, name='index'),  # aqui: views.home no lugar de views.index
-    
+    # Página inicial
+    path('', views.home, name='home'),
+
     # Páginas principais
     path('institucional/', views.institucional, name='institucional'),
     path('pesquisa/', views.pesquisa, name='pesquisa'),
@@ -30,11 +31,11 @@ urlpatterns = [
     # Atividades
     path('atividades/', views.atividades, name='atividades'),
     path('atividades/cadastrar/', views.cadastrar_atividade, name='cadastrar_atividade'),
-    path('atividades/gerenciar/', views.listar_atividades, name='listar_atividades'),
+    path('atividades/gerenciar/', views.editar_atividade, name='gerenciar_atividades'),
     path('atividades/editar/<int:id>/', views.editar_atividade, name='editar_atividade'),
     path('atividades/excluir/<int:id>/', views.excluir_atividade, name='excluir_atividade'),
 
-    # Projeto PET
+    # Projetos PET
     path('cadastrar-projeto-pet/', views.cadastrar_projeto_pet, name='cadastrar_projeto_pet'),
 
     # Grupos de pesquisa
