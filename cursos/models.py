@@ -1,5 +1,7 @@
 from django.db import models
+from django.utils.text import slugify
 
+# MODELO: Projeto
 class Projeto(models.Model):
     titulo = models.CharField(max_length=200)
     descricao = models.TextField()
@@ -7,6 +9,9 @@ class Projeto(models.Model):
 
     def __str__(self):
         return self.titulo
+
+
+# MODELO: Notícia
 class Noticia(models.Model):
     titulo = models.CharField(max_length=200)
     conteudo = models.TextField()
@@ -16,8 +21,8 @@ class Noticia(models.Model):
     def __str__(self):
         return self.titulo
 
-from django.db import models
 
+# MODELO: Livro
 class Livro(models.Model):
     titulo = models.CharField(max_length=200)
     autor = models.CharField(max_length=200)
@@ -29,6 +34,8 @@ class Livro(models.Model):
     def __str__(self):
         return self.titulo
 
+
+# MODELO: Atividade
 class Atividade(models.Model):
     TIPO_CHOICES = [
         ('Palestra', 'Palestra'),
@@ -46,23 +53,15 @@ class Atividade(models.Model):
 
     def __str__(self):
         return self.titulo
-class GrupoPesquisa(models.Model):
-    nome = models.CharField(max_length=200)
-    descricao = models.TextField()
-    lider = models.CharField(max_length=100)
-    area = models.CharField(max_length=100, blank=True, null=True)
-    site = models.URLField(blank=True, null=True)
-    slug = models.SlugField(unique=True)
 
-    def __str__(self):
-        return self.nomes
-    
-from django.utils.text import slugify
 
+# MODELO: Grupo de Pesquisa
 class GrupoPesquisa(models.Model):
     nome = models.CharField(max_length=200)
     lider = models.CharField(max_length=200)
     descricao = models.TextField(blank=True, null=True)
+    area = models.CharField(max_length=100, blank=True, null=True)
+    site = models.URLField(blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -73,3 +72,31 @@ class GrupoPesquisa(models.Model):
     def __str__(self):
         return self.nome
 
+
+# MODELO: Destaque
+class Destaque(models.Model):
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField(blank=True)
+    imagem = models.ImageField(upload_to='destaques/')
+    link = models.URLField(blank=True)
+
+    def __str__(self):
+        return self.titulo
+
+
+# MODELO: Projeto PET (substitui PetDestaque)
+class ProjetoPET(models.Model):
+    GRUPO_CHOICES = [
+        ('SI', 'Sistemas de Informação'),
+        ('CC', 'Ciência da Computação'),
+    ]
+
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField()
+    grupo = models.CharField(max_length=2, choices=GRUPO_CHOICES)
+    ordem = models.PositiveIntegerField(default=0)
+    imagem = models.ImageField(upload_to='projetos_pet/', blank=True, null=True)
+    pet_tipo = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return f"{self.titulo} ({self.get_grupo_display()})"

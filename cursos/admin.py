@@ -14,3 +14,13 @@ from .models import GrupoPesquisa
 class GrupoPesquisaAdmin(admin.ModelAdmin):
     list_display = ('nome', 'lider')
     prepopulated_fields = {"slug": ("nome",)}  # gera slug automaticamente
+
+from .models import Destaque
+
+@admin.register(Destaque)
+class DestaqueAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'link')
+
+from .models import ProjetoPET
+
+admin.site.register(ProjetoPET)

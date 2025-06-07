@@ -26,3 +26,11 @@ class AtividadeForm(forms.ModelForm):
         widgets = {
             'data': forms.DateInput(attrs={'type': 'date'}),
         }
+        
+from django import forms
+from .models import ProjetoPET
+
+class ProjetoPETForm(forms.ModelForm):
+    class Meta:
+        model = ProjetoPET
+        fields = ['titulo', 'descricao', 'grupo', 'ordem']  
