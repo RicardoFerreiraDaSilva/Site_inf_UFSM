@@ -174,6 +174,135 @@
              .pet-slide-cc.active {
                 display: block;
 }
+         .pet-carrossel {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: 480px; /* metade do carrossel principal */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.pet-slide-container-si,
+.pet-slide-container-cc {
+    position: relative;
+    min-height: 250px;
+}
+
+.pet-slide-si, .pet-slide-cc {
+    display: none;
+    padding: 20px;
+    text-align: center;
+}
+
+.pet-slide-si.active,
+.pet-slide-cc.active {
+    display: block;
+}
+
+.pet-slide-si img,
+.pet-slide-cc img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.carrossel-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--azul-medio);
+}
+
+.carrossel-buttons button {
+    background-color: white;
+    color: var(--azul-medio);
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.carrossel-buttons button:hover {
+    background-color: var(--azul-escuro);
+    color: white;
+}
+
+/* Ajustes para o container flex no mobile */
+@media (max-width: 1024px) {
+    .flex.flex-col.lg\\:flex-row {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    .pet-carrossel {
+        max-width: 100%;
+    }
+}
+
+.pets-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px; /* espaçamento entre os carrosséis */
+  justify-content: center;
+  flex-wrap: wrap; /* para evitar overflow em telas pequenas */
+}
+
+.pet-carrossel {
+  flex: 1 1 45%; /* cada carrossel ocupa 45% da largura disponível */
+  max-width: 480px;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .pets-container {
+    flex-direction: column;
+  }
+  .pet-carrossel {
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.pets-container {
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente */
+  gap: 20px; /* espaço menor entre os carrosséis */
+  max-width: 960px; /* largura máxima para não ficar muito espalhado */
+  margin: 0 auto; /* centraliza o container na página */
+}
+.pet-carrossel {
+  flex: 1 1 45%; /* os dois carrosséis dividem espaço quase igual */
+  max-width: 45%; /* controla largura máxima */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.pet-carrossel-buttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.pet-carrossel-buttons button {
+  background-color: var(--azul-medio);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin: 0 4px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pet-carrossel-buttons button:hover {
+  background-color: var(--azul-escuro);
+}
 
     </style>
 </head>
@@ -218,50 +347,61 @@
 <section class="px-4 py-8">
   <div class="flex flex-col lg:flex-row gap-6 justify-center">
 
+<section class="px-4 py-8">
+  <div class="flex flex-col lg:flex-row justify-center items-start gap-8 max-w-6xl mx-auto">
+    
+ <section class="px-4 py-8">
+  <div class="pets-container">
     <!-- Carrossel PET SI -->
-    <div class="w-full lg:w-1/2">
-      <h2 class="text-xl font-semibold mb-3 text-center text-blue-900">PET Sistemas de Informação</h2>
-      <div class="pet-carrossel relative overflow-hidden rounded-xl shadow-md bg-white">
-        <div class="pet-slide-container-si">
-          <div class="pet-slide-si active p-4">
-            <h3 class="font-bold text-blue-800 mb-2">Projeto 1</h3>
-            <p class="text-sm text-gray-600">Descrição do projeto do PET SI.</p>
+    <div class="pet-carrossel">
+      <h3 class="text-xl font-semibold text-blue-800 text-center mb-4">PET Sistemas de Informação</h3>
+      <div class="pet-slide-container-si">
+        {% for projeto in petsi_destaques %}
+          <div class="pet-slide-si {% if forloop.first %}active{% endif %}">
+            {% if projeto.imagem %}
+              <img src="{{ projeto.imagem.url }}" alt="{{ projeto.titulo }}" />
+            {% endif %}
+            <h4>{{ projeto.titulo }}</h4>
+            <p>{{ projeto.descricao }}</p>
           </div>
-          <div class="pet-slide-si p-4">
-            <h3 class="font-bold text-blue-800 mb-2">Projeto 2</h3>
-            <p class="text-sm text-gray-600">Outro destaque do PET SI.</p>
+        {% empty %}
+          <div class="pet-slide-si active">
+            <p>Nenhum projeto cadastrado para PET SI.</p>
           </div>
-        </div>
-        <div class="carrossel-buttons text-center py-2">
-          <button onclick="mudarSlidePET('si', -1)">Anterior</button>
-          <button onclick="mudarSlidePET('si', 1)">Próximo</button>
-        </div>
+        {% endfor %}
+      </div>
+      <div class="pet-carrossel-buttons">
+        <button onclick="mudarSlidePET('si', -1)">Anterior</button>
+        <button onclick="mudarSlidePET('si', 1)">Próximo</button>
       </div>
     </div>
 
     <!-- Carrossel PET CC -->
-    <div class="w-full lg:w-1/2">
-      <h2 class="text-xl font-semibold mb-3 text-center text-blue-900">PET Ciência da Computação</h2>
-      <div class="pet-carrossel relative overflow-hidden rounded-xl shadow-md bg-white">
-        <div class="pet-slide-container-cc">
-          <div class="pet-slide-cc active p-4">
-            <h3 class="font-bold text-blue-800 mb-2">Projeto A</h3>
-            <p class="text-sm text-gray-600">Descrição do projeto do PET CC.</p>
+    <div class="pet-carrossel">
+      <h3 class="text-xl font-semibold text-blue-800 text-center mb-4">PET Ciência da Computação</h3>
+      <div class="pet-slide-container-cc">
+        {% for projeto in petcc_destaques %}
+          <div class="pet-slide-cc {% if forloop.first %}active{% endif %}">
+            {% if projeto.imagem %}
+              <img src="{{ projeto.imagem.url }}" alt="{{ projeto.titulo }}" />
+            {% endif %}
+            <h4>{{ projeto.titulo }}</h4>
+            <p>{{ projeto.descricao }}</p>
           </div>
-          <div class="pet-slide-cc p-4">
-            <h3 class="font-bold text-blue-800 mb-2">Projeto B</h3>
-            <p class="text-sm text-gray-600">Outro destaque do PET CC.</p>
+        {% empty %}
+          <div class="pet-slide-cc active">
+            <p>Nenhum projeto cadastrado para PET CC.</p>
           </div>
-        </div>
-        <div class="carrossel-buttons text-center py-2">
-          <button onclick="mudarSlidePET('cc', -1)">Anterior</button>
-          <button onclick="mudarSlidePET('cc', 1)">Próximo</button>
-        </div>
+        {% endfor %}
+      </div>
+      <div class="pet-carrossel-buttons">
+        <button onclick="mudarSlidePET('cc', -1)">Anterior</button>
+        <button onclick="mudarSlidePET('cc', 1)">Próximo</button>
       </div>
     </div>
-
   </div>
 </section>
+
 
 <div class="localizacao">
     <h3>📍 Localização do INF</h3>
@@ -334,6 +474,13 @@
     mostrarSlidePET('si', 0);
     mostrarSlidePET('cc', 0);
   });
+
+
+  // Roda os carrosséis automaticamente a cada 5 segundos
+  setInterval(() => mudarSlidePET('si', 1), 5000);
+  setInterval(() => mudarSlidePET('cc', 1), 5000);
+
+
 </script>
 
 </body>

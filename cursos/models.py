@@ -21,6 +21,7 @@ class Noticia(models.Model):
     def __str__(self):
         return self.titulo
 
+from django.db import models
 
 # MODELO: Livro
 class Livro(models.Model):
