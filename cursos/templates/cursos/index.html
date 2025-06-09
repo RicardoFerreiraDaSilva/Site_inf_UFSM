@@ -51,71 +51,100 @@
             border-radius: 5px;
         }
 
-      .carrossel {
-    position: relative;
-    max-width: 720px; /* menor que antes */
-    margin: 40px auto;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    background-color: white;
+ .carrossel {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.carrossel-slide-container {
+  position: relative;
 }
 
 .slide {
-    display: none;
-    padding: 24px;
-    text-align: center;
+  display: none;
+  padding: 16px;
 }
 
 .slide.active {
-    display: block;
+  display: block;
 }
 
 .slide img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 12px;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 12px;
 }
 
-.slide p {
-    margin: 8px 0;
-    font-size: 1rem;
-    color: var(--texto);
+.slide-content {
+  padding: 0 8px;
 }
 
-.slide a {
-    font-weight: bold;
-    color: var(--azul-medio);
-    text-decoration: none;
-    font-size: 1.05rem;
+.titulo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1d4ed8; /* Azul */
+  margin-bottom: 6px;
 }
 
-.slide a:hover {
-    text-decoration: underline;
+.titulo a {
+  text-decoration: none;
+  color: #1d4ed8;
 }
 
-/* Botões do carrossel */
-.carrossel-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 12px;
+.titulo a:hover {
+  text-decoration: underline;
 }
 
-.carrossel-buttons button {
-    background-color: var(--azul-medio);
-    color: white;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.descricao {
+  color: #4b5563; /* Cinza escuro */
+  font-size: 15px;
 }
 
-.carrossel-buttons button:hover {
-    background-color: var(--azul-escuro);
+.carrossel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255,255,255,0.85);
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 14px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 10;
+  transition: background-color 0.2s ease;
+}
+
+.carrossel-btn:hover {
+  background-color: rgba(255,255,255,1);
+}
+
+.carrossel-btn.anterior {
+  left: 10px;
+}
+
+.carrossel-btn.proximo {
+  right: 10px;
+}
+.carrossel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px; /* igual à "Acesso Rápido" */
+  margin: 40px auto; /* espaço acima e abaixo */
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  padding-bottom: 8px;
 }
 
         .localizacao, .redes-sociais {
@@ -409,27 +438,30 @@
 </section>
 
 <div class="carrossel">
+  <div class="carrossel-slide-container">
     {% for destaque in destaques %}
-    <div class="slide {% if forloop.first %}active{% endif %}">
+      <div class="slide {% if forloop.first %}active{% endif %}">
         <img src="{{ destaque.imagem.url }}" alt="{{ destaque.titulo }}">
-        <p>
+        <div class="slide-content">
+          <p class="titulo">
             {% if destaque.link %}
-                <a href="{{ destaque.link }}" target="_blank">{{ destaque.titulo }}</a>
+              <a href="{{ destaque.link }}" target="_blank">{{ destaque.titulo }}</a>
             {% else %}
-                {{ destaque.titulo }}
+              {{ destaque.titulo }}
             {% endif %}
-        </p>
-        <p>{{ destaque.descricao }}</p>
-    </div>
+          </p>
+          <p class="descricao">{{ destaque.descricao }}</p>
+        </div>
+      </div>
     {% endfor %}
+
+    <!-- Botões -->
+    <button onclick="mudarSlide(-1)" class="carrossel-btn anterior">&#8592;</button>
+    <button onclick="mudarSlide(1)" class="carrossel-btn proximo">&#8594;</button>
+  </div>
 </div>
 
-<div class="carrossel-buttons">
-    <button onclick="mudarSlide(-1)">Anterior</button>
-    <button onclick="mudarSlide(1)">Próximo</button>
-</div>
-<section class="px-4 py-8">
-  <div class="flex flex-col lg:flex-row gap-6 justify-center">
+
 
 <section class="px-4 py-8">
   <div class="flex flex-col lg:flex-row justify-center items-start gap-8 max-w-6xl mx-auto">
