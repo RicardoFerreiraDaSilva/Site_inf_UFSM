@@ -51,65 +51,72 @@
             border-radius: 5px;
         }
 
-        .carrossel {
-            position: relative;
-            max-width: 960px;
-            margin: 40px auto;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+      .carrossel {
+    position: relative;
+    max-width: 720px; /* menor que antes */
+    margin: 40px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    background-color: white;
+}
 
-        .slide {
-            display: none;
-            width: 100%;
-            text-align: center;
-            padding: 20px;
-            background: white;
-        }
+.slide {
+    display: none;
+    padding: 24px;
+    text-align: center;
+}
 
-        .slide img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
+.slide.active {
+    display: block;
+}
 
-        .slide.active {
-            display: block;
-        }
+.slide img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
 
-        .slide p {
-            margin-top: 10px;
-        }
+.slide p {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: var(--texto);
+}
 
-        .slide a {
-            font-weight: bold;
-            color: var(--azul-medio);
-            text-decoration: none;
-        }
+.slide a {
+    font-weight: bold;
+    color: var(--azul-medio);
+    text-decoration: none;
+    font-size: 1.05rem;
+}
 
-        .slide a:hover {
-            text-decoration: underline;
-        }
+.slide a:hover {
+    text-decoration: underline;
+}
 
-        .carrossel-buttons {
-            text-align: center;
-            margin-top: 10px;
-        }
+/* Botões do carrossel */
+.carrossel-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+}
 
-        .carrossel-buttons button {
-            background-color: var(--azul-medio);
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            margin: 0 4px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+.carrossel-buttons button {
+    background-color: var(--azul-medio);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-        .carrossel-buttons button:hover {
-            background-color: var(--azul-escuro);
-        }
+.carrossel-buttons button:hover {
+    background-color: var(--azul-escuro);
+}
 
         .localizacao, .redes-sociais {
             max-width: 960px;
@@ -303,6 +310,54 @@
 .pet-carrossel-buttons button:hover {
   background-color: var(--azul-escuro);
 }
+.acesso-rapido {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.acesso-rapido h2 {
+  color: var(--azul-escuro);
+  margin-bottom: 24px;
+  font-size: 1.8rem;
+}
+
+.acesso-icones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.acesso-icones .item {
+  flex: 1 1 140px;
+  max-width: 160px;
+  background-color: var(--cinza-claro);
+  padding: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--texto);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.acesso-icones .item i {
+  font-size: 32px;
+  color: var(--azul-medio);
+}
+
+.acesso-icones .item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 
     </style>
 </head>
@@ -323,6 +378,35 @@
     <a href="/estrutura/">Estrutura</a>
     <a href="/pessoas/">Pessoas</a>
 </nav>
+<section class="acesso-rapido">
+  <h2>Acesso Rápido</h2>
+  <div class="acesso-icones">
+    <a href="/sistemas-informacao/" class="item">
+      <i class="fas fa-laptop-code"></i>
+      <span>Sistemas de Informação</span>
+    </a>
+    <a href="/ciencia-computacao/" class="item">
+      <i class="fas fa-brain"></i>
+      <span>Ciência da Computação</span>
+    </a>
+    <a href="https://moodle.ufsm.br" target="_blank" class="item">
+      <i class="fas fa-chalkboard-teacher"></i>
+      <span>Moodle</span>
+    </a>
+    <a href="https://biblioteca.ufsm.br" target="_blank" class="item">
+      <i class="fas fa-book"></i>
+      <span>Biblioteca</span>
+    </a>
+    <a href="/duvidas/" class="item">
+      <i class="fas fa-question-circle"></i>
+      <span>Dúvidas</span>
+    </a>
+    <a href="/pos-graduacao/" class="item">
+      <i class="fas fa-graduation-cap"></i>
+      <span>Pós-Graduação</span>
+    </a>
+  </div>
+</section>
 
 <div class="carrossel">
     {% for destaque in destaques %}
