@@ -11,6 +11,10 @@ from .forms import (
     ProjetoForm, AtividadeForm, ProjetoPETForm
 )
 
+#Acesso rápido
+def sistemas_informacao(request):
+    return render(request, 'cursos/sistemas_informacao.html')
+
 # Página inicial com destaques e projetos PET
 def home(request):
     destaques = Destaque.objects.all()

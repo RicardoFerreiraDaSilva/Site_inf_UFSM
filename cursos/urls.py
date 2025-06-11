@@ -40,4 +40,7 @@ urlpatterns = [
 
     # Grupos de pesquisa
     path('grupos/<slug:slug>/', views.grupo_detalhe, name='grupo_detalhe'),
+
+    #Acesso rápido
+    path('sistemas_informacao/', views.sistemas_informacao, name='sistemas_informacao'),
 ]
