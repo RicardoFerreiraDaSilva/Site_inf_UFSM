@@ -15,6 +15,9 @@ from .forms import (
 def sistemas_informacao(request):
     return render(request, 'cursos/sistemas_informacao.html')
 
+def ciencia_computacao(request):
+    return render(request, 'cursos/ciencia_computacao.html')
+
 # Página inicial com destaques e projetos PET
 def home(request):
     destaques = Destaque.objects.all()

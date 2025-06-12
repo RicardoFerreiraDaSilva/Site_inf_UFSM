@@ -43,4 +43,6 @@ urlpatterns = [
 
     #Acesso rápido
     path('sistemas_informacao/', views.sistemas_informacao, name='sistemas_informacao'),
+    path('ciencia_computacao/', views.ciencia_computacao, name='ciencia_computacao'),
+
 ]
