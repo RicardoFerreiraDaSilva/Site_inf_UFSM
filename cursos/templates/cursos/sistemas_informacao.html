@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Sistemas de Informação - UFSM</title>
-</head>
-<body>
-    <h1>Página de Teste: Sistemas de Informação</h1>
-    <p>Se você está vendo este conteúdo, a view e o template estão funcionando corretamente.</p>
-</body>
-</html>
+{% extends 'cursos/base.html' %}
+
+{% block title %}Sistemas de Informação - Instituto de Informática - UFSM{% endblock %}
+
+{% block content %}
+<div class="pagina-curso">
+    <div class="container">
+        <h1 class="titulo">Curso de Sistemas de Informação</h1>
+        <p>Bem-vindo à página do curso de Sistemas de Informação da UFSM!</p>
+        <!-- Você pode colocar mais conteúdo aqui -->
+    </div>
+</div>
+{% endblock %}
