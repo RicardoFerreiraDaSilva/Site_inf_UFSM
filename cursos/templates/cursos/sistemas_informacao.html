@@ -3,11 +3,61 @@
 {% block title %}Sistemas de Informação - Instituto de Informática - UFSM{% endblock %}
 
 {% block content %}
-<div class="pagina-curso">
-    <div class="container">
-        <h1 class="titulo">Curso de Sistemas de Informação</h1>
-        <p>Bem-vindo à página do curso de Sistemas de Informação da UFSM!</p>
-        <!-- Você pode colocar mais conteúdo aqui -->
+<div class="pagina-curso bg-gray-100 py-10">
+    <div class="max-w-4xl mx-auto px-6">
+        <h1 class="text-3xl font-bold text-blue-900 mb-4">Curso de Sistemas de Informação</h1>
+        <p class="text-gray-800 mb-6">
+            O curso de Sistemas de Informação da UFSM forma profissionais capacitados para atuar com tecnologia da informação,
+            desenvolvimento de sistemas, banco de dados, redes e gestão de TI. A proposta é alinhar conhecimento técnico e visão estratégica.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow p-6">
+                <h2 class="text-xl font-semibold text-blue-800 mb-2">Objetivos do Curso</h2>
+                <p class="text-gray-700">
+                    Capacitar profissionais com habilidades técnicas e gerenciais para solucionar problemas reais por meio da tecnologia,
+                    promovendo a inovação e o uso ético da informação.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow p-6">
+                <h2 class="text-xl font-semibold text-blue-800 mb-2">Perfil do Egresso</h2>
+                <p class="text-gray-700">
+                    O egresso estará apto a desenvolver sistemas, gerenciar projetos, trabalhar com bancos de dados, segurança da informação
+                    e atuar em ambientes corporativos com visão crítica e inovadora.
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 mb-8">
+            <h2 class="text-xl font-semibold text-blue-800 mb-4">Acesso Rápido</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="https://ead06.proj.ufsm.br/login/index.php" target="_blank" class="flex items-center space-x-3 hover:bg-blue-50 p-3 rounded border">
+                    <i class="fas fa-chalkboard-teacher text-blue-700 text-xl"></i>
+                    <span>Moodle</span>
+                </a>
+                <a href="https://biblioteca.ufsm.br" target="_blank" class="flex items-center space-x-3 hover:bg-blue-50 p-3 rounded border">
+                    <i class="fas fa-book text-blue-700 text-xl"></i>
+                    <span>Biblioteca</span>
+                </a>
+                <a href="/duvidas/" class="flex items-center space-x-3 hover:bg-blue-50 p-3 rounded border">
+                    <i class="fas fa-question-circle text-blue-700 text-xl"></i>
+                    <span>Dúvidas Frequentes</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-6 text-center">
+            <h2 class="text-xl font-semibold text-blue-800 mb-4">Redes Sociais do Curso</h2>
+            <div class="flex justify-center space-x-6 text-2xl">
+                <a href="https://instagram.com/petsiufsm" target="_blank" class="text-pink-600 hover:text-pink-800">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://discord.gg/abc123" target="_blank" class="text-indigo-600 hover:text-indigo-800">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
