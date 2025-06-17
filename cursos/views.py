@@ -24,6 +24,9 @@ def pos_graduacao_cc(request):
 def duvidas(request):
     return render(request, 'cursos/duvidas.html')
 
+def biblioteca(request):
+    return render(request, 'cursos/biblioteca.html')
+
 # Página inicial com destaques e projetos PET
 def home(request):
     destaques = Destaque.objects.all()

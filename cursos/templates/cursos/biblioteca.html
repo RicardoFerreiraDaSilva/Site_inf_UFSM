@@ -1,0 +1,47 @@
+{% extends 'cursos/base.html' %}
+
+{% block title %}Bibliotecas - Instituto de Informática - UFSM{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-blue-900 text-center mb-8">Bibliotecas da UFSM</h1>
+
+    <div class="space-y-8">
+
+        <div>
+            <h2 class="text-2xl font-semibold text-blue-800">📍 Biblioteca Central da UFSM</h2>
+            <p>
+                A Biblioteca Central (BC) é o maior acervo da UFSM. Localizada próxima ao Planetário, ela oferece empréstimos,
+                salas de estudo, computadores com internet e acesso a periódicos e bases de dados acadêmicas.
+            </p>
+            <p class="mt-2">
+                <a href="https://biblioteca.ufsm.br" target="_blank" class="text-blue-600 underline">Acesse o site da Biblioteca Central</a>
+            </p>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-semibold text-blue-800">🏛️ Biblioteca Setorial do CT</h2>
+            <p>
+                A Biblioteca Setorial do Centro de Tecnologia (CT) oferece um acervo especializado para as áreas de
+                engenharia e computação, facilitando o acesso a materiais usados nas disciplinas do INF.
+            </p>
+            <p class="mt-2">
+                Local: Prédio 07, ao lado da Direção do CT.
+            </p>
+        </div>
+
+        <div>
+            <h2 class="text-2xl font-semibold text-blue-800">💻 Biblioteca Digital da UFSM</h2>
+            <p>
+                A UFSM também oferece uma biblioteca digital com acesso remoto a livros, teses, dissertações, artigos e
+                bases de dados como Scielo, Portal CAPES, entre outras.
+            </p>
+            <p class="mt-2">
+                Para acessar, utilize seu login institucional pelo link:
+                <a href="https://biblioteca.ufsm.br/acesso-online/" target="_blank" class="text-blue-600 underline">Acesso Digital à Biblioteca</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

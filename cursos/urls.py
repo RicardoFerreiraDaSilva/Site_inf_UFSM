@@ -46,5 +46,6 @@ urlpatterns = [
     path('ciencia_computacao/', views.ciencia_computacao, name='ciencia_computacao'),
     path('pos-graduacao-cc/', views.pos_graduacao_cc, name='pos_graduacao_cc'),
     path('duvidas/', views.duvidas, name='duvidas'),
+    path('biblioteca/', views.biblioteca, name='biblioteca'),
 
 ]
