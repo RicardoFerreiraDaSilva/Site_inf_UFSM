@@ -21,12 +21,23 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: Arial, sans-serif;
+        html, body {
+            height: 100%;
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
             background-color: #fafafa;
             color: var(--texto);
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
         }
 
         header, footer {
@@ -127,6 +138,7 @@
     </style>
 </head>
 <body>
+  <div class="wrapper">
     <header>
         <h1>Pessoas do INF</h1>
         <p>Conheça os docentes e colaboradores do Instituto de Informática da UFSM</p>
@@ -143,37 +155,40 @@
         <a href="/pessoas/">Pessoas</a>
     </nav>
 
-    <section>
-        <h2>Docentes e Colaboradores</h2>
-        <div class="cards-container">
-            <div class="atividade-card">
-                <h3>Bacharelado em Sistemas de Informação</h3>
-                <p>Veja a lista de docentes do curso:</p>
-                <a href="https://www.ufsm.br/cursos/graduacao/santa-maria/sistemas-de-informacao/docentes" target="_blank">
-                    Acessar página de docentes
-                </a>
-            </div>
+    <main>
+      <section>
+          <h2>Docentes e Colaboradores</h2>
+          <div class="cards-container">
+              <div class="atividade-card">
+                  <h3>Bacharelado em Sistemas de Informação</h3>
+                  <p>Veja a lista de docentes do curso:</p>
+                  <a href="https://www.ufsm.br/cursos/graduacao/santa-maria/sistemas-de-informacao/docentes" target="_blank">
+                      Acessar página de docentes
+                  </a>
+              </div>
 
-            <div class="atividade-card">
-                <h3>Curso Técnico em Informática</h3>
-                <p>Veja a lista de docentes do curso:</p>
-                <a href="https://www.ufsm.br/cursos/tecnico/santa-maria/informatica/docentes" target="_blank">
-                    Acessar página de docentes
-                </a>
-            </div>
+              <div class="atividade-card">
+                  <h3>Curso Técnico em Informática</h3>
+                  <p>Veja a lista de docentes do curso:</p>
+                  <a href="https://www.ufsm.br/cursos/tecnico/santa-maria/informatica/docentes" target="_blank">
+                      Acessar página de docentes
+                  </a>
+              </div>
 
-            <div class="atividade-card">
-                <h3>Mestrado em Ciência da Computação</h3>
-                <p>Veja a equipe de professores e pesquisadores envolvidos:</p>
-                <a href="https://www.ufsm.br/cursos/pos-graduacao/santa-maria/ppgcc/" target="_blank">
-                    Acessar PPGCC
-                </a>
-            </div>
-        </div>
-    </section>
+              <div class="atividade-card">
+                  <h3>Mestrado em Ciência da Computação</h3>
+                  <p>Veja a equipe de professores e pesquisadores envolvidos:</p>
+                  <a href="https://www.ufsm.br/cursos/pos-graduacao/santa-maria/ppgcc/" target="_blank">
+                      Acessar PPGCC
+                  </a>
+              </div>
+          </div>
+      </section>
+    </main>
 
     <footer>
         <p>© 2025 Instituto de Informática - UFSM</p>
     </footer>
+  </div>
 </body>
 </html>
