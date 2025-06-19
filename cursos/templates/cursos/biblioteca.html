@@ -3,45 +3,98 @@
 {% block title %}Bibliotecas - Instituto de Informática - UFSM{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-blue-900 text-center mb-8">Bibliotecas da UFSM</h1>
+<style>
+  .biblioteca-container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 20px;
+  }
 
-    <div class="space-y-8">
+  .biblioteca-container h1 {
+    text-align: center;
+    color: #003366;
+    font-size: 2em;
+    margin-bottom: 30px;
+  }
 
-        <div>
-            <h2 class="text-2xl font-semibold text-blue-800">📍 Biblioteca Central da UFSM</h2>
-            <p>
-                A Biblioteca Central (BC) é o maior acervo da UFSM. Localizada próxima ao Planetário, ela oferece empréstimos,
-                salas de estudo, computadores com internet e acesso a periódicos e bases de dados acadêmicas.
-            </p>
-            <p class="mt-2">
-                <a href="https://biblioteca.ufsm.br" target="_blank" class="text-blue-600 underline">Acesse o site da Biblioteca Central</a>
-            </p>
-        </div>
+  .biblioteca-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 24px;
+    margin-bottom: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
 
-        <div>
-            <h2 class="text-2xl font-semibold text-blue-800">🏛️ Biblioteca Setorial do CT</h2>
-            <p>
-                A Biblioteca Setorial do Centro de Tecnologia (CT) oferece um acervo especializado para as áreas de
-                engenharia e computação, facilitando o acesso a materiais usados nas disciplinas do INF.
-            </p>
-            <p class="mt-2">
-                Local: Prédio 07, ao lado da Direção do CT.
-            </p>
-        </div>
+  .biblioteca-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
 
-        <div>
-            <h2 class="text-2xl font-semibold text-blue-800">💻 Biblioteca Digital da UFSM</h2>
-            <p>
-                A UFSM também oferece uma biblioteca digital com acesso remoto a livros, teses, dissertações, artigos e
-                bases de dados como Scielo, Portal CAPES, entre outras.
-            </p>
-            <p class="mt-2">
-                Para acessar, utilize seu login institucional pelo link:
-                <a href="https://biblioteca.ufsm.br/acesso-online/" target="_blank" class="text-blue-600 underline">Acesso Digital à Biblioteca</a>
-            </p>
-        </div>
+  .biblioteca-card h2 {
+    font-size: 1.5em;
+    color: #005599;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
-    </div>
+  .biblioteca-card p {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .biblioteca-card a {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 16px;
+    background-color: #005599;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .biblioteca-card a:hover {
+    background-color: #003366;
+  }
+
+  @media (max-width: 600px) {
+    .biblioteca-container {
+      padding: 10px;
+    }
+
+    .biblioteca-card h2 {
+      font-size: 1.2em;
+    }
+
+    .biblioteca-card p {
+      font-size: 0.95em;
+    }
+  }
+</style>
+
+<div class="biblioteca-container">
+  <h1>Bibliotecas da UFSM</h1>
+
+  <div class="biblioteca-card">
+    <h2><i class="fas fa-university"></i> Biblioteca Central da UFSM</h2>
+    <p>A Biblioteca Central (BC) é o principal acervo da universidade. Conta com milhares de obras acadêmicas, espaços de estudo, computadores e atendimento ao público.</p>
+    <a href="https://biblioteca.ufsm.br" target="_blank">Acessar site da BC</a>
+  </div>
+
+  <div class="biblioteca-card">
+    <h2><i class="fas fa-building"></i> Biblioteca Setorial do CT</h2>
+    <p>Localizada no Centro de Tecnologia (prédio 07), a biblioteca setorial é especializada nas áreas das engenharias e da computação. Possui acervo técnico e materiais das disciplinas do INF.</p>
+  </div>
+
+  <div class="biblioteca-card">
+    <h2><i class="fas fa-laptop"></i> Biblioteca Digital</h2>
+    <p>Por meio da biblioteca digital, alunos e professores têm acesso a livros eletrônicos, artigos, dissertações, periódicos e bases como Scielo, CAPES e IEEE. A autenticação requer login institucional.</p>
+    <a href="https://biblioteca.ufsm.br/acesso-online/" target="_blank">Acessar Biblioteca Digital</a>
+  </div>
 </div>
 {% endblock %}
