@@ -101,3 +101,23 @@ class ProjetoPET(models.Model):
 
     def __str__(self):
         return f"{self.titulo} ({self.get_grupo_display()})"
+# MODELO: notícias e publicações 
+
+from django.utils import timezone
+
+class Noticia(models.Model):
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField()
+    imagem = models.ImageField(upload_to='noticias/')
+    data = models.DateField(default=timezone.now) 
+    imagem = models.ImageField(upload_to='noticias/', default='default.jpg')
+
+  
+class Publicacao(models.Model):
+    titulo = models.CharField(max_length=200)
+    autor = models.CharField(max_length=100)
+    link = models.URLField()
+    ano = models.IntegerField()
+
+    def __str__(self):
+        return self.titulo

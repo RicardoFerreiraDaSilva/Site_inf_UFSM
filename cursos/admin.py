@@ -24,3 +24,6 @@ class DestaqueAdmin(admin.ModelAdmin):
 from .models import ProjetoPET
 
 admin.site.register(ProjetoPET)
+
+from .models import Publicacao
+admin.site.register(Publicacao)

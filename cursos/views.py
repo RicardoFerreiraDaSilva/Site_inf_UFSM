@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from .models import Publicacao, Noticia
 
 from .models import (
     Projeto, Noticia, Livro, Atividade,
-    GrupoPesquisa, Destaque, ProjetoPET
+    GrupoPesquisa, Destaque, ProjetoPET, Publicacao
 )
 from .forms import (
     ProjetoForm, AtividadeForm, ProjetoPETForm
@@ -32,10 +33,14 @@ def home(request):
     destaques = Destaque.objects.all()
     petsi_destaques = ProjetoPET.objects.filter(grupo='SI')
     petcc_destaques = ProjetoPET.objects.filter(grupo='CC')
+    noticias = Noticia.objects.order_by('-data')[:5]
+    publicacoes = Publicacao.objects.order_by('-ano')[:5]
     return render(request, 'cursos/index.html', {
         'destaques': destaques,
         'petsi_destaques': petsi_destaques,
         'petcc_destaques': petcc_destaques,
+        'noticias': noticias,
+        'publicacoes': publicacoes,
     })
 
 # Página de notícias
