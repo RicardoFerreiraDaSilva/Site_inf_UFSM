@@ -52,6 +52,15 @@ def noticia_detail(request, pk):
     noticia = get_object_or_404(Noticia, pk=pk)
     return render(request, 'cursos/noticia_detail.html', {'noticia': noticia})
 
+# Página para publicações acadêmicas
+def publicacoes_academicas(request):
+    publicacoes = Publicacao.objects.order_by('-ano')
+    return render(request, 'cursos/publicacoes_academicas.html', {'publicacoes': publicacoes})
+
+def publicacao_detail(request, pk):
+    publicacao = get_object_or_404(Publicacao, pk=pk)
+    return render(request, 'cursos/publicacao_detail.html', {'publicacao': publicacao})
+
 # Página de projetos
 def projetos(request):
     projetos = Projeto.objects.all()

@@ -24,6 +24,10 @@ urlpatterns = [
     # Publicações
     path('publicacoes/', views.publicacoes, name='publicacoes'),
 
+    # Publicações Acadêmicas
+    path('publicacoes-academicas/', views.publicacoes_academicas, name='publicacoes_academicas'),
+    path('publicacao-academica/<int:pk>/', views.publicacao_detail, name='publicacao_academica_detail'),
+
     # Notícias
     path('noticias/', views.noticias, name='noticias'),
     path('noticia/<int:pk>/', views.noticia_detail, name='noticia_detail'),

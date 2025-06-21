@@ -470,7 +470,11 @@
     </h2>
     {% for noticia in noticias %}
       <div style="margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 0.75rem;">
-        <h3 style="color: var(--azul-medio); font-weight: 600; margin: 0;">{{ noticia.titulo }}</h3>
+        <h3 style="color: var(--azul-medio); font-weight: 600; margin: 0;">
+          <a href="{% url 'noticia_detail' noticia.pk %}" style="color: var(--azul-medio); text-decoration: none;">
+            {{ noticia.titulo }}
+          </a>
+        </h3>
         <small style="color: #666;">{{ noticia.data|date:"d/m/Y" }}</small>
         <p style="margin-top: 0.5rem; color: #444;">{{ noticia.descricao|truncatewords:20 }}</p>
       </div>
@@ -482,11 +486,15 @@
   <!-- Publicações -->
   <div style="flex: 1 1 400px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-top: 5px solid var(--azul-escuro); padding: 20px; min-width: 300px;">
     <h2 style="color: var(--azul-escuro); font-weight: 700; margin-bottom: 1rem;">
-      <i class="fas fa-book"></i> Publicações Recentes
+      <i class="fas fa-book"></i> Publicações Acadêmicas Recentes
     </h2>
     {% for publicacao in publicacoes %}
       <div style="margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 0.75rem;">
-        <h3 style="color: var(--azul-medio); font-weight: 600; margin: 0;">{{ publicacao.titulo }}</h3>
+        <h3 style="color: var(--azul-medio); font-weight: 600; margin: 0;">
+          <a href="{% url 'publicacao_academica_detail' publicacao.pk %}" style="color: var(--azul-medio); text-decoration: none;">
+            {{ publicacao.titulo }}
+          </a>
+        </h3>
         <small style="color: #666;">
           {{ publicacao.autor }}{% if publicacao.ano %} — {{ publicacao.ano }}{% endif %}
         </small>
@@ -497,6 +505,7 @@
   </div>
 
 </section>
+
 
 <section class="px-4 py-8">
   <div class="flex flex-col lg:flex-row justify-center items-start gap-8 max-w-6xl mx-auto">
