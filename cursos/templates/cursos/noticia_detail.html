@@ -3,18 +3,179 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>{{ noticia.titulo }}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'cursos/estilo.css' %}">
+    <title>{{ noticia.titulo }} - INF UFSM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        /* --- Estilos Globais e Variáveis (Consistente com a Home) --- */
+        :root {
+            --azul-escuro: #003366;
+            --azul-medio: #005599;
+            --cinza-claro: #f2f2f2;
+            --cinza-meta: #6c757d;
+            --texto: #333;
+            --branco: #fff;
+            --borda-radius: 10px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cinza-claro);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        /* --- Cabeçalho, Navegação e Rodapé (Consistente com a Home) --- */
+        header {
+            background-color: var(--azul-escuro);
+            color: var(--branco);
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: var(--azul-medio);
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            color: var(--branco);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: var(--azul-escuro);
+        }
+        
+        footer {
+            background-color: var(--azul-escuro);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* --- Layout Principal da Notícia --- */
+        .noticia-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px 40px;
+            background-color: var(--branco);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        /* --- Estilos do Artigo --- */
+        .noticia-titulo {
+            color: var(--azul-escuro);
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .noticia-meta {
+            color: var(--cinza-meta);
+            font-size: 0.9em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .noticia-imagem {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--borda-radius);
+            margin-bottom: 30px;
+        }
+
+        .noticia-conteudo {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .noticia-conteudo p {
+            margin-bottom: 1.5em;
+        }
+
+        .noticia-conteudo a {
+            color: var(--azul-medio);
+            font-weight: bold;
+            text-decoration: none;
+            transition: text-decoration 0.3s;
+        }
+
+        .noticia-conteudo a:hover {
+            text-decoration: underline;
+        }
+        
+        .voltar-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--azul-medio);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .voltar-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* --- Responsividade --- */
+        @media (max-width: 768px) {
+            .noticia-container {
+                padding: 20px;
+                margin: 20px auto;
+            }
+
+            .noticia-titulo {
+                font-size: 2rem;
+            }
+            
+            header {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Cabeçalho -->
 <header>
-    <img src="{% static 'cursos/novo_logo.png' %}" alt="Logo Novo" width="150">
+    <a href="/"><img src="{% static 'cursos/novo_logo.png' %}" alt="Logo INF UFSM" width="120"></a>
     <div>
         <h1>Instituto de Informática da UFSM</h1>
-        <p>Explore os cursos de Sistemas de Informação e Ciência da Computação</p>
+        <p>Notícias e Destaques</p>
     </div>
 </header>
 
@@ -29,23 +190,29 @@
     <a href="/pessoas/">Pessoas</a>
 </nav>
 
-<!-- Conteúdo da Notícia -->
-<section style="padding: 30px;">
-    <h2>{{ noticia.titulo }}</h2>
-    <p style="color: gray; font-size: 0.9em;">Publicado em {{ noticia.data_publicacao|date:"d/m/Y H:i" }}</p>
+<main class="noticia-container">
+    <h1 class="noticia-titulo">{{ noticia.titulo }}</h1>
+    
+    <div class="noticia-meta">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Publicado em {{ noticia.data_publicacao|date:"d de F de Y" }}</span>
+    </div>
 
     {% if noticia.imagem %}
-        <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="noticia-imagem">
     {% endif %}
 
-    <div style="margin-top: 20px; line-height: 1.6;">
-        {{ noticia.conteudo|linebreaks }}
-    </div>
-</section>
+    <article class="noticia-conteudo">
+        {{ noticia.conteudo|safe|linebreaks }}
+    </article>
 
-<!-- Rodapé -->
+    <a href="/" class="voltar-link">
+        <i class="fas fa-arrow-left"></i> Voltar para a página inicial
+    </a>
+</main>
+
 <footer>
-    <p>© 2025 Instituto de Informática - UFSM</p>
+    <p>© {% now "Y" %} Instituto de Informática - UFSM</p>
 </footer>
 
 </body>

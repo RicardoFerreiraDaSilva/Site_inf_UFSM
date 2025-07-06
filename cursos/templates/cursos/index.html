@@ -5,13 +5,18 @@
     <meta charset="UTF-8">
     <title>INF UFSM - Página Inicial</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
             --azul-escuro: #003366;
             --azul-medio: #005599;
             --cinza-claro: #f2f2f2;
+            --cinza-texto: #4b5563;
             --texto: #333;
+            --branco: #fff;
+            --borda-radius: 10px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15); /* Sombra para o hover */
         }
 
         body {
@@ -22,9 +27,10 @@
             color: var(--texto);
         }
 
+        /* --- Cabeçalho e Navegação --- */
         header, footer {
             background-color: var(--azul-escuro);
-            color: white;
+            color: var(--branco);
             text-align: center;
             padding: 20px;
         }
@@ -39,355 +45,237 @@
         }
 
         nav a {
-            color: white;
+            color: var(--branco);
             text-decoration: none;
             font-weight: bold;
             padding: 6px 12px;
+            border-radius: 5px;
             transition: background-color 0.3s;
         }
 
         nav a:hover {
             background-color: var(--azul-escuro);
-            border-radius: 5px;
         }
 
- .carrossel {
-  position: relative;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  overflow: hidden;
-}
-
-.carrossel-slide-container {
-  position: relative;
-}
-
-.slide {
-  display: none;
-  padding: 16px;
-}
-
-.slide.active {
-  display: block;
-}
-
-.slide img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 12px 12px 0 0;
-  margin-bottom: 12px;
-}
-
-.slide-content {
-  padding: 0 8px;
-}
-
-.titulo {
-  font-size: 18px;
-  font-weight: bold;
-  color: #1d4ed8; /* Azul */
-  margin-bottom: 6px;
-}
-
-.titulo a {
-  text-decoration: none;
-  color: #1d4ed8;
-}
-
-.titulo a:hover {
-  text-decoration: underline;
-}
-
-.descricao {
-  color: #4b5563; /* Cinza escuro */
-  font-size: 15px;
-}
-
-.carrossel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255,255,255,0.85);
-  color: #333;
-  border: none;
-  border-radius: 50%;
-  padding: 10px 14px;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  z-index: 10;
-  transition: background-color 0.2s ease;
-}
-
-.carrossel-btn:hover {
-  background-color: rgba(255,255,255,1);
-}
-
-.carrossel-btn.anterior {
-  left: 10px;
-}
-
-.carrossel-btn.proximo {
-  right: 10px;
-}
-.carrossel {
-  position: relative;
-  width: 100%;
-  max-width: 1200px; /* igual à "Acesso Rápido" */
-  margin: 40px auto; /* espaço acima e abaixo */
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  overflow: hidden;
-  padding-bottom: 8px;
-}
-
-        .localizacao, .redes-sociais {
+        /* --- Contêineres Principais --- */
+        .container {
             max-width: 960px;
             margin: 40px auto;
             padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background-color: var(--branco);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--box-shadow);
             text-align: center;
         }
 
-        .localizacao h3, .redes-sociais h3 {
-            color: var(--azul-escuro);
-            margin-bottom: 20px;
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 960px;
+            margin: 40px auto;
         }
 
+        .flex-item {
+            flex: 1 1 400px;
+            background: var(--branco);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--box-shadow);
+            border-top: 5px solid var(--azul-escuro);
+            padding: 20px;
+            min-width: 300px;
+        }
+
+        .section-title {
+            color: var(--azul-escuro);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: left;
+            font-size: 1.5rem;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+        }
+
+        /* --- Acesso Rápido --- */
+        .acesso-icones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .acesso-icones .item {
+            flex: 1 1 140px;
+            max-width: 160px;
+            background-color: var(--cinza-claro);
+            padding: 20px;
+            border-radius: var(--borda-radius);
+            text-decoration: none;
+            color: var(--texto);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .acesso-icones .item i {
+            font-size: 32px;
+            color: var(--azul-medio);
+        }
+
+        .acesso-icones .item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* --- Carrossel Principal --- */
+        .carrossel {
+            position: relative;
+            max-width: 960px;
+            margin: 40px auto;
+            background-color: var(--branco);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        .carrossel:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .carrossel-slide { display: none; }
+        .carrossel-slide.active { display: block; }
+        .carrossel-slide img {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: var(--borda-radius) var(--borda-radius) 0 0;
+        }
+        .carrossel-slide .slide-content { padding: 20px; }
+        .carrossel-slide .titulo { font-size: 1.2rem; font-weight: bold; color: var(--azul-escuro); margin: 0 0 10px 0; }
+        .carrossel-slide .titulo a { text-decoration: none; color: inherit; }
+        .carrossel-slide .titulo a:hover { text-decoration: underline; }
+        .carrossel-slide .descricao { color: var(--cinza-texto); font-size: 1rem; }
+        .carrossel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.85);
+            border: none;
+            border-radius: 50%;
+            padding: 10px 14px;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.2s;
+        }
+        .carrossel-btn:hover { background-color: var(--branco); }
+        .carrossel-btn.prev { left: 15px; }
+        .carrossel-btn.next { right: 15px; }
+
+        /* --- Notícias e Publicações --- */
+        .list-item { margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 0.75rem; text-align: left; }
+        .list-item:last-child { border-bottom: none; margin-bottom: 0; }
+        .list-item h3 { color: var(--azul-medio); font-weight: 600; margin: 0; }
+        .list-item h3 a { color: inherit; text-decoration: none; }
+        .list-item h3 a:hover { text-decoration: underline; }
+        .list-item small { color: #666; font-size: 0.85rem; }
+        .list-item p { margin-top: 0.5rem; color: #444; }
+
+        /* --- Carrosséis PET --- */
+        .pets-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 960px;
+            margin: 40px auto;
+        }
+
+        .pet-carrossel {
+            flex: 1 1 400px;
+            max-width: 450px;
+            background-color: var(--branco);
+            border-radius: var(--borda-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        .pet-carrossel:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .pet-carrossel h3 { color: var(--azul-escuro); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+        .pet-slide { display: none; }
+        .pet-slide.active { display: block; }
+        .pet-slide img { max-width: 100%; border-radius: var(--borda-radius); margin-bottom: 12px; }
+        .pet-carrossel-buttons { margin-top: auto; padding-top: 15px; }
+        .pet-carrossel-buttons button {
+            background-color: var(--azul-medio);
+            color: var(--branco);
+            border: none;
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .pet-carrossel-buttons button:hover { background-color: var(--azul-escuro); }
+
+        /* --- Localização e Redes Sociais --- */
         .localizacao iframe {
             width: 100%;
             height: 400px;
             border: none;
-            border-radius: 10px;
+            border-radius: var(--borda-radius);
         }
 
-        .social-icons a {
-            margin: 0 15px;
-            font-size: 32px;
-            text-decoration: none;
-        }
-
+        .social-icons a { margin: 0 15px; font-size: 32px; text-decoration: none; transition: opacity 0.3s; }
+        .social-icons a:hover { opacity: 0.8; }
         .fa-instagram { color: #E1306C; }
         .fa-linkedin { color: #0077B5; }
         .fa-discord { color: #5865F2; }
         .fa-youtube { color: #FF0000; }
 
-        .social-icons a:hover {
-            opacity: 0.8;
+        /* --- Responsividade --- */
+        @media (max-width: 900px) {
+            .pet-carrossel {
+                flex-basis: 48%;
+            }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .flex-container, .pets-container {
+                flex-direction: column;
+            }
+            .pet-carrossel {
+                max-width: 100%;
+            }
             nav {
                 flex-direction: column;
             }
-
-            .slide p {
-                font-size: 0.95rem;
-            }
-
-            .social-icons a {
-                font-size: 26px;
-                margin: 0 8px;
-            }
-
             .localizacao iframe {
                 height: 300px;
             }
+            .social-icons a {
+                font-size: 28px;
+                margin: 0 10px;
+            }
         }
-            .pet-slide-si, .pet-slide-cc {
-                display: none;
-        }
-
-             .pet-slide-si.active,
-             .pet-slide-cc.active {
-                display: block;
-}
-         .pet-carrossel {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    overflow: hidden;
-    max-width: 480px; /* metade do carrossel principal */
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.pet-slide-container-si,
-.pet-slide-container-cc {
-    position: relative;
-    min-height: 250px;
-}
-
-.pet-slide-si, .pet-slide-cc {
-    display: none;
-    padding: 20px;
-    text-align: center;
-}
-
-.pet-slide-si.active,
-.pet-slide-cc.active {
-    display: block;
-}
-
-.pet-slide-si img,
-.pet-slide-cc img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-bottom: 12px;
-}
-
-.carrossel-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    background-color: var(--azul-medio);
-}
-
-.carrossel-buttons button {
-    background-color: white;
-    color: var(--azul-medio);
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.carrossel-buttons button:hover {
-    background-color: var(--azul-escuro);
-    color: white;
-}
-
-/* Ajustes para o container flex no mobile */
-@media (max-width: 1024px) {
-    .flex.flex-col.lg\\:flex-row {
-        flex-direction: column !important;
-        gap: 20px !important;
-    }
-
-    .pet-carrossel {
-        max-width: 100%;
-    }
-}
-
-.pets-container {
-  display: flex;
-  flex-direction: row;
-  gap: 24px; /* espaçamento entre os carrosséis */
-  justify-content: center;
-  flex-wrap: wrap; /* para evitar overflow em telas pequenas */
-}
-
-.pet-carrossel {
-  flex: 1 1 45%; /* cada carrossel ocupa 45% da largura disponível */
-  max-width: 480px;
-  box-sizing: border-box;
-}
-@media (max-width: 768px) {
-  .pets-container {
-    flex-direction: column;
-  }
-  .pet-carrossel {
-    flex: 1 1 100%;
-    max-width: 100%;
-    margin-bottom: 20px;
-  }
-}
-
-.pets-container {
-  display: flex;
-  justify-content: center; /* centraliza horizontalmente */
-  gap: 20px; /* espaço menor entre os carrosséis */
-  max-width: 960px; /* largura máxima para não ficar muito espalhado */
-  margin: 0 auto; /* centraliza o container na página */
-}
-.pet-carrossel {
-  flex: 1 1 45%; /* os dois carrosséis dividem espaço quase igual */
-  max-width: 45%; /* controla largura máxima */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: white;
-  border-radius: 10px;
-  padding: 16px;
-}
-
-.pet-carrossel-buttons {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.pet-carrossel-buttons button {
-  background-color: var(--azul-medio);
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  margin: 0 4px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.pet-carrossel-buttons button:hover {
-  background-color: var(--azul-escuro);
-}
-.acesso-rapido {
-  max-width: 960px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.acesso-rapido h2 {
-  color: var(--azul-escuro);
-  margin-bottom: 24px;
-  font-size: 1.8rem;
-}
-
-.acesso-icones {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.acesso-icones .item {
-  flex: 1 1 140px;
-  max-width: 160px;
-  background-color: var(--cinza-claro);
-  padding: 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: var(--texto);
-  transition: transform 0.3s, box-shadow 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.acesso-icones .item i {
-  font-size: 32px;
-  color: var(--azul-medio);
-}
-
-.acesso-icones .item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
     </style>
 </head>
 <body>
@@ -407,163 +295,133 @@
     <a href="/estrutura/">Estrutura</a>
     <a href="/pessoas/">Pessoas</a>
 </nav>
-<section class="acesso-rapido">
-  <h2>Acesso Rápido</h2>
-  <div class="acesso-icones">
-    <a href="/sistemas_informacao/" class="item">
-      <i class="fas fa-laptop-code"></i>
-      <span>Sistemas de Informação</span>
-    </a>
-    <a href="/ciencia_computacao/" class="item">
-      <i class="fas fa-brain"></i>
-      <span>Ciência da Computação</span>
-    </a>
-    <a href="https://ead06.proj.ufsm.br/login/index.php" target="_blank" class="item">
-      <i class="fas fa-chalkboard-teacher"></i>
-      <span>Moodle</span>
-    </a>
-    <a href="/biblioteca/" class="item">
-      <i class="fas fa-book"></i>
-      <span>Biblioteca</span>
-    </a>
-    <a href="/duvidas/" class="item">
-      <i class="fas fa-question-circle"></i>
-      <span>Dúvidas</span>
-    </a>
-    <a href="/pos-graduacao-cc/" class="item">
-      <i class="fas fa-graduation-cap"></i>
-      <span>Pós-Graduação</span>
-    </a>
-  </div>
+
+<section class="container">
+    <h2 class="section-title" style="text-align:center;">Acesso Rápido</h2>
+    <div class="acesso-icones">
+        <a href="/sistemas_informacao/" class="item">
+            <i class="fas fa-laptop-code"></i>
+            <span>Sistemas de Informação</span>
+        </a>
+        <a href="/ciencia_computacao/" class="item">
+            <i class="fas fa-brain"></i>
+            <span>Ciência da Computação</span>
+        </a>
+        <a href="https://ead.ufsm.br/moodle/" target="_blank" rel="noopener noreferrer" class="item">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Moodle</span>
+        </a>
+        <a href="/biblioteca/" class="item">
+            <i class="fas fa-book"></i>
+            <span>Biblioteca</span>
+        </a>
+        <a href="/duvidas/" class="item">
+            <i class="fas fa-question-circle"></i>
+            <span>Dúvidas</span>
+        </a>
+        <a href="/pos-graduacao-cc/" class="item">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Pós-Graduação</span>
+        </a>
+    </div>
 </section>
 
-<div class="carrossel">
-  <div class="carrossel-slide-container">
-    {% for destaque in destaques %}
-      <div class="slide {% if forloop.first %}active{% endif %}">
-        <img src="{{ destaque.imagem.url }}" alt="{{ destaque.titulo }}">
-        <div class="slide-content">
-          <p class="titulo">
-            {% if destaque.link %}
-              <a href="{{ destaque.link }}" target="_blank">{{ destaque.titulo }}</a>
-            {% else %}
-              {{ destaque.titulo }}
-            {% endif %}
-          </p>
-          <p class="descricao">{{ destaque.descricao }}</p>
-        </div>
-      </div>
-    {% endfor %}
-
-    <!-- Botões -->
-    <button onclick="mudarSlide(-1)" class="carrossel-btn anterior">&#8592;</button>
-    <button onclick="mudarSlide(1)" class="carrossel-btn proximo">&#8594;</button>
-  </div>
+<div class="carrossel" data-carrossel="principal">
+    <div class="carrossel-container">
+        {% for destaque in destaques %}
+            <div class="carrossel-slide {% if forloop.first %}active{% endif %}">
+                <img src="{{ destaque.imagem.url }}" alt="{{ destaque.titulo }}">
+                <div class="slide-content">
+                    <p class="titulo">
+                        {% if destaque.link %}
+                            <a href="{{ destaque.link }}" target="_blank" rel="noopener noreferrer">{{ destaque.titulo }}</a>
+                        {% else %}
+                            {{ destaque.titulo }}
+                        {% endif %}
+                    </p>
+                    <p class="descricao">{{ destaque.descricao }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <div class="carrossel-slide active">
+                <div class="slide-content">
+                    <p class="titulo">Nenhum destaque cadastrado</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <button class="carrossel-btn prev" data-action="prev" aria-label="Anterior">←</button>
+    <button class="carrossel-btn next" data-action="next" aria-label="Próximo">→</button>
 </div>
 
-<section style="max-width: 960px; margin: 40px auto; padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-
-  <!-- Notícias -->
-  <div style="flex: 1 1 400px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-top: 5px solid var(--azul-escuro); padding: 20px; min-width: 300px;">
-    <h2 style="color: var(--azul-escuro); font-weight: 700; margin-bottom: 1rem;">
-      <i class="fas fa-newspaper"></i> Últimas Notícias
-    </h2>
-    {% for noticia in noticias %}
-      <div style="margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 0.75rem;">
-        <h3 style="color: var(--azul-medio); font-weight: 600; margin: 0;">
-          <a href="{% url 'noticia_detail' noticia.pk %}" style="color: var(--azul-medio); text-decoration: none;">
-            {{ noticia.titulo }}
-          </a>
-        </h3>
-        <small style="color: #666;">{{ noticia.data|date:"d/m/Y" }}</small>
-        <p style="margin-top: 0.5rem; color: #444;">{{ noticia.descricao|truncatewords:20 }}</p>
-      </div>
-    {% empty %}
-      <p style="color: #666;">Nenhuma notícia cadastrada.</p>
-    {% endfor %}
-  </div>
-
-  <!-- Publicações -->
-  <div style="flex: 1 1 400px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-top: 5px solid var(--azul-escuro); padding: 20px; min-width: 300px;">
-    <h2 style="color: var(--azul-escuro); font-weight: 700; margin-bottom: 1rem;">
-      <i class="fas fa-book"></i> Publicações Acadêmicas Recentes
-    </h2>
-    {% for publicacao in publicacoes %}
-      <div style="margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 0.75rem;">
-        <h3 style="color: var(--azul-medio); font-weight: 600; margin: 0;">
-          <a href="{% url 'publicacao_academica_detail' publicacao.pk %}" style="color: var(--azul-medio); text-decoration: none;">
-            {{ publicacao.titulo }}
-          </a>
-        </h3>
-        <small style="color: #666;">
-          {{ publicacao.autor }}{% if publicacao.ano %} — {{ publicacao.ano }}{% endif %}
-        </small>
-      </div>
-    {% empty %}
-      <p style="color: #666;">Nenhuma publicação cadastrada.</p>
-    {% endfor %}
-  </div>
-
-</section>
-
-
-<section class="px-4 py-8">
-  <div class="flex flex-col lg:flex-row justify-center items-start gap-8 max-w-6xl mx-auto">
-    
- <section class="px-4 py-8">
-  <div class="pets-container">
-    <!-- Carrossel PET SI -->
-    <div class="pet-carrossel">
-      <h3 class="text-xl font-semibold text-blue-800 text-center mb-4">PET Sistemas de Informação</h3>
-      <div class="pet-slide-container-si">
-        {% for projeto in petsi_destaques %}
-          <div class="pet-slide-si {% if forloop.first %}active{% endif %}">
-            {% if projeto.imagem %}
-              <img src="{{ projeto.imagem.url }}" alt="{{ projeto.titulo }}" />
-            {% endif %}
-            <h4>{{ projeto.titulo }}</h4>
-            <p>{{ projeto.descricao }}</p>
-          </div>
+<section class="flex-container">
+    <div class="flex-item">
+        <h2 class="section-title"><i class="fas fa-newspaper"></i> Últimas Notícias</h2>
+        {% for noticia in noticias %}
+            <div class="list-item">
+                <h3><a href="{% url 'noticia_detail' noticia.pk %}">{{ noticia.titulo }}</a></h3>
+                <small>{{ noticia.data|date:"d/m/Y" }}</small>
+                <p>{{ noticia.descricao|truncatewords:20 }}</p>
+            </div>
         {% empty %}
-          <div class="pet-slide-si active">
-            <p>Nenhum projeto cadastrado para PET SI.</p>
-          </div>
+            <p>Nenhuma notícia cadastrada.</p>
         {% endfor %}
-      </div>
-      <div class="pet-carrossel-buttons">
-        <button onclick="mudarSlidePET('si', -1)">Anterior</button>
-        <button onclick="mudarSlidePET('si', 1)">Próximo</button>
-      </div>
     </div>
 
-    <!-- Carrossel PET CC -->
-    <div class="pet-carrossel">
-      <h3 class="text-xl font-semibold text-blue-800 text-center mb-4">PET Ciência da Computação</h3>
-      <div class="pet-slide-container-cc">
-        {% for projeto in petcc_destaques %}
-          <div class="pet-slide-cc {% if forloop.first %}active{% endif %}">
-            {% if projeto.imagem %}
-              <img src="{{ projeto.imagem.url }}" alt="{{ projeto.titulo }}" />
-            {% endif %}
-            <h4>{{ projeto.titulo }}</h4>
-            <p>{{ projeto.descricao }}</p>
-          </div>
+    <div class="flex-item">
+        <h2 class="section-title"><i class="fas fa-book"></i> Publicações Recentes</h2>
+        {% for publicacao in publicacoes %}
+            <div class="list-item">
+                <h3><a href="{% url 'publicacao_academica_detail' publicacao.pk %}">{{ publicacao.titulo }}</a></h3>
+                <small>{{ publicacao.autor }}{% if publicacao.ano %} — {{ publicacao.ano }}{% endif %}</small>
+            </div>
         {% empty %}
-          <div class="pet-slide-cc active">
-            <p>Nenhum projeto cadastrado para PET CC.</p>
-          </div>
+            <p>Nenhuma publicação cadastrada.</p>
         {% endfor %}
-      </div>
-      <div class="pet-carrossel-buttons">
-        <button onclick="mudarSlidePET('cc', -1)">Anterior</button>
-        <button onclick="mudarSlidePET('cc', 1)">Próximo</button>
-      </div>
     </div>
-  </div>
 </section>
 
+<div class="pets-container">
+    <div class="pet-carrossel" data-carrossel="pet-si">
+        <h3>PET Sistemas de Informação</h3>
+        <div class="carrossel-container">
+            {% for projeto in petsi_destaques %}
+                <div class="pet-slide {% if forloop.first %}active{% endif %}">
+                    {% if projeto.imagem %}<img src="{{ projeto.imagem.url }}" alt="{{ projeto.titulo }}">{% endif %}
+                    <h4>{{ projeto.titulo }}</h4>
+                    <p>{{ projeto.descricao }}</p>
+                </div>
+            {% empty %}
+                <div class="pet-slide active"><p>Nenhum projeto cadastrado para PET SI.</p></div>
+            {% endfor %}
+        </div>
+        <div class="pet-carrossel-buttons">
+            <button data-action="prev">Anterior</button>
+            <button data-action="next">Próximo</button>
+        </div>
+    </div>
 
-<div class="localizacao">
+    <div class="pet-carrossel" data-carrossel="pet-cc">
+        <h3>PET Ciência da Computação</h3>
+        <div class="carrossel-container">
+            {% for projeto in petcc_destaques %}
+                <div class="pet-slide {% if forloop.first %}active{% endif %}">
+                    {% if projeto.imagem %}<img src="{{ projeto.imagem.url }}" alt="{{ projeto.titulo }}">{% endif %}
+                    <h4>{{ projeto.titulo }}</h4>
+                    <p>{{ projeto.descricao }}</p>
+                </div>
+            {% empty %}
+                <div class="pet-slide active"><p>Nenhum projeto cadastrado para PET CC.</p></div>
+            {% endfor %}
+        </div>
+        <div class="pet-carrossel-buttons">
+            <button data-action="prev">Anterior</button>
+            <button data-action="next">Próximo</button>
+        </div>
+    </div>
+</div>
+
+<div class="container localizacao">
     <h3>📍 Localização do INF</h3>
     <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.327578877799!2d-53.718734984888534!3d-29.713095481999897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fee5a47200bdc1%3A0x19a370418e0972e7!2sInstituto%20de%20Inform%C3%A1tica%20-%20UFSM!5e0!3m2!1spt-BR!2sbr!4v1683742356030!5m2!1spt-BR!2sbr"
@@ -573,74 +431,74 @@
     </iframe>
 </div>
 
-<div class="redes-sociais">
+
+<div class="container redes-sociais">
     <h3>🌐 Siga o INF nas redes sociais</h3>
     <div class="social-icons">
-        <a href="https://www.instagram.com/infufsm" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/school/infufsm" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://discord.com/invite/infufsm" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
-        <a href="https://www.youtube.com/@infufsm" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.instagram.com/infufsm" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/school/ufsm-universidade-federal-de-santa-maria/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://discord.com/invite/UFSM" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+        <a href="https://www.youtube.com/@infufsm3" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
     </div>
 </div>
 
 <footer>
-    <p>© 2025 Instituto de Informática - UFSM</p>
+    <p>© {% now "Y" %} Instituto de Informática - UFSM</p>
 </footer>
 
 <script>
-    let slideAtual = 0;
-    const slides = document.querySelectorAll(".slide");
+document.addEventListener("DOMContentLoaded", () => {
+    // Função genérica para controlar qualquer carrossel
+    const initCarousel = (carouselSelector) => {
+        const carousel = document.querySelector(`[data-carrossel='${carouselSelector}']`);
+        if (!carousel) return;
 
-    function mostrarSlide(index) {
-        slides.forEach(slide => slide.classList.remove("active"));
-        slideAtual = (index + slides.length) % slides.length;
-        slides[slideAtual].classList.add("active");
-    }
+        const container = carousel.querySelector('.carrossel-container');
+        const slides = container.children;
+        const prevButton = carousel.querySelector('[data-action="prev"]');
+        const nextButton = carousel.querySelector('[data-action="next"]');
 
-    function mudarSlide(direcao) {
-        mostrarSlide(slideAtual + direcao);
-    }
+        if (slides.length <= 1) {
+             if(prevButton) prevButton.style.display = 'none';
+             if(nextButton) nextButton.style.display = 'none';
+             return;
+        }
 
-    setInterval(() => mudarSlide(1), 8000);
-</script>
+        let currentIndex = 0;
 
-<script>
-  let indiceSI = 0;
-  let indiceCC = 0;
+        const showSlide = (index) => {
+            Array.from(slides).forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        };
 
-  function mostrarSlidePET(grupo, indice) {
-    const slides = document.querySelectorAll(`.pet-slide-${grupo}`);
-    if (!slides.length) return;
+        carousel.addEventListener('click', (e) => {
+            const action = e.target.dataset.action;
+            if (action === 'next') {
+                currentIndex = (currentIndex + 1) % slides.length;
+            } else if (action === 'prev') {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            } else {
+                return;
+            }
+            showSlide(currentIndex);
+        });
+        
+        // Autoplay
+        const autoPlayInterval = carousel.dataset.carrossel === 'principal' ? 8000 : 6000;
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showSlide(currentIndex);
+        }, autoPlayInterval); 
 
-    if (grupo === 'si') {
-      indiceSI = (indice + slides.length) % slides.length;
-      slides.forEach((s, i) => s.classList.toggle("active", i === indiceSI));
-    } else if (grupo === 'cc') {
-      indiceCC = (indice + slides.length) % slides.length;
-      slides.forEach((s, i) => s.classList.toggle("active", i === indiceCC));
-    }
-  }
+        showSlide(currentIndex);
+    };
 
-  function mudarSlidePET(grupo, direcao) {
-    if (grupo === 'si') {
-      mostrarSlidePET('si', indiceSI + direcao);
-    } else if (grupo === 'cc') {
-      mostrarSlidePET('cc', indiceCC + direcao);
-    }
-  }
-
-  // Inicializar os slides ao carregar a página
-  document.addEventListener("DOMContentLoaded", () => {
-    mostrarSlidePET('si', 0);
-    mostrarSlidePET('cc', 0);
-  });
-
-
-  // Roda os carrosséis automaticamente a cada 5 segundos
-  setInterval(() => mudarSlidePET('si', 1), 5000);
-  setInterval(() => mudarSlidePET('cc', 1), 5000);
-
-
+    // Inicializa todos os carrosséis
+    initCarousel('principal');
+    initCarousel('pet-si');
+    initCarousel('pet-cc');
+});
 </script>
 
 </body>
