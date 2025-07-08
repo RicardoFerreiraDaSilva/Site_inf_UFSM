@@ -29,6 +29,9 @@ def duvidas(request):
 def biblioteca(request):
     return render(request, 'cursos/biblioteca.html')
 
+def moodle_guia(request):
+    return render(request, 'cursos/moodle.html')
+
 # Página inicial com destaques e projetos PET
 def home(request):
     destaques = Destaque.objects.all()
@@ -66,9 +69,14 @@ def detalhe_evento(request, evento_id):
 
 # Página para publicações acadêmicas
 def publicacoes_academicas(request):
+    # Busca todas as publicações, ordenando pelo ano mais recente
     publicacoes = Publicacao.objects.order_by('-ano')
+    
+    # Renderiza o template de listagem, enviando a lista de publicações
     return render(request, 'cursos/publicacoes_academicas.html', {'publicacoes': publicacoes})
 
+
+# Sua view de detalhe que já está correta
 def publicacao_detail(request, pk):
     publicacao = get_object_or_404(Publicacao, pk=pk)
     return render(request, 'cursos/publicacao_detail.html', {'publicacao': publicacao})

@@ -106,12 +106,32 @@ class ProjetoPET(models.Model):
 from django.utils import timezone
 
 class Noticia(models.Model):
-    titulo = models.CharField(max_length=200)
-    descricao = models.TextField()
-    imagem = models.ImageField(upload_to='noticias/')
-    data = models.DateField(default=timezone.now) 
-    imagem = models.ImageField(upload_to='noticias/', default='default.jpg')
-    conteudo = models.TextField(null=True, blank=True)
+    titulo = models.CharField(
+        max_length=200
+    )
+    # Sugestão: Usar CharField para uma descrição curta é uma boa prática
+    descricao = models.CharField(
+        max_length=255, 
+        help_text="Um resumo curto da notícia para a página inicial."
+    )
+    # ✅ O campo 'imagem' definido apenas uma vez e como opcional
+    imagem = models.ImageField(
+        upload_to='noticias/', 
+        null=True, 
+        blank=True,
+        help_text="Imagem de destaque da notícia (opcional)."
+    )
+    # ✅ Corrigido para DateTimeField para incluir a hora
+    data = models.DateTimeField(
+        default=timezone.now
+    ) 
+    conteudo = models.TextField(
+        null=True, 
+        blank=True
+    )
+    
+    def __str__(self):
+        return self.titulo
 
   
 class Publicacao(models.Model):

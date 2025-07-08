@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os # Movido para o topo para organização
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +27,7 @@ SECRET_KEY = 'django-insecure-3%utg!c2wz$3o14%#kk6!90vrr7%^)br*i(q!!qv+sy!sdh9f+
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'site-inf-ufsm-4xyv.onrender.com']
+
 
 # Application definition
 
@@ -102,11 +104,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# ✅ ALTERADO para Português do Brasil
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+# ✅ ALTERADO para o fuso horário de São Paulo
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
+
+# ✅ Garanta que USE_L10N esteja como True para a formatação de data funcionar
+USE_L10N = True
 
 USE_TZ = True
 
@@ -114,16 +121,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-import os
-
-# Definir o caminho para arquivos estáticos
 STATIC_URL = '/static/'
 
-# Definir onde o Django deve procurar os arquivos estáticos no seu computador
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'cursos/static'),
 ]
-
 
 
 # Default primary key field type
@@ -131,17 +133,15 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+
+# ❌ Bloco DATABASES duplicado foi removido daqui.
+
+# Configurações de Login
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-import os
 
+# Configurações de Mídia (Uploads de Imagens)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

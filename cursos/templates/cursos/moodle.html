@@ -1,0 +1,126 @@
+{% extends "cursos/base.html" %}
+{% load static %}
+
+{% block title %}Guia Moodle - INF UFSM{% endblock %}
+
+{% block styles %}
+<style>
+    .guia-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .guia-titulo {
+        text-align: center;
+        color: var(--azul-escuro);
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+    }
+
+    .info-bloco {
+        background-color: #fff;
+        padding: 25px 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border-left: 5px solid var(--azul-medio);
+    }
+
+    .info-bloco h2 {
+        color: var(--azul-escuro);
+        font-size: 1.8rem;
+        margin-top: 0;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .info-bloco p, .info-bloco li {
+        color: #333;
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+    .info-bloco strong {
+        color: var(--azul-escuro);
+    }
+
+    .centro {
+        text-align: center;
+    }
+
+    .moodle-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 15px 30px;
+        background: linear-gradient(45deg, var(--azul-medio), var(--azul-escuro));
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 50px; /* Botão arredondado */
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        box-shadow: 0 4px 10px rgba(0, 51, 102, 0.3);
+    }
+
+    .moodle-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 51, 102, 0.4);
+    }
+    
+    .moodle-button .fa-arrow-right {
+        margin-left: 10px;
+        transition: transform 0.2s;
+    }
+    
+    .moodle-button:hover .fa-arrow-right {
+        transform: translateX(5px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="guia-container">
+
+    <h1 class="guia-titulo">Guia Rápido: Moodle UFSM</h1>
+
+    <div class="info-bloco">
+        <h2><i class="fas fa-info-circle"></i> O que é o Moodle UFSM?</h2>
+        <p>
+            O Moodle é o principal <strong>Ambiente Virtual de Aprendizagem (AVA)</strong> da nossa universidade. É uma plataforma online onde os professores podem postar materiais de aula (slides, textos, vídeos), criar fóruns de discussão, receber trabalhos e aplicar avaliações. Pense nele como a sua sala de aula digital.
+        </p>
+    </div>
+
+    <div class="info-bloco">
+        <h2><i class="fas fa-key"></i> Como Acessar (Alunos Novos)</h2>
+        <p>
+            Para os cursos de Sistemas de Informação e Ciência da Computação, utilizamos a versão "Moodle Presencial". O acesso é simples:
+        </p>
+        <ol>
+            <li>Seu <strong>usuário</strong> é o seu <strong>número de matrícula</strong> (disponível no Portal do Aluno).</li>
+            <li>Sua <strong>senha inicial</strong> é a mesma que você usa para o Portal do Aluno e para o e-mail da UFSM.</li>
+        </ol>
+        <div class="centro">
+            <a href="https://ufsm.br/moodle/" class="moodle-button" target="_blank" rel="noopener noreferrer">
+                Acessar Moodle Presencial <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="info-bloco">
+        <h2><i class="fas fa-exclamation-triangle"></i> Importante: O uso é obrigatório?</h2>
+        <p>
+            Não. O uso do Moodle <strong>não é obrigatório</strong> para todas as disciplinas. A UFSM dá liberdade para que cada professor escolha a melhor metodologia para sua turma.
+        </p>
+        <p>
+            Caso um professor decida não utilizar o Moodle, ele informará a turma sobre como os materiais serão distribuídos e como a comunicação será feita. Geralmente, o primeiro contato e os avisos importantes são enviados para o seu <strong>e-mail institucional da UFSM</strong>.
+        </p>
+        <p>
+            <strong>Fique sempre atento ao seu e-mail no início do semestre!</strong> É por lá que você receberá as primeiras instruções de cada professor.
+        </p>
+    </div>
+
+</div>
+{% endblock %}

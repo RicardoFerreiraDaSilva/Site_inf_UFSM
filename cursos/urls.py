@@ -25,8 +25,12 @@ urlpatterns = [
     path('publicacoes/', views.publicacoes, name='publicacoes'),
 
     # Publicações Acadêmicas
+   # Garanta que a rota para a LISTA de publicações existe
     path('publicacoes-academicas/', views.publicacoes_academicas, name='publicacoes_academicas'),
-    path('publicacao-academica/<int:pk>/', views.publicacao_detail, name='publicacao_academica_detail'),
+
+    # ✅ ESTA É A LINHA QUE PRECISA ESTAR CORRETA ✅
+    # A URL deve ser no plural: 'publicacoes/'
+    path('publicacoes/<int:pk>/', views.publicacao_detail, name='publicacao_detail'),
 
     # Notícias
     path('noticias/', views.noticias, name='noticias'),
@@ -51,6 +55,7 @@ urlpatterns = [
     path('pos-graduacao-cc/', views.pos_graduacao_cc, name='pos_graduacao_cc'),
     path('duvidas/', views.duvidas, name='duvidas'),
     path('biblioteca/', views.biblioteca, name='biblioteca'),
+    path('moodle/', views.moodle_guia, name='moodle_guia'),
     
     #Novo destaque
     path('eventos/<int:evento_id>/', views.detalhe_evento, name='detalhe_evento'),

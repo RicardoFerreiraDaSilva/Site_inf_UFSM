@@ -195,7 +195,7 @@
     
     <div class="noticia-meta">
         <i class="fas fa-calendar-alt"></i>
-        <span>Publicado em {{ noticia.data_publicacao|date:"d de F de Y" }}</span>
+        <span>Publicado em {{ noticia.data|date:"d-m-Y" }}</span>
     </div>
 
     {% if noticia.imagem %}
