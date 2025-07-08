@@ -1,65 +1,112 @@
-{% extends "seu_app/base.html" %} {% load static %}
+{% extends "cursos/base.html" %}
+{% load static %}
 
 {% block title %}{{ evento.titulo }} - INF UFSM{% endblock %}
 
-{% block content %}
+{% block styles %}
 <style>
-    /* Estilos para a página de detalhes do evento (semelhante a noticia_detail) */
+    /* Estilos específicos para a página de detalhe do evento */
     .evento-container {
-        max-width: 800px;
-        margin: 40px auto;
+        max-width: 800px; 
+        margin: 40px auto; 
         padding: 30px 40px;
         background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     }
+
     .evento-titulo {
-        color: #003366;
-        font-size: 2.5rem;
+        color: #003366; 
+        font-size: 2.8rem;
         font-weight: 700;
         margin-bottom: 15px;
+        line-height: 1.2;
     }
+
     .evento-meta {
         color: #6c757d;
-        font-size: 0.9em;
-        margin-bottom: 25px;
-    }
-    .evento-imagem {
-        width: 100%;
-        border-radius: 10px;
+        font-size: 0.9rem;
         margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 20px;
     }
+
+    /* ✅ CORREÇÃO DEFINITIVA DA IMAGEM ABAIXO */
+    .evento-imagem {
+        width: 100%; /* A imagem sempre se ajusta à largura do container */
+        height: auto; /* A altura é calculada automaticamente para manter a proporção */
+        border-radius: 8px;
+        margin-bottom: 30px;
+        display: block; /* Garante que a imagem se comporte como um bloco */
+    }
+
     .evento-conteudo {
         font-size: 1.1rem;
-        line-height: 1.7;
+        line-height: 1.8; 
+        color: #333;
     }
+
+    .evento-conteudo p {
+        margin-bottom: 1.5em; 
+    }
+
     .voltar-link {
         display: inline-block;
-        margin-top: 30px;
-        color: #005599;
+        margin-top: 40px;
+        padding: 12px 24px;
+        background-color: #005599;
+        color: #fff;
         text-decoration: none;
         font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .voltar-link:hover {
+        background-color: #003366;
+        transform: translateY(-2px);
+    }
+
+    /* --- Responsividade para Celulares --- */
+    @media (max-width: 768px) {
+        .evento-container {
+            padding: 20px;
+            margin: 20px 15px;
+        }
+
+        .evento-titulo {
+            font-size: 2.1rem;
+        }
+
+        .evento-conteudo {
+            font-size: 1rem;
+        }
     }
 </style>
+{% endblock %}
 
-<main class="evento-container">
+{% block content %}
+<div class="evento-container">
     <h1 class="evento-titulo">{{ evento.titulo }}</h1>
     
     <div class="evento-meta">
         <i class="fas fa-calendar-alt"></i>
-        <span>Data do Evento: {{ evento.data_evento|date:"d/m/Y H:i" }}</span>
+        <span>Data do Evento: {{ evento.data_evento|date:"d de F de Y, H:i" }}</span>
     </div>
 
     {% if evento.imagem %}
-        <img src="{{ evento.imagem.url }}" alt="{{ evento.titulo }}" class="evento-imagem">
+        <img src="{{ evento.imagem.url }}" alt="Imagem do evento: {{ evento.titulo }}" style="width: 100%; height: auto; display: block; max-height: 500px; object-fit: contain;">
     {% endif %}
 
     <article class="evento-conteudo">
         {{ evento.conteudo_completo|safe|linebreaks }}
     </article>
 
-    <a href="{% url 'index' %}" class="voltar-link">
-        <i class="fas fa-arrow-left"></i> Voltar para a página inicial
+    <a href="/" class="voltar-link">
+        <i class="fas fa-arrow-left"></i> Voltar à Página Inicial
     </a>
-</main>
+</div>
 {% endblock %}
