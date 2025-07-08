@@ -111,6 +111,7 @@ class Noticia(models.Model):
     imagem = models.ImageField(upload_to='noticias/')
     data = models.DateField(default=timezone.now) 
     imagem = models.ImageField(upload_to='noticias/', default='default.jpg')
+    conteudo = models.TextField(null=True, blank=True)
 
   
 class Publicacao(models.Model):
