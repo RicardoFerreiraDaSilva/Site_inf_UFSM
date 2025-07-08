@@ -13,7 +13,7 @@
         :root {
             --azul-escuro: #003366;
             --azul-medio: #005599;
-            --cinza-claro: #f4f4f4; /* Um cinza um pouco mais suave */
+            --cinza-claro: #f4f4f4;
             --texto: #333;
         }
         * {
@@ -62,28 +62,21 @@
             color: var(--azul-escuro);
         }
         .cards-container {
-            display: grid; /* Usando Grid para um alinhamento ainda melhor */
+            display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
+            align-items: stretch; 
         }
 
-        /* ✅ Classe renomeada e estilo melhorado */
-        .grupo-card-link {
-            text-decoration: none; /* Remove o sublinhado do link que envolve o card */
-            color: inherit;
-            display: block;
-            height: 100%;
-        }
-        
         .grupo-card {
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.07);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
-            flex-direction: column; /* Organiza o conteúdo em coluna */
-            overflow: hidden; /* Garante que a imagem não vaze */
-            height: 100%; /* Faz com que os cards na mesma linha tenham a mesma altura */
+            flex-direction: column;
+            overflow: hidden;
+            height: 100%;
         }
         
         .grupo-card:hover {
@@ -91,24 +84,32 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
         
-        /* ✅ Novo estilo para a imagem */
         .grupo-imagem {
             width: 100%;
-            height: 180px; /* Altura fixa para a imagem */
-            object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+            height: 180px;
+            object-fit: cover;
         }
 
         .card-content {
             padding: 20px;
             display: flex;
             flex-direction: column;
-            flex-grow: 1; /* Faz esta área crescer para empurrar o rodapé do card */
+            flex-grow: 1; 
         }
 
         .card-content h3 {
             font-size: 1.4rem;
             margin: 0 0 10px 0;
             color: var(--azul-escuro);
+        }
+        
+        .card-content h3 a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card-content h3 a:hover {
+            text-decoration: underline;
         }
         
         .card-content p {
@@ -118,8 +119,13 @@
         }
 
         .card-footer {
-            margin-top: auto; /* Empurra o rodapé para o final do card */
-            padding: 0 20px 20px;
+            margin-top: auto;
+            padding: 20px;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f0f0f0;
         }
 
         .card-footer a {
@@ -149,35 +155,35 @@
         <a href="/publicacoes/">Publicações</a>
         <a href="/estrutura/">Estrutura</a>
         <a href="/pessoas/">Pessoas</a>
-       
     </nav>
 
 <section>
     <h2 class="page-title">Nossos Grupos de Pesquisa</h2>
     <div class="cards-container">
         {% for grupo in grupos %}
-            <a href="{% url 'grupo_detalhe' grupo.slug %}" class="grupo-card-link">
-                <article class="grupo-card">
-                    {% if grupo.imagem %}
-                        <img src="{{ grupo.imagem.url }}" alt="Logo do {{ grupo.nome }}" class="grupo-imagem" />
+            <article class="grupo-card">
+                {% if grupo.imagem %}
+                    <img src="{{ grupo.imagem.url }}" alt="Logo do {{ grupo.nome }}" class="grupo-imagem" />
+                {% endif %}
+                <div class="card-content">
+                    <h3>
+                        <a href="{% url 'grupo_detalhe' grupo.slug %}">{{ grupo.nome }}</a>
+                    </h3>
+                    <p><strong>Líder:</strong> {{ grupo.lider }}</p>
+                    {% if grupo.area %}
+                        <p><strong>Área:</strong> {{ grupo.area }}</p>
                     {% endif %}
-                    <div class="card-content">
-                        <h3>{{ grupo.nome }}</h3>
-                        <p><strong>Líder:</strong> {{ grupo.lider }}</p>
-                        {% if grupo.area %}
-                            <p><strong>Área:</strong> {{ grupo.area }}</p>
-                        {% endif %}
-                        <p>{{ grupo.descricao|truncatewords:20 }}</p>
-                    </div>
+                    <p>{{ grupo.descricao|truncatewords:20 }}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'grupo_detalhe' grupo.slug %}">Saiba Mais →</a>
                     {% if grupo.site %}
-                        <div class="card-footer">
-                             <a href="{{ grupo.site }}" target="_blank" rel="noopener noreferrer">
-                                Visitar site do grupo <i class="fas fa-external-link-alt fa-xs"></i>
-                            </a>
-                        </div>
+                        <a href="{{ grupo.site }}" target="_blank" rel="noopener noreferrer">
+                            Site do Grupo <i class="fas fa-external-link-alt fa-xs"></i>
+                        </a>
                     {% endif %}
-                </article>
-            </a>
+                </div>
+            </article>
         {% endfor %}
     </div>
 </section>
