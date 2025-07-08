@@ -51,5 +51,8 @@ urlpatterns = [
     path('pos-graduacao-cc/', views.pos_graduacao_cc, name='pos_graduacao_cc'),
     path('duvidas/', views.duvidas, name='duvidas'),
     path('biblioteca/', views.biblioteca, name='biblioteca'),
+    
+    #Novo destaque
+    path('eventos/<int:evento_id>/', views.detalhe_evento, name='detalhe_evento'),
 
 ]

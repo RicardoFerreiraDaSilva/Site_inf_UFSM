@@ -353,6 +353,41 @@
     <button class="carrossel-btn prev" data-action="prev" aria-label="Anterior">←</button>
     <button class="carrossel-btn next" data-action="next" aria-label="Próximo">→</button>
 </div>
+<section class="container">
+    <h2 class="section-title" style="text-align:center;">Próximos Eventos</h2>
+</section>
+
+<div class="carrossel" data-carrossel="eventos">
+    <div class="carrossel-container">
+        {% for evento in eventos %}
+            <div class="carrossel-slide {% if forloop.first %}active{% endif %}">
+                <a href="{% url 'detalhe_evento' evento.id %}" class="slide-link">
+                    <img src="{{ evento.imagem.url }}" alt="{{ evento.titulo }}">
+                    <div class="slide-content">
+                        <p class="titulo">{{ evento.titulo }}</p>
+                        <p class="descricao">{{ evento.descricao_curta }}</p>
+                    </div>
+                </a>
+            </div>
+        {% empty %}
+            <div class="carrossel-slide active">
+                <div class="slide-content">
+                    <p class="titulo">Nenhum evento programado no momento.</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <button class="carrossel-btn prev" data-action="prev" aria-label="Anterior">←</button>
+    <button class="carrossel-btn next" data-action="next" aria-label="Próximo">→</button>
+</div>
+
+<style>
+    .slide-link {
+        text-decoration: none;
+        color: inherit;
+        display: block; /* Faz o link ocupar todo o espaço do slide */
+    }
+</style>
 
 <section class="flex-container">
     <div class="flex-item">
@@ -498,6 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initCarousel('principal');
     initCarousel('pet-si');
     initCarousel('pet-cc');
+    initCarousel('eventos'); 
 });
 </script>
 

@@ -1,0 +1,65 @@
+{% extends "seu_app/base.html" %} {% load static %}
+
+{% block title %}{{ evento.titulo }} - INF UFSM{% endblock %}
+
+{% block content %}
+<style>
+    /* Estilos para a página de detalhes do evento (semelhante a noticia_detail) */
+    .evento-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px 40px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .evento-titulo {
+        color: #003366;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    .evento-meta {
+        color: #6c757d;
+        font-size: 0.9em;
+        margin-bottom: 25px;
+    }
+    .evento-imagem {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    .evento-conteudo {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+    .voltar-link {
+        display: inline-block;
+        margin-top: 30px;
+        color: #005599;
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>
+
+<main class="evento-container">
+    <h1 class="evento-titulo">{{ evento.titulo }}</h1>
+    
+    <div class="evento-meta">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Data do Evento: {{ evento.data_evento|date:"d/m/Y H:i" }}</span>
+    </div>
+
+    {% if evento.imagem %}
+        <img src="{{ evento.imagem.url }}" alt="{{ evento.titulo }}" class="evento-imagem">
+    {% endif %}
+
+    <article class="evento-conteudo">
+        {{ evento.conteudo_completo|safe|linebreaks }}
+    </article>
+
+    <a href="{% url 'index' %}" class="voltar-link">
+        <i class="fas fa-arrow-left"></i> Voltar para a página inicial
+    </a>
+</main>
+{% endblock %}

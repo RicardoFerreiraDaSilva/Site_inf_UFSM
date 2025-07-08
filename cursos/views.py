@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .models import Publicacao, Noticia
 
+# Imports dos models organizados
 from .models import (
-    Projeto, Noticia, Livro, Atividade,
-    GrupoPesquisa, Destaque, ProjetoPET, Publicacao
+    Projeto, Atividade, GrupoPesquisa, Destaque, ProjetoPET, 
+    Publicacao, Noticia, Livro,
+    Evento  # ✅ Model Evento importado
 )
 from .forms import (
     ProjetoForm, AtividadeForm, ProjetoPETForm
@@ -35,12 +36,17 @@ def home(request):
     petcc_destaques = ProjetoPET.objects.filter(grupo='CC')
     noticias = Noticia.objects.order_by('-data')[:5]
     publicacoes = Publicacao.objects.order_by('-ano')[:5]
+    
+    # ✅ Busca os eventos para o novo carrossel
+    eventos = Evento.objects.order_by('-data_evento')
+    
     return render(request, 'cursos/index.html', {
         'destaques': destaques,
         'petsi_destaques': petsi_destaques,
         'petcc_destaques': petcc_destaques,
         'noticias': noticias,
         'publicacoes': publicacoes,
+        'eventos': eventos, # ✅ Adiciona os eventos ao contexto do template
     })
 
 # Página de notícias
@@ -51,6 +57,12 @@ def noticias(request):
 def noticia_detail(request, pk):
     noticia = get_object_or_404(Noticia, pk=pk)
     return render(request, 'cursos/noticia_detail.html', {'noticia': noticia})
+
+# ✅ NOVA VIEW PARA A PÁGINA DE DETALHES DO EVENTO
+def detalhe_evento(request, evento_id):
+    evento = get_object_or_404(Evento, pk=evento_id)
+    return render(request, 'cursos/detalhe_evento.html', {'evento': evento})
+
 
 # Página para publicações acadêmicas
 def publicacoes_academicas(request):
