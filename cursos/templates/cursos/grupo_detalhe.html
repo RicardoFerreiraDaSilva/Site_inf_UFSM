@@ -1,0 +1,144 @@
+{% extends "cursos/base.html" %}
+{% load static %}
+
+{% block title %}{{ grupo.nome }} - Grupos de Pesquisa{% endblock %}
+
+{% block styles %}
+<style>
+    .grupo-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 35px 45px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+        border-top: 5px solid var(--azul-escuro);
+    }
+
+    .grupo-header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: flex-start;
+        margin-bottom: 30px;
+        padding-bottom: 25px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .grupo-imagem {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        flex-shrink: 0;
+    }
+
+    .grupo-info h1 {
+        color: var(--azul-escuro);
+        font-size: 2.6rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin: 0 0 15px 0;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+     .meta-item i {
+        color: var(--azul-medio);
+    }
+    
+    .grupo-descricao {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #333;
+        text-align: justify;
+    }
+
+    .botoes-container {
+        margin-top: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .botao-site, .voltar-link {
+        display: inline-block;
+        padding: 12px 24px;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .botao-site {
+        background-color: var(--azul-medio);
+        color: #fff;
+    }
+
+    .botao-site:hover {
+        background-color: var(--azul-escuro);
+        transform: translateY(-2px);
+    }
+
+    .voltar-link {
+        color: var(--azul-medio);
+    }
+    
+    .voltar-link:hover {
+        text-decoration: underline;
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="grupo-container">
+    <div class="grupo-header">
+        {% if grupo.imagem %}
+            <img src="{{ grupo.imagem.url }}" alt="Logo do {{ grupo.nome }}" class="grupo-imagem">
+        {% endif %}
+
+        <div class="grupo-info">
+            <h1>{{ grupo.nome }}</h1>
+            <div class="meta-item">
+                <i class="fas fa-user fa-fw"></i>
+                <div><strong>Líder:</strong> {{ grupo.lider }}</div>
+            </div>
+            {% if grupo.area %}
+            <div class="meta-item">
+                <i class="fas fa-flask fa-fw"></i>
+                <div><strong>Área:</strong> {{ grupo.area }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% if grupo.descricao %}
+        <article class="grupo-descricao">
+            {{ grupo.descricao|linebreaks }}
+        </article>
+    {% endif %}
+
+    <div class="botoes-container">
+        {% if grupo.site %}
+            <a href="{{ grupo.site }}" class="botao-site" target="_blank" rel="noopener noreferrer">
+                <i class="fas fa-external-link-alt"></i> Visitar Site do Grupo
+            </a>
+        {% endif %}
+
+        <a href="{% url 'pesquisa' %}" class="voltar-link">
+             <i class="fas fa-arrow-left"></i> Voltar para a lista de grupos
+        </a>
+    </div>
+</main>
+{% endblock %}

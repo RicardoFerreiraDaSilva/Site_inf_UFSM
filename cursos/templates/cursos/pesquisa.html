@@ -13,7 +13,7 @@
         :root {
             --azul-escuro: #003366;
             --azul-medio: #005599;
-            --cinza-claro: #f2f2f2;
+            --cinza-claro: #f4f4f4; /* Um cinza um pouco mais suave */
             --texto: #333;
         }
         * {
@@ -22,8 +22,7 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #fafafa;
+            background-color: var(--cinza-claro);
             color: var(--texto);
         }
         header, footer {
@@ -34,7 +33,6 @@
         }
         nav {
             background-color: var(--azul-medio);
-            text-align: center;
             padding: 12px;
             display: flex;
             flex-wrap: wrap;
@@ -46,68 +44,100 @@
             text-decoration: none;
             font-weight: bold;
             padding: 6px 12px;
+            border-radius: 5px;
             transition: background-color 0.3s;
         }
         nav a:hover {
             background-color: var(--azul-escuro);
-            border-radius: 5px;
         }
         section {
-            padding: 30px 20px;
+            padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
-        h2 {
+        h2.page-title {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
             color: var(--azul-escuro);
         }
         .cards-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 24px;
+            display: grid; /* Usando Grid para um alinhamento ainda melhor */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
-        .atividade-card {
+
+        /* ✅ Classe renomeada e estilo melhorado */
+        .grupo-card-link {
+            text-decoration: none; /* Remove o sublinhado do link que envolve o card */
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+        
+        .grupo-card {
             background-color: white;
-            border-left: 6px solid var(--azul-medio);
             border-radius: 10px;
-            padding: 20px;
-            max-width: 380px;
-            flex: 1 1 280px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-        .atividade-card:hover {
-            transform: translateY(-5px);
-        }
-        .atividade-card h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--azul-escuro);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column; /* Organiza o conteúdo em coluna */
+            overflow: hidden; /* Garante que a imagem não vaze */
+            height: 100%; /* Faz com que os cards na mesma linha tenham a mesma altura */
         }
-        .atividade-card p {
-            margin: 8px 0;
+        
+        .grupo-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        /* ✅ Novo estilo para a imagem */
+        .grupo-imagem {
+            width: 100%;
+            height: 180px; /* Altura fixa para a imagem */
+            object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Faz esta área crescer para empurrar o rodapé do card */
+        }
+
+        .card-content h3 {
+            font-size: 1.4rem;
+            margin: 0 0 10px 0;
+            color: var(--azul-escuro);
+        }
+        
+        .card-content p {
+            margin: 4px 0;
             line-height: 1.5;
+            font-size: 0.95rem;
         }
-        @media (max-width: 600px) {
-            .atividade-card {
-                max-width: 100%;
-            }
-            nav {
-                flex-direction: column;
-            }
+
+        .card-footer {
+            margin-top: auto; /* Empurra o rodapé para o final do card */
+            padding: 0 20px 20px;
         }
+
+        .card-footer a {
+            color: var(--azul-medio);
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .card-footer a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
     <header>
         <h1>Grupos de Pesquisa</h1>
-        <p>Conheça os grupos de pesquisa do Instituto de Informática da UFSM</p>
+        <p>Conheça as linhas de pesquisa do Instituto de Informática da UFSM</p>
     </header>
 
     <nav>
@@ -119,36 +149,41 @@
         <a href="/publicacoes/">Publicações</a>
         <a href="/estrutura/">Estrutura</a>
         <a href="/pessoas/">Pessoas</a>
-        <a href="/grupos/">Grupos de Pesquisa</a>
+       
     </nav>
 
 <section>
-    <h2>Grupos em Destaque</h2>
+    <h2 class="page-title">Nossos Grupos de Pesquisa</h2>
     <div class="cards-container">
         {% for grupo in grupos %}
-            <div class="atividade-card">
-                {% if grupo.imagem %}
-                    <img src="{{ grupo.imagem.url }}" alt="{{ grupo.nome }}" class="grupo-logo" />
-                {% endif %}
-                <h3>{{ grupo.nome }}</h3>
-                <p><strong>Líder:</strong> {{ grupo.lider }}</p>
-                {% if grupo.area %}
-                    <p><strong>Área:</strong> {{ grupo.area }}</p>
-                {% endif %}
-                <p>{{ grupo.descricao|truncatechars:150 }}</p>
-                {% if grupo.site %}
-                    <p><a href="{{ grupo.site }}" target="_blank">Visitar site</a></p>
-                {% endif %}
-                {% if grupo.slug %}
-                    <a href="{% url 'grupo_detalhe' grupo.slug %}">Saiba mais</a>
-                {% endif %}
-            </div>
+            <a href="{% url 'grupo_detalhe' grupo.slug %}" class="grupo-card-link">
+                <article class="grupo-card">
+                    {% if grupo.imagem %}
+                        <img src="{{ grupo.imagem.url }}" alt="Logo do {{ grupo.nome }}" class="grupo-imagem" />
+                    {% endif %}
+                    <div class="card-content">
+                        <h3>{{ grupo.nome }}</h3>
+                        <p><strong>Líder:</strong> {{ grupo.lider }}</p>
+                        {% if grupo.area %}
+                            <p><strong>Área:</strong> {{ grupo.area }}</p>
+                        {% endif %}
+                        <p>{{ grupo.descricao|truncatewords:20 }}</p>
+                    </div>
+                    {% if grupo.site %}
+                        <div class="card-footer">
+                             <a href="{{ grupo.site }}" target="_blank" rel="noopener noreferrer">
+                                Visitar site do grupo <i class="fas fa-external-link-alt fa-xs"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                </article>
+            </a>
         {% endfor %}
     </div>
 </section>
 
     <footer>
-        <p>© 2025 Instituto de Informática - UFSM</p>
+        <p>© {% now "Y" %} Instituto de Informática - UFSM</p>
     </footer>
 </body>
 </html>

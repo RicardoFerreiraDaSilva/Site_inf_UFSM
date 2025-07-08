@@ -1,104 +1,182 @@
-{% extends "cursos/base.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Publicações Acadêmicas - INF UFSM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* --- ESTILOS GLOBAIS (que viriam do base.html) --- */
+        :root {
+            --azul-escuro: #003366;
+            --azul-medio: #005599;
+            --cinza-claro: #f4f4f4;
+        }
 
-{% block title %}Publicações Acadêmicas - INF UFSM{% endblock %}
+        html {
+            height: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: var(--cinza-claro);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex-grow: 1; 
+        }
+        
+        header, footer {
+            background-color: var(--azul-escuro);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-{% block styles %}
-<style>
-    .page-container {
-        max-width: 1100px;
-        margin: 40px auto;
-        padding: 20px;
-    }
-    .page-title {
-        text-align: center;
-        color: var(--azul-escuro);
-        font-size: 2.5rem;
-        margin-bottom: 40px;
-    }
-    .publicacoes-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: 25px;
-    }
-    .pub-card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        padding: 25px;
-        border-top: 4px solid var(--azul-medio);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        display: flex;
-        flex-direction: column;
-    }
-    .pub-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    }
-    .pub-card h2 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--azul-escuro);
-        margin: 0 0 10px 0;
-    }
-    .pub-card h2 a {
-        text-decoration: none;
-        color: inherit;
-    }
-    .pub-card h2 a:hover {
-        text-decoration: underline;
-    }
-    .pub-meta {
-        font-size: 0.9rem;
-        color: #666;
-        margin-bottom: 15px;
-    }
-    .pub-resumo {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #444;
-        flex-grow: 1; /* Faz o resumo ocupar o espaço disponível */
-    }
-    .leia-mais {
-        margin-top: 20px;
-        font-weight: bold;
-        color: var(--azul-medio);
-        text-decoration: none;
-        align-self: flex-start;
-    }
-    .leia-mais:hover {
-        text-decoration: underline;
-    }
-</style>
-{% endblock %}
+        nav {
+            background-color: var(--azul-medio);
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-{% block content %}
-<div class="page-container">
-    <h1 class="page-title">Publicações Acadêmicas</h1>
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
 
-    {% if publicacoes %}
-        <div class="publicacoes-grid">
-            {% for pub in publicacoes %}
-                <div class="pub-card">
-                    <h2>
-                        <a href="{% url 'publicacao_detail' pub.pk %}">
-                            {{ pub.titulo }}
-                        </a>
-                    </h2>
-                    <p class="pub-meta">
-                        <strong>{{ pub.autor }}</strong> ({{ pub.ano }})
-                    </p>
-                    {% if pub.resumo %}
-                        <p class="pub-resumo">{{ pub.resumo|truncatewords:25 }}</p>
-                    {% endif %}
-                    <a href="{% url 'publicacao_detail' pub.pk %}" class="leia-mais">
-                        Ver Detalhes →
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p style="text-align: center;">Nenhuma publicação acadêmica cadastrada no momento.</p>
+        nav a:hover, nav a.ativo {
+            background-color: #003f6b;
+        }
+
+        /* --- ESTILOS ESPECÍFICOS DESTA PÁGINA DE LISTAGEM --- */
+        .page-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .page-title {
+            text-align: center;
+            color: var(--azul-escuro);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        .publicacoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        .pub-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            border-top: 4px solid var(--azul-medio);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .pub-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .pub-card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--azul-escuro);
+            margin: 0 0 10px 0;
+        }
+        .pub-card h2 a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .pub-card h2 a:hover {
+            text-decoration: underline;
+        }
+        .pub-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .pub-resumo {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #444;
+            flex-grow: 1;
+        }
+        .leia-mais {
+            margin-top: 20px;
+            font-weight: bold;
+            color: var(--azul-medio);
+            text-decoration: none;
+            align-self: flex-start;
+        }
+        .leia-mais:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Instituto de Informática - UFSM</h1>
+</header>
+
+<nav>
+    <a href="/">Início</a>
+    <a href="/projetos/">Projetos</a>
+    <a href="/atividades/">Atividades</a>
+    <a href="/institucional/">Institucional</a>
+    <a href="/pesquisa/">Pesquisa</a>
+    <a href="{% url 'publicacoes_academicas' %}">Publicações</a>
+    <a href="/estrutura/">Estrutura</a>
+    <a href="/pessoas/">Pessoas</a>
+</nav>
+
+<main>
+    <div class="page-container">
+        <h1 class="page-title">Publicações Acadêmicas</h1>
+    
+        {% if publicacoes %}
+            <div class="publicacoes-grid">
+                {% for pub in publicacoes %}
+                    <div class="pub-card">
+    <h2>
+        <a href="{% url 'publicacao_detail' pub.pk %}">
+            {{ pub.titulo }}
+        </a>
+    </h2>
+    <p class="pub-meta">
+        <strong>{{ pub.autor }}</strong> ({{ pub.ano }})
+    </p>
+
+    {% if pub.resumo %}
+        <p class="pub-resumo">{{ pub.resumo|truncatewords:25 }}</p>
     {% endif %}
+
+    <a href="{% url 'publicacao_detail' pub.pk %}" class="leia-mais">
+        Ver Detalhes →
+    </a>
 </div>
-{% endblock %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p style="text-align: center;">Nenhuma publicação acadêmica cadastrada no momento.</p>
+        {% endif %}
+    </div>
+</main>
+
+<footer>
+    <p>© {% now "Y" %} Instituto de Informática - UFSM</p>
+</footer>
+
+</body>
+</html>

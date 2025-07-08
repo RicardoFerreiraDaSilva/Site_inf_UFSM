@@ -1,147 +1,227 @@
-{% extends "cursos/base.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>{{ publicacao.titulo }} - Publicações - INF UFSM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* --- ESTILOS GLOBAIS (que viriam do base.html) --- */
+        :root {
+            --azul-escuro: #003366;
+            --azul-medio: #005599;
+            --cinza-claro: #f4f4f4;
+        }
 
-{% block title %}{{ publicacao.titulo }} - Publicações{% endblock %}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cinza-claro);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-{% block styles %}
-<style>
-    .publicacao-container {
-        max-width: 850px;
-        margin: 50px auto;
-        padding: 40px 50px; /* Mais espaçamento interno */
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
-        border-top: 5px solid var(--azul-escuro);
-    }
+        main {
+            flex-grow: 1; /* Garante que o rodapé fique no final */
+        }
+        
+        header, footer {
+            background-color: var(--azul-escuro);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-    .publicacao-titulo {
-        color: var(--azul-escuro);
-        font-size: 2.5rem;
-        font-weight: 700;
-        line-height: 1.3;
-        margin-bottom: 25px; /* Mais espaço abaixo do título */
-    }
+        nav {
+            background-color: var(--azul-medio);
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-    /* ✅ CORREÇÃO: Meta empilhado e com mais espaço */
-    .publicacao-meta {
-        display: flex;
-        flex-direction: column; /* Itens um abaixo do outro */
-        align-items: flex-start; /* Alinha à esquerda */
-        gap: 12px; /* Espaço entre os itens */
-        color: #555;
-        font-size: 1rem;
-        margin-bottom: 35px;
-        padding-bottom: 25px;
-        border-bottom: 1px solid #eee;
-    }
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
 
-    .meta-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .publicacao-resumo {
-        font-size: 1.1rem;
-        line-height: 1.8;
-        color: #333;
-        text-align: justify;
-    }
-
-    .publicacao-resumo h3 {
-        color: var(--azul-medio);
-        font-size: 1.5rem;
-        margin-top: 30px;
-        margin-bottom: 15px;
-    }
-    
-    /* ✅ CORREÇÃO: Botões empilhados e centralizados */
-    .botoes-container {
-        margin-top: 40px;
-        display: flex;
-        flex-direction: column; /* Botões um abaixo do outro */
-        align-items: center; /* Centraliza os botões */
-        gap: 15px;
-    }
-
-    .botao-publicacao, .voltar-link {
-        display: inline-block;
-        padding: 12px 24px;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 5px;
-        text-align: center;
-        transition: all 0.3s ease;
-        width: 100%;
-        max-width: 320px;
-    }
-
-    .botao-publicacao {
-        background-color: var(--azul-medio);
-        color: #fff;
-        font-size: 1.1rem;
-    }
-
-    .botao-publicacao:hover {
-        background-color: var(--azul-escuro);
-        transform: translateY(-2px);
-    }
-
-    .voltar-link {
-        color: var(--azul-medio);
-        background-color: transparent;
-    }
-    
-    .voltar-link:hover {
-        color: var(--azul-escuro);
-        text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
+        nav a:hover {
+            background-color: #003f6b;
+        }
+        
+        /* --- ESTILOS ESPECÍFICOS DESTA PÁGINA --- */
         .publicacao-container {
-            padding: 25px;
-            margin: 20px 15px;
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 40px 50px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            border-top: 5px solid var(--azul-escuro);
         }
+
         .publicacao-titulo {
-            font-size: 2rem;
+            color: var(--azul-escuro);
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 25px;
         }
-    }
-</style>
-{% endblock %}
 
-{% block content %}
-<main class="publicacao-container">
-    <h1 class="publicacao-titulo">{{ publicacao.titulo }}</h1>
+        .publicacao-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meta-item i {
+            color: var(--azul-medio);
+        }
+        
+        .publicacao-resumo h3 {
+            color: var(--azul-medio);
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .publicacao-resumo {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+        }
+
+        .botoes-container {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .botao-publicacao, .voltar-link {
+            display: block;
+            padding: 14px 28px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .botao-publicacao {
+            background-color: var(--azul-medio);
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .botao-publicacao:hover {
+            background-color: var(--azul-escuro);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .voltar-link {
+            color: var(--azul-medio);
+            background-color: transparent;
+            font-size: 0.9rem;
+        }
+        
+        .voltar-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .publicacao-container {
+                padding: 25px;
+                margin: 20px 15px;
+            }
+            .publicacao-titulo {
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Instituto de Informática - UFSM</h1>
+</header>
+
+<nav>
+    <a href="/">Início</a>
+    <a href="/projetos/">Projetos</a>
+    <a href="/atividades/">Atividades</a>
+    <a href="/institucional/">Institucional</a>
+    <a href="/pesquisa/">Pesquisa</a>
+    <a href="{% url 'publicacoes_academicas' %}">Publicações</a>
+    <a href="/estrutura/">Estrutura</a>
+    <a href="/pessoas/">Pessoas</a>
+</nav>
+
+<main>
+    <div class="publicacao-container">
+        <h1 class="publicacao-titulo">{{ publicacao.titulo }}</h1>
+        
+        <div class="publicacao-meta">
+            <div class="meta-item">
+                <i class="fas fa-user fa-fw"></i>
+                <div><strong>Autor(es):</strong> {{ publicacao.autor }}</div>
+            </div>
+            {% if publicacao.ano %}
+            <div class="meta-item">
+                <i class="fas fa-calendar-alt fa-fw"></i>
+                <div><strong>Ano:</strong> {{ publicacao.ano }}</div>
+            </div>
+            {% endif %}
+        </div>
     
-    <div class="publicacao-meta">
-        <div class="meta-item">
-            <i class="fas fa-user fa-fw"></i> <strong>Autor(es):</strong> {{ publicacao.autor }}
-        </div>
-        {% if publicacao.ano %}
-        <div class="meta-item">
-            <i class="fas fa-calendar-alt fa-fw"></i> <strong>Ano:</strong> {{ publicacao.ano }}
-        </div>
+        {% if publicacao.resumo %}
+        <article class="publicacao-resumo">
+            <h3>Resumo</h3>
+            <p>{{ publicacao.resumo|linebreaksbr }}</p>
+        </article>
         {% endif %}
-    </div>
-
-    {% if publicacao.resumo %}
-    <article class="publicacao-resumo">
-        <h3>Resumo</h3>
-        {{ publicacao.resumo|linebreaks }}
-    </article>
-    {% endif %}
-
-    <div class="botoes-container">
-        {% if publicacao.link %}
-            <a href="{{ publicacao.link }}" class="botao-publicacao" target="_blank" rel="noopener noreferrer">
-                <i class="fas fa-external-link-alt"></i> Acessar Publicação
+    
+        <div class="botoes-container">
+            {% if publicacao.link %}
+                <a href="{{ publicacao.link }}" class="botao-publicacao" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-external-link-alt"></i> Acessar Publicação
+                </a>
+            {% endif %}
+    
+            <a href="{% url 'publicacoes_academicas' %}" class="voltar-link">
+                 Voltar para a lista
             </a>
-        {% endif %}
-
-        <a href="{% url 'publicacoes_academicas' %}" class="voltar-link">
-             Voltar para a lista
-        </a>
+        </div>
     </div>
 </main>
-{% endblock %}
+
+<footer>
+    <p>© {% now "Y" %} Instituto de Informática - UFSM</p>
+</footer>
+
+</body>
+</html>

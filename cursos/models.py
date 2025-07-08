@@ -139,6 +139,11 @@ class Publicacao(models.Model):
     autor = models.CharField(max_length=100)
     link = models.URLField()
     ano = models.IntegerField()
+    resumo = models.TextField(
+        null=True, 
+        blank=True, 
+        help_text="Uma breve descrição ou resumo do artigo."
+    )
 
     def __str__(self):
         return self.titulo
