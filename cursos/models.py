@@ -1,27 +1,46 @@
 from django.db import models
+from django.utils import timezone  # ✅ IMPORTADO NO TOPO
 from django.utils.text import slugify
 
 # MODELO: Projeto
 class Projeto(models.Model):
     titulo = models.CharField(max_length=200)
     descricao = models.TextField()
-    data_publicacao = models.DateField()
+    data_criacao = models.DateTimeField(default=timezone.now)
+    link = models.URLField(
+        max_length=200, 
+        blank=True, 
+        null=True, 
+        help_text="Link para o repositório ou site do projeto (opcional)."
+    )
+    imagem = models.ImageField(
+        upload_to='projetos_alunos/', 
+        blank=True, 
+        null=True, 
+        help_text="Imagem de destaque do projeto (opcional)."
+    )
 
     def __str__(self):
         return self.titulo
 
-
-# MODELO: Notícia
+# ✅ MODELO 'Noticia' UNIFICADO E CORRIGIDO
 class Noticia(models.Model):
     titulo = models.CharField(max_length=200)
-    conteudo = models.TextField()
-    data_publicacao = models.DateTimeField(auto_now_add=True)
-    imagem = models.ImageField(upload_to='noticias/', blank=True, null=True)
-
+    descricao = models.CharField(
+        max_length=255, 
+        help_text="Um resumo curto da notícia para a página inicial."
+    )
+    conteudo = models.TextField(null=True, blank=True)
+    data = models.DateTimeField(default=timezone.now) 
+    imagem = models.ImageField(
+        upload_to='noticias/', 
+        null=True, 
+        blank=True,
+        help_text="Imagem de destaque da notícia (opcional)."
+    )
+    
     def __str__(self):
         return self.titulo
-
-from django.db import models
 
 # MODELO: Livro
 class Livro(models.Model):
@@ -35,7 +54,6 @@ class Livro(models.Model):
     def __str__(self):
         return self.titulo
 
-
 # MODELO: Atividade
 class Atividade(models.Model):
     TIPO_CHOICES = [
@@ -44,7 +62,6 @@ class Atividade(models.Model):
         ('Feira', 'Feira'),
         ('Outra', 'Outra'),
     ]
-
     titulo = models.CharField(max_length=200)
     descricao = models.TextField()
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
@@ -54,7 +71,6 @@ class Atividade(models.Model):
 
     def __str__(self):
         return self.titulo
-
 
 # MODELO: Grupo de Pesquisa
 class GrupoPesquisa(models.Model):
@@ -73,7 +89,6 @@ class GrupoPesquisa(models.Model):
     def __str__(self):
         return self.nome
 
-
 # MODELO: Destaque
 class Destaque(models.Model):
     titulo = models.CharField(max_length=200)
@@ -84,14 +99,12 @@ class Destaque(models.Model):
     def __str__(self):
         return self.titulo
 
-
-# MODELO: Projeto PET (substitui PetDestaque)
+# MODELO: Projeto PET
 class ProjetoPET(models.Model):
     GRUPO_CHOICES = [
         ('SI', 'Sistemas de Informação'),
         ('CC', 'Ciência da Computação'),
     ]
-
     titulo = models.CharField(max_length=200)
     descricao = models.TextField()
     grupo = models.CharField(max_length=2, choices=GRUPO_CHOICES)
@@ -101,39 +114,8 @@ class ProjetoPET(models.Model):
 
     def __str__(self):
         return f"{self.titulo} ({self.get_grupo_display()})"
-# MODELO: notícias e publicações 
-
-from django.utils import timezone
-
-class Noticia(models.Model):
-    titulo = models.CharField(
-        max_length=200
-    )
-    # Sugestão: Usar CharField para uma descrição curta é uma boa prática
-    descricao = models.CharField(
-        max_length=255, 
-        help_text="Um resumo curto da notícia para a página inicial."
-    )
-    # ✅ O campo 'imagem' definido apenas uma vez e como opcional
-    imagem = models.ImageField(
-        upload_to='noticias/', 
-        null=True, 
-        blank=True,
-        help_text="Imagem de destaque da notícia (opcional)."
-    )
-    # ✅ Corrigido para DateTimeField para incluir a hora
-    data = models.DateTimeField(
-        default=timezone.now
-    ) 
-    conteudo = models.TextField(
-        null=True, 
-        blank=True
-    )
-    
-    def __str__(self):
-        return self.titulo
-
-  
+ 
+# MODELO: Publicacao
 class Publicacao(models.Model):
     titulo = models.CharField(max_length=200)
     autor = models.CharField(max_length=100)
@@ -148,6 +130,7 @@ class Publicacao(models.Model):
     def __str__(self):
         return self.titulo
 
+# MODELO: Evento
 class Evento(models.Model):
     titulo = models.CharField(max_length=200)
     descricao_curta = models.CharField(max_length=255, help_text="Aparece no card do carrossel na página inicial.")

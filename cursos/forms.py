@@ -1,13 +1,15 @@
 from django import forms
 from .models import Projeto
 
+# forms.py (versão corrigida)
+from django import forms
+from .models import Projeto # Garanta que Projeto está importado
+
 class ProjetoForm(forms.ModelForm):
     class Meta:
         model = Projeto
-        fields = ['titulo', 'descricao', 'data_publicacao']
-        widgets = {
-            'data_publicacao': forms.DateInput(attrs={'type': 'date'})
-        }
+        # ✅ Corrigido para 'data_criacao' e adicionados os novos campos opcionais
+        fields = ['titulo', 'descricao', 'link', 'imagem']
 
 from .models import Atividade
 

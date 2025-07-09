@@ -2,22 +2,196 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>{{ projeto.titulo }}</title>
+    <meta charset="UTF-8" />
+    <title>{{ projeto.titulo }} - Projetos - INF UFSM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
-        .container { max-width: 800px; margin: 40px auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-        h1 { color: #003366; }
-        p { font-size: 16px; line-height: 1.6; }
-        a { color: #005599; text-decoration: none; }
+        /* --- ESTILOS GLOBAIS (que viriam do base.html) --- */
+        :root {
+            --azul-escuro: #003366;
+            --azul-medio: #005599;
+            --cinza-claro: #f4f4f4;
+        }
+
+        html {
+            height: 100%;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: var(--cinza-claro);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex-grow: 1; 
+        }
+        
+        header, footer {
+            background-color: var(--azul-escuro);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: var(--azul-medio);
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover, nav a.ativo {
+            background-color: #003f6b;
+        }
+
+        /* --- ESTILOS ESPECÍFICOS DA PÁGINA DE DETALHES DO PROJETO --- */
+        .projeto-container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 35px 45px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+            border-top: 5px solid var(--azul-escuro);
+        }
+
+        .projeto-titulo {
+            color: var(--azul-escuro);
+            font-size: 2.6rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+
+        .projeto-meta {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .projeto-imagem {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #eee;
+        }
+
+        .projeto-descricao {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: justify;
+        }
+        
+        .botoes-container {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .botao-projeto, .voltar-link {
+            display: inline-block;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .botao-projeto {
+            background-color: var(--azul-medio);
+            color: #fff;
+        }
+
+        .botao-projeto:hover {
+            background-color: var(--azul-escuro);
+            transform: translateY(-2px);
+        }
+
+        .voltar-link {
+            color: var(--azul-medio);
+        }
+        
+        .voltar-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>{{ projeto.titulo }}</h1>
-        <p><strong>Data de publicação:</strong> {{ projeto.data_publicacao }}</p>
-        <p>{{ projeto.descricao }}</p>
-        <p><a href="{% url 'projetos' %}">← Voltar para projetos</a></p>
+
+<header>
+    <h1>Instituto de Informática - UFSM</h1>
+</header>
+
+<nav>
+    <a href="/">Início</a>
+    <a href="{% url 'projetos' %}" class="ativo">Projetos</a>
+    <a href="/atividades/">Atividades</a>
+    <a href="/institucional/">Institucional</a>
+    <a href="/pesquisa/">Pesquisa</a>
+    <a href="/publicacoes/">Publicações</a>
+    <a href="/estrutura/">Estrutura</a>
+    <a href="/pessoas/">Pessoas</a>
+</nav>
+
+<main>
+    <div class="projeto-container">
+        <h1 class="projeto-titulo">{{ projeto.titulo }}</h1>
+        
+        <div class="projeto-meta">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Criado em: {{ projeto.data_criacao|date:"d de F de Y" }}</span>
+        </div>
+    
+        {% if projeto.imagem %}
+            <img src="{{ projeto.imagem.url }}" alt="Imagem do projeto: {{ projeto.titulo }}" class="projeto-imagem">
+        {% endif %}
+    
+        <article class="projeto-descricao">
+            {{ projeto.descricao|linebreaks }}
+        </article>
+    
+        <div class="botoes-container">
+            {% if projeto.link %}
+                <a href="{{ projeto.link }}" class="botao-projeto" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-external-link-alt"></i> Acessar Site/Repositório
+                </a>
+            {% endif %}
+    
+            <a href="{% url 'projetos' %}" class="voltar-link">
+                 <i class="fas fa-arrow-left"></i> Voltar para a lista de projetos
+            </a>
+        </div>
+    
     </div>
+</main>
+
+<footer>
+    <p>© {% now "Y" %} Instituto de Informática - UFSM</p>
+</footer>
+
 </body>
 </html>
