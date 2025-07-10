@@ -395,7 +395,7 @@
 <section class="flex-container">
     <div class="flex-item">
         <h2 class="section-title"><i class="fas fa-newspaper"></i> Últimas Notícias</h2>
-        {% for noticia in noticias %}
+        {% for noticia in noticias|slice:":5" %}
             <div class="list-item">
                 <h3><a href="{% url 'noticia_detail' noticia.pk %}">{{ noticia.titulo }}</a></h3>
                 <small>{{ noticia.data|date:"d/m/Y" }}</small>
@@ -408,7 +408,7 @@
 
 <div class="flex-item">
     <h2 class="section-title"><i class="fas fa-book"></i> Publicações Recentes</h2>
-    {% for publicacao in publicacoes %}
+    {% for publicacao in publicacoes|slice:":5" %}
         <div class="list-item">
             <h3><a href="{% url 'publicacao_detail' publicacao.pk %}">{{ publicacao.titulo }}</a></h3>
             <small>{{ publicacao.autor }}{% if publicacao.ano %} — {{ publicacao.ano }}{% endif %}</small>
