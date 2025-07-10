@@ -163,7 +163,7 @@
         
         <div class="projeto-meta">
             <i class="fas fa-calendar-alt"></i>
-            <span>Criado em: {{ projeto.data_criacao|date:"d de F de Y" }}</span>
+           <span>Criado em: {{ projeto.data_criacao|date:"d/m/Y H:i" }}</span>
         </div>
     
         {% if projeto.imagem %}
